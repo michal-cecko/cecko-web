@@ -418,7 +418,10 @@ body[data-theme="light"] .nav {
     padding: 90px 28px 40px;
     box-sizing: border-box;
     overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
   }
+  .nav-overlay::-webkit-scrollbar { display: none; }
   .nav-overlay.is-open { transform: translateY(0); pointer-events: auto; }
 
   .nav-overlay-links {
@@ -441,7 +444,7 @@ body[data-theme="light"] .nav {
   .nav-overlay.is-open .nav-overlay-links li:nth-child(6) { transition-delay: 0.43s; }
   .nav-overlay.is-open .nav-overlay-links li:nth-child(7) { transition-delay: 0.5s; }
 
-  .nav-overlay-links a {
+  .nav-overlay-links li:not(.nav-overlay-cta) a {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -453,21 +456,27 @@ body[data-theme="light"] .nav {
     font-weight: 500;
     border-bottom: 1px solid var(--border);
   }
-  .nav-overlay-links li:first-child a { border-top: 1px solid var(--border); }
-  .nav-overlay-links a.active {
+  .nav-overlay-links li:not(.nav-overlay-cta):first-child a { border-top: 1px solid var(--border); }
+  .nav-overlay-links li:not(.nav-overlay-cta) a.active {
     color: var(--lime);
     font-family: var(--font-italic);
     font-style: italic;
     font-weight: 400;
   }
-  .nav-overlay-links a.active::after {
+  .nav-overlay-links li:not(.nav-overlay-cta) a.active::after {
     content: '●';
     color: var(--lime);
     font-size: 14px;
     margin-left: 12px;
   }
-  .nav-overlay-cta { margin-top: 32px; align-self: flex-start; }
-  .nav-overlay-cta a { border: 1px solid var(--lime); color: var(--lime); padding: 16px 32px; }
+  .nav-overlay-cta {
+    margin-top: 32px;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
 
   /* Raise burger above overlay so it stays tappable as close button */
   .nav { z-index: 9999; }
@@ -788,6 +797,31 @@ body[data-theme="light"] .nav {
   .hero-foot { grid-template-columns: 1fr 1fr; gap: 24px; padding-top: 20px; }
   .hero-stat { border-right: none; padding: 0; }
   .hero-stat-num { font-size: 36px; }
+}
+
+/* Phone: prioritise name + heading + CTAs in the first paint, push the
+   availability badge and location bar below the stats. */
+@media (max-width: 700px) {
+  .hero { padding: 80px 20px 28px; }
+  .hero-top {
+    order: 4;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .hero-center { margin: 16px 0 0; }
+  .hero-preheading-author { margin-bottom: 18px; }
+  .hero-heading { font-size: clamp(48px, 13vw, 60px); }
+  .hero-sub {
+    margin-top: 24px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    gap: 16px;
+  }
+  .hero-foot { margin-top: 24px; }
 }
 
 /* ============================================ SECTIONS ============================================ */
