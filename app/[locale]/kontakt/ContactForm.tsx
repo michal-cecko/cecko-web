@@ -67,7 +67,7 @@ export default function ContactForm({ t }: { t: Dict }) {
   const [form, setForm] = useState<FormState>({
     name: '',
     email: '',
-    budget: '25k',
+    budget: '1-2.5k',
     type: 'web',
     msg: '',
     company: '',
@@ -105,11 +105,10 @@ export default function ContactForm({ t }: { t: Dict }) {
     ['design', tc.typeDesign],
   ];
   const budgets: [string, string][] = [
-    ['5k', '< 5 000 €'],
-    ['15k', '5–15k €'],
-    ['25k', '15–30k €'],
-    ['50k', '30–60k €'],
-    ['100k', '60k+ €'],
+    ['<1k', '< 1 000 €'],
+    ['1-2.5k', '1 000 – 2 500 €'],
+    ['2.5-5k', '2 500 – 5 000 €'],
+    ['5k+', '5 000+ €'],
   ];
 
   return (
