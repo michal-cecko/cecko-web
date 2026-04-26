@@ -1,0 +1,35 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cecko-web-next
+    labels:
+      - "traefik.enable=true"
+      # HTTPS router
+      - "traefik.http.routers.ceckoweb.rule=Host(`cecko.dev`)"
+      - "traefik.http.routers.ceckoweb.entrypoints=websecure"
+      - "traefik.http.routers.ceckoweb.tls.certresolver=myresolver"
+      - "traefik.http.services.ceckoweb.loadbalancer.server.port=3000"
+      # HTTP redirect router
+      - "traefik.http.routers.ceckoweb-http.rule=Host(`cecko.dev`)"
+      - "traefik.http.routers.ceckoweb-http.entrypoints=web"
+      - "traefik.http.routers.ceckoweb-http.middlewares=redirect-to-https"
+      # Redirect middleware
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
+      # Security headers
+      - "traefik.http.routers.ceckoweb.middlewares=security-headers"
+      - "traefik.http.middlewares.security-headers.headers.customRequestHeaders.X-Forwarded-Proto=https"
+      - "traefik.http.middlewares.security-headers.headers.customRequestHeaders.X-Forwarded-For="
+    networks:
+      - web
+    expose:
+      - "3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+
+networks:
+  web:
+    external: true

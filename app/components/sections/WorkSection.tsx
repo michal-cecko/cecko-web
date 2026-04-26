@@ -1,0 +1,65 @@
+import Link from 'next/link';
+import { WORKS } from '../../data';
+
+export default function WorkSection() {
+  return (
+    <section className="section" id="work" data-screen-label="04 Work">
+      <div className="section-head">
+        <div className="section-head-meta">
+          <span className="mono">04 — Vybrané práce</span>
+          <span className="section-head-meta-desc">
+            Projekty, ktoré ma niečo naučili a klientom priniesli výsledok.
+          </span>
+        </div>
+        <h2 className="section-title">
+          Z posledných <em>rokov.</em>
+        </h2>
+        <Link href="/prace" className="btn btn-ghost section-cta">
+          Všetky práce →
+        </Link>
+      </div>
+      <div className="work-list">
+        {WORKS.slice(0, 6).map((w, i) => (
+          <Link key={w.id} href={`/pripadova-studia/${w.id}`} className="work-row">
+            <span className="work-row-n">({String(i + 1).padStart(2, '0')})</span>
+            <div className="work-row-main">
+              <h3 className="work-row-title">{w.title}</h3>
+              <span className="work-row-kind">{w.kind}</span>
+            </div>
+            <div className="work-row-tags">
+              {w.tags.map((t) => (
+                <span key={t} className="chip">
+                  {t}
+                </span>
+              ))}
+            </div>
+            <span className="work-row-year">{w.year}</span>
+            <span className="work-row-arrow">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            <div
+              className="work-preview"
+              style={{
+                background: i % 2 === 0 ? 'linear-gradient(135deg, #C6F432, #8b6cce)' : 'linear-gradient(135deg, #1c1e19, #C6F432)',
+              }}
+            >
+              <div className="wp-mock" style={{ color: i % 2 === 0 ? '#0c0d0a' : '#f0ede4' }}>
+                <div className="wp-dots">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <div>
+                  <div className="wp-title">{w.title}</div>
+                  <div className="wp-sub">{w.kind}</div>
+                </div>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}

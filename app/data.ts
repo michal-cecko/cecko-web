@@ -1,190 +1,12 @@
-// Sections component file for Michal Čečko site
-const { useState: uS, useEffect: uE, useRef: uR } = React;
+export type Service = {
+  n: string;
+  title: string;
+  desc: string;
+  tags: string[];
+  span: string;
+};
 
-const MARK = (
-  <svg viewBox="0 0 87 94" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0 72.5V58.34l36.81 21.35v14.17L0 72.5Zm49.71-14.48L12.27 36.34V14.72L6.37 18.24 0 22.04v21.46l36.81 21.35 12.9 7.48v21.68l5.81-3.47 6.46-3.87V65.15l-12.27-7.12ZM24.89 7.16v21.8l49.79 28.87v21.24l5.59-3.33 6.4-3.82V50.73l-12-6.95L49.86 29.39 36.93 21.89V0l-6.32 3.77-5.72 3.4ZM49.86.33l36.81 21.35v14.6L49.86 14.93V.33Z" fill="currentColor"/>
-  </svg>
-);
-
-function LangSwitcher({ className = '' }) {
-  const [lang, setLang] = uS(() => {
-    try { return localStorage.getItem('mc_lang') || 'sk'; } catch { return 'sk'; }
-  });
-  uE(() => {
-    const onStorage = () => {
-      try { setLang(localStorage.getItem('mc_lang') || 'sk'); } catch {}
-    };
-    window.addEventListener('storage', onStorage);
-    window.addEventListener('mc:lang', onStorage);
-    return () => {
-      window.removeEventListener('storage', onStorage);
-      window.removeEventListener('mc:lang', onStorage);
-    };
-  }, []);
-  const pick = (v) => {
-    setLang(v);
-    try { localStorage.setItem('mc_lang', v); } catch {}
-    window.dispatchEvent(new Event('mc:lang'));
-  };
-  return (
-    <div className={`lang-switch ${className}`} role="group" aria-label="Jazyk">
-      {['sk', 'cz', 'en'].map(v => (
-        <button
-          key={v}
-          type="button"
-          className={`lang-opt ${lang === v ? 'is-active' : ''}`}
-          onClick={() => pick(v)}
-          aria-pressed={lang === v}
-        >{v.toUpperCase()}</button>
-      ))}
-    </div>
-  );
-}
-
-function Nav({ active = 'home' }) {
-  const [open, setOpen] = uS(false);
-  uE(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
-    document.body.classList.toggle('nav-overlay-open', open);
-    return () => { document.body.style.overflow = ''; document.body.classList.remove('nav-overlay-open'); };
-  }, [open]);
-  const close = () => setOpen(false);
-  const links = [
-    ['index.html', 'home', 'Domov'],
-    ['o-mne.html', 'about', 'O mne'],
-    ['sluzby.html', 'services', 'Služby'],
-    ['prace.html', 'work', 'Práce'],
-    ['cv.html', 'cv', 'CV'],
-    ['kontakt.html', 'contact', 'Kontakt'],
-  ];
-  return (
-    <>
-      <nav className={`nav ${open ? 'nav-open' : ''}`}>
-        <a href="index.html" className="nav-brand" onClick={close}>
-          <span className="nav-name">ČEČKO<em>.dev</em></span>
-        </a>
-        <ul className="nav-links">
-          {links.map(([href, key, label]) => (
-            <li key={key}><a href={href} onClick={close} className={active === key ? 'active' : ''}>{label}</a></li>
-          ))}
-        </ul>
-        <div className="nav-right">
-          <span className="nav-status"><span className="dot-live" /> K dispozícii — Jún 2026</span>
-          <LangSwitcher />
-          <a href="kontakt.html" className="nav-cta" onClick={close}>Napíšte mi</a>
-        </div>
-        <button
-          type="button"
-          className="nav-burger"
-          aria-label={open ? 'Zavrieť menu' : 'Otvoriť menu'}
-          aria-expanded={open}
-          onClick={() => setOpen(o => !o)}
-        >
-          <span /><span /><span />
-        </button>
-      </nav>
-      {ReactDOM.createPortal(
-        <div className={`nav-overlay ${open ? 'is-open' : ''}`} aria-hidden={!open}>
-          <ul className="nav-overlay-links">
-            {links.map(([href, key, label]) => (
-              <li key={key}><a href={href} onClick={close} className={active === key ? 'active' : ''}>{label}</a></li>
-            ))}
-            <li className="nav-overlay-cta">
-              <LangSwitcher className="lang-switch-lg" />
-              <a href="kontakt.html" className="btn btn-ghost" onClick={close}>Napíšte mi →</a>
-            </li>
-          </ul>
-        </div>,
-        document.body
-      )}
-    </>
-  );
-}
-
-function Cursor() {
-  const d = uR(null), r = uR(null);
-  uE(() => {
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    const onMove = (e) => {
-      mx = e.clientX; my = e.clientY;
-      if (d.current) { d.current.style.left = mx + 'px'; d.current.style.top = my + 'px'; }
-      const t = e.target;
-      if (t.closest('a, button, .service-card, .work-row, .faq-q, .stack-cat')) document.body.classList.add('hover-link');
-      else document.body.classList.remove('hover-link');
-    };
-    const loop = () => {
-      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
-      if (r.current) { r.current.style.left = rx + 'px'; r.current.style.top = ry + 'px'; }
-      requestAnimationFrame(loop);
-    };
-    window.addEventListener('mousemove', onMove);
-    loop();
-    return () => window.removeEventListener('mousemove', onMove);
-  }, []);
-  return (<><div ref={d} className="cursor-dot" /><div ref={r} className="cursor-ring" /></>);
-}
-
-function WorkPreviewFollow() {
-  uE(() => {
-    const onMove = (e) => {
-      document.documentElement.style.setProperty('--mx', e.clientX + 'px');
-      document.documentElement.style.setProperty('--my', e.clientY + 'px');
-    };
-    window.addEventListener('mousemove', onMove);
-    return () => window.removeEventListener('mousemove', onMove);
-  }, []);
-  return null;
-}
-
-function Counter({ to, suffix = '', sup = '' }) {
-  const [n, setN] = uS(0);
-  const ref = uR(null);
-  uE(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        const start = performance.now();
-        const step = (t) => {
-          const p = Math.min(1, (t - start) / 1400);
-          const eased = 1 - Math.pow(1 - p, 3);
-          setN(Math.round(to * eased));
-          if (p < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-        io.disconnect();
-      }
-    }, { threshold: 0.3 });
-    io.observe(el);
-    return () => io.disconnect();
-  }, [to]);
-  return <span ref={ref}>{n}{suffix}{sup && <sup>{sup}</sup>}</span>;
-}
-
-function Footer() {
-  return (
-    <footer className="footer">
-      <div className="footer-big">
-        <span className="footer-big-text">ČEČKO<em>.dev</em></span>
-      </div>
-      <div className="footer-meta">
-        <span>© 2026 Michal Čečko</span>
-        <span>Freelance · IČO 23260696</span>
-        <div style={{ display: 'flex', gap: 16 }}>
-          <a href="#">LinkedIn</a>
-          <a href="#">GitHub</a>
-          <a href="#">Telegram</a>
-        </div>
-        <span>Remote · Ostrava CZ / Žilina SK</span>
-        <LangSwitcher />
-      </div>
-    </footer>
-  );
-}
-
-// Data
-const SERVICES = [
+export const SERVICES: Service[] = [
   { n: '01', title: 'Fullstack webový vývoj', desc: 'Interné dashboardy, CRM a databázové systémy, klientské portály, custom webové aplikácie, ale aj malé weby. Od databázy po UI — Laravel + FilamentPHP backend, moderný frontend.', tags: ['Laravel', 'Filament', 'Vue', 'CRM', 'Dashboards'], span: 'span-6' },
   { n: '02', title: 'Mobilné aplikácie', desc: 'Flutter, Ionic, React Native, alebo natívne iOS/Android. Od MVP po App Store / Google Play release.', tags: ['Flutter', 'RN', 'Swift', 'Kotlin'], span: 'span-6' },
   { n: '03', title: 'UI & UX dizajn', desc: 'Weby, aplikácie, logá, branding a vizuálna identita — AI-powered workflow pre rýchle iterácie. Od wireframu po produkčný design systém.', tags: ['UI/UX', 'Branding', 'Logo', 'AI workflow'], span: 'span-4' },
@@ -192,7 +14,10 @@ const SERVICES = [
   { n: '05', title: 'AI integrácie', desc: 'LLM API, chatboti, automatizácie. Claude, OpenAI, custom integrácie.', tags: ['OpenAI', 'Claude', 'RAG'], span: 'span-4' },
 ];
 
-const STACK = [
+export type StackItem = { n: string; p?: boolean };
+export type StackCategory = { title: string; count: string; items: StackItem[] };
+
+export const STACK: StackCategory[] = [
   {
     title: 'Backend & DB', count: '12',
     items: [
@@ -208,7 +33,7 @@ const STACK = [
       { n: 'MySQL / Postgres', p: true },
       { n: 'Redis' },
       { n: 'WebSockets' },
-    ]
+    ],
   },
   {
     title: 'Frontend', count: '09',
@@ -222,7 +47,7 @@ const STACK = [
       { n: 'Tailwind CSS', p: true },
       { n: 'Alpine.js' },
       { n: 'HTML / CSS', p: true },
-    ]
+    ],
   },
   {
     title: 'Mobile', count: '05',
@@ -232,7 +57,7 @@ const STACK = [
       { n: 'React Native', p: true },
       { n: 'Swift (iOS)' },
       { n: 'Kotlin (Android)' },
-    ]
+    ],
   },
   {
     title: 'Design & Tooling', count: '07',
@@ -244,11 +69,25 @@ const STACK = [
       { n: 'CI/CD' },
       { n: 'Linux / DevOps' },
       { n: 'AWS / DigitalOcean' },
-    ]
+    ],
   },
 ];
 
-const WORKS = [
+export type Work = {
+  id: string;
+  title: string;
+  kind: string;
+  year: string;
+  tags: string[];
+  url: string | null;
+  confidential: boolean;
+  duration: string;
+  role: string;
+  challenge: string;
+  solution: string;
+};
+
+export const WORKS: Work[] = [
   {
     id: 'bcz',
     title: 'BCZ Club',
@@ -291,7 +130,7 @@ const WORKS = [
   {
     id: 'faktury',
     title: 'Interný fakturačný systém',
-    kind: 'Vlastný faktura­čný nástroj',
+    kind: 'Vlastný fakturačný nástroj',
     year: '2025',
     tags: ['Laravel', 'Filament'],
     url: null,
@@ -368,20 +207,26 @@ const WORKS = [
   },
 ];
 
-const PROCESS = [
+export type ProcessStep = { n: string; title: string; dur: string; desc: string; outputs: string[] };
+
+export const PROCESS: ProcessStep[] = [
   { n: '01', title: 'Prvý kontakt', dur: 'Email / telefón', desc: 'Napíšete alebo zavoláte. V mailu popíšete ľudskou rečou, čo potrebujete — žiadna technická reč, žiadne požiadavky na formu. Stačí ak viem o čom to je.', outputs: ['Email / call', 'Raw zadanie', 'Bez formátu'] },
   { n: '02', title: 'Môj pohľad & odhad', dur: '2–4 dni', desc: 'Spravím si na projekt svoj pohľad — netechnickú špecifikáciu v ľudskej reči, priložím referencie a odkazy na podobné práce, a hrubý cenový odhad. Aby ste vedeli do čoho idete.', outputs: ['Netechnická špecifikácia', 'Referencie', 'Hrubý odhad ceny'] },
   { n: '03', title: 'Detailná špecifikácia', dur: '1–2 týždne', desc: 'Ak vám to vyhovuje, pripravím detailnú, technickejšiu špecku. Toto je alfa a omega — presne opisuje čo bude odovzdané. Plus timeline, míľniky, a pri väčších projektoch rozdelenie na sprinty.', outputs: ['Detailná špecifikácia', 'Timeline & míľniky', 'Finálna cena'] },
   { n: '04', title: 'Vývoj & odovzdanie', dur: '2–16 týždňov', desc: 'Väčšie appky idú v sprintoch — priebežne vidíte progress na stagingu. Menšie appky uvidíte naraz, keď sú hotové — odovzdám na kontrolu na staging verzii, opravím pripomienky, spustíme do produkcie.', outputs: ['Live staging verzia', 'Kontrola & pripomienky', 'Po kontrole odovzdanie do produkcie'] },
 ];
 
-const TESTIMONIALS = [
+export type Testimonial = { quote: string; name: string; role: string; init: string };
+
+export const TESTIMONIALS: Testimonial[] = [
   { quote: 'Michal dodal presne to, čo sme potrebovali. Komunikácia je jasná, termíny dodržané, kvalita kódu prvotriedna. Odporúčam.', name: 'Peter Kováč', role: 'CEO, Medico s.r.o.', init: 'PK' },
   { quote: 'Po dvoch neúspešných pokusoch s inými dodávateľmi nám Michal dorobil SaaS platformu za 10 týždňov. Stále s ním spolupracujeme.', name: 'Ivana Horváthová', role: 'Founder, TrainPro', init: 'IH' },
   { quote: 'Najlepšia investícia tohto roka. Mobilná appka sa vyvíjala rýchlo, všetko transparentne, žiadne prekvapenia v cene.', name: 'Martin Blaho', role: 'COO, DeliveryNow', init: 'MB' },
 ];
 
-const FAQS = [
+export type FAQ = { q: string; a: string };
+
+export const FAQS: FAQ[] = [
   { q: 'Koľko stojí spustenie projektu?', a: 'Záleží od rozsahu. Jednoduchý statický web s kontaktným formulárom viem spraviť od 800 €. Menší jednoduchý e-shop od 2 000 €. Robustnejšie webové a mobilné aplikácie sa vždy naceňujú samostatne — ceny sa menia podľa špecifikácie a pevná cena sa dá stanoviť až po detailnom zadaní. Po úvodnom calle dostanete odhad a harmonogram.' },
   { q: 'Pracujete sám alebo máte tím?', a: 'Sám. Pracujem ako freelancer. Na väčšie projekty, v prípade nízkych kapacít, mám preverených subcontractorov (dizajn, mobile, DevOps), ale vždy je za komunikáciu a kvalitu zodpovedný jeden človek — ja.' },
   { q: 'Prečo PHP / Laravel a nie niečo "modernejšie"?', a: 'Pretože Laravel je najmodernejší 🤯 najrýchlejší spôsob ako dodať robustný backend za málo peňazí. FilamentPHP je pecka, šetrí týždne práce na admin rozhraniach. Kde treba, použijem Node alebo Go — ale 80% biznis projektov sa hodí najlepšie na Laravel.' },
@@ -391,8 +236,3 @@ const FAQS = [
   { q: 'Viete spraviť aj dizajn alebo len vývoj?', a: 'Obidvoje. Preferujem keď môžem mať dizajn pod kontrolou — výsledok je konzistentný a rýchlejšie sa programuje. Viem pracovať aj z dodaného Figma filu.' },
   { q: 'Fakturujete s DPH?', a: 'Nie. Mám založenú českú živnosť. Faktúry vystavujem mesačne alebo podľa dohodnutých míľnikov.' },
 ];
-
-Object.assign(window, {
-  Nav, Cursor, Footer, WorkPreviewFollow, Counter, MARK, LangSwitcher,
-  SERVICES, STACK, WORKS, PROCESS, TESTIMONIALS, FAQS
-});
