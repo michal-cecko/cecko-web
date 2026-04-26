@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Chrome from '../components/Chrome';
+import SmoothScroll from '../components/SmoothScroll';
 import { locales, localeOgTag, type Locale } from '../i18n/config';
 import { getDictionary } from '../i18n/dictionaries';
 
@@ -62,5 +63,12 @@ export default async function LocaleLayout({ children, params }: Params & { chil
   const { locale } = await params;
   if (!(locales as readonly string[]).includes(locale)) notFound();
   const t = getDictionary(locale as Locale);
-  return <Chrome locale={locale as Locale} t={t}>{children}</Chrome>;
+  return (
+    <>
+      <SmoothScroll />
+      <Chrome locale={locale as Locale} t={t}>
+        {children}
+      </Chrome>
+    </>
+  );
 }
