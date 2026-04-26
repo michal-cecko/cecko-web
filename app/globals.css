@@ -1682,11 +1682,27 @@ body[data-theme="light"] .service-card-bg-num { color: var(--bg-2); }
 
 /* ============================================ PRINT / PDF ============================================
    Used by the CV → PDF generator (scripts/generate-cv-pdfs.mjs) and
-   anyone who hits Cmd+P on /cv. Strips chrome, animations, and the
-   noisy body::before noise overlay. Keeps the dark theme so the PDF
-   matches the brand.
+   anyone who hits Cmd+P on /cv. Forces a light, paper-friendly
+   palette: white background, dark text, and a darkened cyan accent
+   (#0e8a82) so it has enough contrast on white. The dark site
+   palette is overridden via the existing CSS variables so all the
+   downstream selectors keep working unchanged.
 */
 @media print {
+  :root,
+  body {
+    --bg: #ffffff;
+    --bg-2: #f6f4ec;
+    --bg-3: #ece8da;
+    --fg: #0c0d0a;
+    --fg-dim: #4a4842;
+    --fg-muted: #8a8779;
+    --border: #d4cebb;
+    --border-hi: #b5af9c;
+    --lime: #0e8a82;
+    --lime-dim: #0a6e68;
+  }
+
   body::before { display: none !important; }
   .nav,
   .nav-overlay,
@@ -1707,7 +1723,8 @@ body[data-theme="light"] .service-card-bg-num { color: var(--bg-2); }
   }
 
   html, body {
-    background: #0b0b0c !important;
+    background: #ffffff !important;
+    color: var(--fg) !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
