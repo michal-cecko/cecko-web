@@ -85,8 +85,8 @@ export default function WorkList() {
               style={{
                 background:
                   i % 2 === 0
-                    ? 'linear-gradient(135deg, #C6F432, #8b6cce)'
-                    : 'linear-gradient(135deg, #1c1e19, #C6F432)',
+                    ? 'linear-gradient(135deg, #49F0E0, #8b6cce)'
+                    : 'linear-gradient(135deg, #1c1e19, #49F0E0)',
               }}
             >
               <div className="wp-mock" style={{ color: i % 2 === 0 ? '#0c0d0a' : '#f0ede4' }}>

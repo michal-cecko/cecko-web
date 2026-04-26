@@ -10,6 +10,4 @@ out/
 .env.*.local
 next-env.d.ts
 .playwright-mcp/
-home-desktop*.png
-home-mobile*.png
-mobile-menu-open*.png
+/*.png

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: '%s — Michal Čečko',
   },
   description:
-    'Freelance fullstack developer. Laravel, Vue, Flutter. Weby, mobilné aplikácie a SaaS produkty od A po Z.',
+    'Freelance fullstack developer. Laravel, Vue. Weby, mobilné aplikácie a SaaS produkty od A po Z.',
   applicationName: 'Michal Čečko',
   authors: [{ name: 'Michal Čečko', url: SITE_URL }],
   creator: 'Michal Čečko',
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
     siteName: 'Michal Čečko',
     title: 'Michal Čečko — Full-Stack Developer · Remote',
     description:
-      'Freelance fullstack developer. Laravel, Vue, Flutter. Weby, mobilné aplikácie a SaaS produkty od A po Z.',
+      'Freelance fullstack developer. Laravel, Vue. Weby, mobilné aplikácie a SaaS produkty od A po Z.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Michal Čečko — Full-Stack Developer · Remote',
     description:
-      'Freelance fullstack developer. Laravel, Vue, Flutter. Weby, mobilné aplikácie a SaaS produkty od A po Z.',
+      'Freelance fullstack developer. Laravel, Vue. Weby, mobilné aplikácie a SaaS produkty od A po Z.',
   },
   icons: {
     icon: '/mark.svg',

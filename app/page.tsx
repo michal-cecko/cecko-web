@@ -14,7 +14,7 @@ const personJsonLd = {
   name: 'Michal Čečko',
   jobTitle: 'Freelance Full-Stack Developer',
   url: 'https://cecko.dev',
-  email: 'mailto:michal@cecko.dev',
+  email: 'mailto:ceckomichal@gmail.com',
   address: [
     { '@type': 'PostalAddress', addressLocality: 'Ostrava', addressCountry: 'CZ' },
     { '@type': 'PostalAddress', addressLocality: 'Žilina', addressCountry: 'SK' },

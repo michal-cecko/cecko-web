@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { SERVICES } from '../data';
 import ProcessSection from '../components/sections/ProcessSection';
 import FAQSection from '../components/sections/FAQSection';
 import ContactSection from '../components/sections/ContactSection';
@@ -15,72 +16,6 @@ export const metadata: Metadata = {
     url: '/sluzby',
   },
 };
-
-const SERVICES_DETAIL: {
-  n: string;
-  title: string;
-  desc: string;
-  price: string;
-  dur: string;
-  includes: string[];
-}[] = [
-  {
-    n: '01',
-    title: 'Prezentačný web',
-    desc: 'Jednoduchý prezentačný web alebo landing page s kontaktným formulárom. Rýchly, dobre vyzerajúci. Ideálne pre malé firmy, freelancerov, alebo launch produktu.',
-    price: 'od 800 €',
-    dur: '1–2 týždne',
-    includes: ['Technická špecifikácia', 'UI dizajn', 'HTML + CSS + Alpine.js', 'Kontaktný formulár', 'SEO základy', 'Analytics'],
-  },
-  {
-    n: '02',
-    title: 'E-shop (menší)',
-    desc: 'Jednoduchý e-shop pre menší sortiment — WordPress/WooCommerce alebo custom Laravel riešenie. Platby, doprava, admin, základné integrácie.',
-    price: 'od 2 000 €',
-    dur: '2–4 týždne',
-    includes: ['Technická špecifikácia', 'UI dizajn', 'Produkty + kategórie', 'Platobná brána', 'Doprava + objednávky', 'Admin panel'],
-  },
-  {
-    n: '03',
-    title: 'Webová aplikácia / interný systém',
-    desc: 'Custom riešenia na mieru — interné nástroje, admin dashboardy, CRM, klientské portály, weby s admin rozhraním a CMS. Laravel + FilamentPHP backend, moderný frontend.',
-    price: 'od 2 500 €',
-    dur: '4–12 týždňov',
-    includes: ['Technická špecifikácia', 'UX/UI dizajn (ak treba)', 'Laravel backend + DB', 'Admin rozhranie (Filament)', 'Deploy + DevOps', 'Dokumentácia'],
-  },
-  {
-    n: '04',
-    title: 'Mobilné aplikácie',
-    desc: 'Cross-platform (Flutter, Ionic, React Native) alebo natívne (Swift, Kotlin). App Store + Play Store submission v cene.',
-    price: 'od 15 000 €',
-    dur: '8–16 týždňov',
-    includes: ['Product discovery', 'UI/UX dizajn', 'iOS + Android build', 'Analytics', 'Push notifikácie', 'Store submission'],
-  },
-  {
-    n: '05',
-    title: 'UI & UX dizajn',
-    desc: 'Weby, aplikácie, logá, branding a vizuálna identita. AI-powered workflow pre rýchle iterácie — od prvých wireframov po produkčný design systém.',
-    price: 'od 3 500 €',
-    dur: '2–4 týždne',
-    includes: ['Brand discovery', 'Logo & vizuálna identita', 'Wireframe', 'Hi-fi Figma mockup', 'Design systém', 'Responzívne layouty', 'Odovzdanie vývojárovi'],
-  },
-  {
-    n: '06',
-    title: 'SaaS MVP',
-    desc: 'End-to-end produktový launch z technickej stránky — brand, dizajn, web, mobilná appka, platby, hosting. Pre zakladateľov, ktorí už vedia čo chcú postaviť a potrebujú jedného človeka na celú realizáciu.',
-    price: 'od 15 000 €',
-    dur: '12–24 týždňov',
-    includes: ['Technická špecifikácia', 'Brand + vizuálna identita', 'Web + mobilná appka', 'Auth + platby (Stripe)', 'Admin panel', 'Hosting 12 mes.'],
-  },
-  {
-    n: '07',
-    title: 'AI integrácie',
-    desc: 'Chatboti, RAG systémy, automatizácie. Claude, OpenAI, open-source modely. Prototyp → produkčná integrácia → tréning.',
-    price: 'od 2 500 €',
-    dur: '1–6 týždňov',
-    includes: ['AI objavovanie', 'Prototyp', 'API integrácia', 'Vektorová DB (ak treba)', 'UI pre AI', 'Training & handoff'],
-  },
-];
 
 export default function ServicesPage() {
   return (
@@ -99,7 +34,7 @@ export default function ServicesPage() {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          {SERVICES_DETAIL.map((s) => (
+          {SERVICES.map((s) => (
             <div
               key={s.n}
               style={{

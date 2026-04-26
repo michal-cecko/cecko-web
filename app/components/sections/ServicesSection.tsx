@@ -23,11 +23,8 @@ export default function ServicesSection() {
             <p className="service-card-desc">{s.desc}</p>
             <div className="service-card-footer">
               <div className="service-card-tags">
-                {s.tags.map((t) => (
-                  <span key={t} className="chip">
-                    {t}
-                  </span>
-                ))}
+                <span className="chip chip-accent">{s.price}</span>
+                <span className="chip">{s.dur}</span>
               </div>
               <span className="service-card-arrow">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

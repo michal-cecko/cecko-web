@@ -37,8 +37,7 @@ export default function Hero() {
         <p className="hero-sub-text">
           Som <strong>fullstack developer</strong> so špecializáciou na PHP / Laravel.
           Navrhujem, programujem a spúšťam <strong>weby, mobilné aplikácie a SaaS produkty</strong> —
-          od prvého wireframu po produkčný deploy. Jeden kontakt, žiadne zbytočné meetingy,
-          jedna zodpovednosť.
+          od prvého wireframu po produkčný deploy.
         </p>
         <div className="hero-actions">
           <Link href="/kontakt" className="btn btn-primary">

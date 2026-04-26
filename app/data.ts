@@ -1,17 +1,90 @@
+export const CONTACT = {
+  email: 'ceckomichal@gmail.com',
+  linkedinUrl: 'https://www.linkedin.com/in/michal-cecko/',
+  linkedinHandle: '@michalcecko',
+  phones: {
+    sk: { display: '+421 911 266 631', href: 'tel:+421911266631' },
+    en: { display: '+421 911 266 631', href: 'tel:+421911266631' },
+    cz: { display: '+420 776 310 843', href: 'tel:+420776310843' },
+  },
+} as const;
+
+export type Lang = keyof typeof CONTACT.phones;
+
 export type Service = {
   n: string;
   title: string;
   desc: string;
-  tags: string[];
+  price: string;
+  dur: string;
+  includes: string[];
   span: string;
 };
 
 export const SERVICES: Service[] = [
-  { n: '01', title: 'Fullstack webový vývoj', desc: 'Interné dashboardy, CRM a databázové systémy, klientské portály, custom webové aplikácie, ale aj malé weby. Od databázy po UI — Laravel + FilamentPHP backend, moderný frontend.', tags: ['Laravel', 'Filament', 'Vue', 'CRM', 'Dashboards'], span: 'span-6' },
-  { n: '02', title: 'Mobilné aplikácie', desc: 'Flutter, Ionic, React Native, alebo natívne iOS/Android. Od MVP po App Store / Google Play release.', tags: ['Flutter', 'RN', 'Swift', 'Kotlin'], span: 'span-6' },
-  { n: '03', title: 'UI & UX dizajn', desc: 'Weby, aplikácie, logá, branding a vizuálna identita — AI-powered workflow pre rýchle iterácie. Od wireframu po produkčný design systém.', tags: ['UI/UX', 'Branding', 'Logo', 'AI workflow'], span: 'span-4' },
-  { n: '04', title: 'SaaS MVP', desc: 'End-to-end produktový launch: od brandingu, cez dizajn, web aj mobilnú appku, až po platby a go-to-market. Väčšie spolupráce 3–6 mesiacov.', tags: ['Product', 'Stripe', 'Multi-platform', 'GTM'], span: 'span-4' },
-  { n: '05', title: 'AI integrácie', desc: 'LLM API, chatboti, automatizácie. Claude, OpenAI, custom integrácie.', tags: ['OpenAI', 'Claude', 'RAG'], span: 'span-4' },
+  {
+    n: '01',
+    title: 'Prezentačný web',
+    desc: 'Jednoduchý prezentačný web alebo landing page s kontaktným formulárom. Rýchly, dobre vyzerajúci. Ideálne pre malé firmy, freelancerov, alebo launch produktu.',
+    price: 'od 800 €',
+    dur: '1–2 týždne',
+    includes: ['Technická špecifikácia', 'UI dizajn', 'HTML + CSS + Alpine.js', 'Kontaktný formulár', 'SEO základy', 'Analytics'],
+    span: 'span-6',
+  },
+  {
+    n: '02',
+    title: 'E-shop (menší)',
+    desc: 'Jednoduchý e-shop pre menší sortiment — WordPress/WooCommerce alebo custom Laravel riešenie. Platby, doprava, admin, základné integrácie.',
+    price: 'od 2 000 €',
+    dur: '2–4 týždne',
+    includes: ['Technická špecifikácia', 'UI dizajn', 'Produkty + kategórie', 'Platobná brána', 'Doprava + objednávky', 'Admin panel'],
+    span: 'span-6',
+  },
+  {
+    n: '03',
+    title: 'Webová aplikácia / interný systém',
+    desc: 'Custom riešenia na mieru — interné nástroje, admin dashboardy, CRM, klientské portály, weby s admin rozhraním a CMS. Laravel + FilamentPHP backend, moderný frontend.',
+    price: 'od 2 500 €',
+    dur: '4–12 týždňov',
+    includes: ['Technická špecifikácia', 'UX/UI dizajn (ak treba)', 'Laravel backend + DB', 'Admin rozhranie (Filament)', 'Deploy + DevOps', 'Dokumentácia'],
+    span: 'span-4',
+  },
+  {
+    n: '04',
+    title: 'Mobilné aplikácie',
+    desc: 'Cross-platform (Flutter, Ionic, React Native) alebo natívne (Swift, Kotlin). App Store + Play Store submission v cene.',
+    price: 'od 1 500 €',
+    dur: '2–6 týždňov',
+    includes: ['Product discovery', 'UI/UX dizajn', 'iOS + Android build', 'Analytics', 'Push notifikácie', 'Store submission'],
+    span: 'span-4',
+  },
+  {
+    n: '05',
+    title: 'UI & UX dizajn',
+    desc: 'Weby, aplikácie, logá, branding a vizuálna identita. AI-powered workflow pre rýchle iterácie — od prvých wireframov po produkčný design systém.',
+    price: 'od 3 500 €',
+    dur: '2–4 týždne',
+    includes: ['Brand discovery', 'Logo & vizuálna identita', 'Wireframe', 'Hi-fi Figma mockup', 'Design systém', 'Responzívne layouty', 'Odovzdanie vývojárovi'],
+    span: 'span-4',
+  },
+  {
+    n: '06',
+    title: 'SaaS MVP',
+    desc: 'End-to-end produktový launch z technickej stránky — brand, dizajn, web, mobilná appka, platby, hosting. Pre zakladateľov, ktorí už vedia čo chcú postaviť a potrebujú jedného človeka na celú realizáciu.',
+    price: 'od 3 500 €',
+    dur: '4–8 týždňov',
+    includes: ['Technická špecifikácia', 'Brand + vizuálna identita', 'Web + mobilná appka', 'Auth + platby (Stripe)', 'Admin panel', 'Hosting 12 mes.'],
+    span: 'span-6',
+  },
+  {
+    n: '07',
+    title: 'AI integrácie',
+    desc: 'Chatboti, RAG systémy, automatizácie. Claude, OpenAI, open-source modely. Prototyp → produkčná integrácia → tréning.',
+    price: 'od 2 500 €',
+    dur: '1–6 týždňov',
+    includes: ['AI objavovanie', 'Prototyp', 'API integrácia', 'Vektorová DB (ak treba)', 'UI pre AI', 'Training & handoff'],
+    span: 'span-6',
+  },
 ];
 
 export type StackItem = { n: string; p?: boolean };

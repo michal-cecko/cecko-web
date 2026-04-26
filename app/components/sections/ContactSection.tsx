@@ -1,10 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { CONTACT } from '../../data';
+import { useLocalePhone } from '../LocalePhone';
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
-  const email = 'michal@cecko.dev';
+  const email = CONTACT.email;
+  const phone = useLocalePhone();
 
   return (
     <section className="contact" id="contact" data-screen-label="08 Contact">
@@ -49,13 +52,13 @@ export default function ContactSection() {
           {copied ? '✓ Skopírované' : 'Skopírovať email'}
         </button>
         <div className="contact-channels" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
-          <a href="tel:+421900000000" className="contact-channel">
+          <a href={phone.href} className="contact-channel">
             <span className="contact-channel-label">Telefón / WhatsApp</span>
-            <span className="contact-channel-value">+421 900 000 000</span>
+            <span className="contact-channel-value">{phone.display}</span>
           </a>
-          <a href="#" className="contact-channel">
+          <a href={CONTACT.linkedinUrl} target="_blank" rel="noopener noreferrer" className="contact-channel">
             <span className="contact-channel-label">LinkedIn</span>
-            <span className="contact-channel-value">@michalcecko</span>
+            <span className="contact-channel-value">{CONTACT.linkedinHandle}</span>
           </a>
         </div>
         <div className="contact-meta">

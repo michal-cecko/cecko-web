@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import ContactForm from './ContactForm';
+import PhoneCard from './PhoneCard';
+import { CONTACT } from '../data';
 
 export const metadata: Metadata = {
   title: 'Kontakt',
@@ -44,15 +46,31 @@ export default function ContactPage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
             {(
               [
-                { label: 'Email', val: 'michal@cecko.dev', href: 'mailto:michal@cecko.dev', full: true },
-                { label: 'Telefón / WhatsApp', val: '+421 900 000 000', href: 'tel:+421900000000', full: true },
-                { label: 'LinkedIn', val: '@michalcecko', href: '#' },
-                { label: 'GitHub', val: '@michalcecko', href: '#' },
-              ] as { label: string; val: string; href: string; full?: boolean }[]
+                {
+                  label: 'Email',
+                  val: CONTACT.email,
+                  href: `mailto:${CONTACT.email}`,
+                  full: true,
+                  external: false,
+                },
+                {
+                  label: 'LinkedIn',
+                  val: CONTACT.linkedinHandle,
+                  href: CONTACT.linkedinUrl,
+                  external: true,
+                },
+                {
+                  label: 'GitHub',
+                  val: '@michal-cecko',
+                  href: 'https://github.com/michal-cecko',
+                  external: true,
+                },
+              ] as { label: string; val: string; href: string; full?: boolean; external: boolean }[]
             ).map((c, i) => (
               <a
                 key={i}
                 href={c.href}
+                {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 style={{
                   gridColumn: c.full ? '1 / -1' : 'auto',
                   padding: '14px 18px',
@@ -94,6 +112,7 @@ export default function ContactPage() {
                 </svg>
               </a>
             ))}
+            <PhoneCard />
           </div>
 
           <div style={{ padding: '18px 22px', background: 'var(--bg-2)', border: '1px solid var(--border)', borderRadius: 14 }}>

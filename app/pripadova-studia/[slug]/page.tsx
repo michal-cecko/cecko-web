@@ -98,7 +98,7 @@ export default async function CaseStudyPage({ params }: Params) {
           style={{
             aspectRatio: '16/9',
             borderRadius: 20,
-            background: 'linear-gradient(135deg, #C6F432, #8b6cce)',
+            background: 'linear-gradient(135deg, #49F0E0, #8b6cce)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

@@ -1,4 +1,5 @@
 import LangSwitcher from './LangSwitcher';
+import { CONTACT } from '../data';
 
 export default function Footer() {
   return (
@@ -12,9 +13,12 @@ export default function Footer() {
         <span>© 2026 Michal Čečko</span>
         <span>Freelance · IČO 23260696</span>
         <div style={{ display: 'flex', gap: 16 }}>
-          <a href="#">LinkedIn</a>
-          <a href="#">GitHub</a>
-          <a href="#">Telegram</a>
+          <a href={CONTACT.linkedinUrl} target="_blank" rel="noopener noreferrer">
+            LinkedIn
+          </a>
+          <a href="https://github.com/michal-cecko" target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
         </div>
         <span>Remote · Ostrava CZ / Žilina SK</span>
         <LangSwitcher />
