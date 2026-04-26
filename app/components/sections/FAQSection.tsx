@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { FAQS } from '../../data';
 import Reveal from '../Reveal';
 import type { Dict } from '../../i18n/dictionaries';
 
 export default function FAQSection({ t }: { t: Dict }) {
   const [open, setOpen] = useState(0);
+  const items = t.faq.items;
 
   return (
     <section className="section" id="faq" data-screen-label="07 FAQ">
@@ -22,7 +22,7 @@ export default function FAQSection({ t }: { t: Dict }) {
         </div>
       </Reveal>
       <div className="faq-list">
-        {FAQS.map((f, i) => (
+        {items.map((f, i) => (
           <Reveal key={i} delay={i * 40} offset={12}>
             <div className={`faq-item ${open === i ? 'open' : ''}`}>
               <button className="faq-q" onClick={() => setOpen(open === i ? -1 : i)}>

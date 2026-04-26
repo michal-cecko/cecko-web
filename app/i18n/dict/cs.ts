@@ -99,6 +99,16 @@ const dict: Dict = {
     metaDesc: 'Nejčastější otázky, které dostávám před začátkem spolupráce.',
     title: 'Co byste se ještě chtěli',
     titleEm: 'zeptat?',
+    items: [
+      { q: 'Kolik stojí spuštění projektu?', a: 'Záleží na rozsahu. Jednoduchý statický web s kontaktním formulářem zvládnu od 800 €. Menší jednoduchý e-shop od 2 000 €. Robustnější webové a mobilní aplikace se vždy oceňují individuálně — ceny se mění podle specifikace a pevná cena se dá stanovit až po detailním zadání. Po úvodním callu dostanete odhad a harmonogram.' },
+      { q: 'Pracujete sám nebo máte tým?', a: 'Sám. Pracuji jako freelancer. Na větší projekty, při nízkých kapacitách, mám prověřené subdodavatele (design, mobile, DevOps), ale za komunikaci a kvalitu vždy odpovídá jeden člověk — já.' },
+      { q: 'Proč PHP / Laravel a ne něco "modernějšího"?', a: 'Protože Laravel je nejmodernější 🤯 — a nejrychlejší způsob, jak dodat robustní backend za málo peněz. FilamentPHP je paráda, šetří týdny práce na admin rozhraních. Kde to dává smysl, sáhnu po Node nebo Go — ale 80 % byznys projektů se nejlépe hodí právě na Laravel.' },
+      { q: 'Děláte i rychlé úpravy stávajících projektů?', a: 'Ano, měsíční retainer od 400 € (10 hodin práce). Můžete ho použít na bug fixy, nové featury, konzultace nebo code review.' },
+      { q: 'Jak probíhá spolupráce na dálku?', a: 'Většinu času remote — Slack, Discord, Google Meet. Rád se osobně potkám na kickoffu a případně u větších milníků.' },
+      { q: 'Podepisujete NDA?', a: 'Samozřejmě — rád podepíšu vaši NDA před prvním hovorem, pokud je třeba. Všechny projekty standardně chráním před zveřejněním, dokud nedostanu souhlas klienta.' },
+      { q: 'Umíte i design, nebo jen vývoj?', a: 'Obojí. Preferuji, když můžu mít design pod kontrolou — výsledek je konzistentnější a rychleji se programuje. Umím pracovat i z dodaného Figma souboru.' },
+      { q: 'Fakturujete s DPH?', a: 'Ne. Mám založenou českou živnost. Faktury vystavuji měsíčně nebo podle dohodnutých milníků.' },
+    ],
   },
   contact: {
     sectionLabel: '08 — Začneme',

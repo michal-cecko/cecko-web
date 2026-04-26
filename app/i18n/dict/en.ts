@@ -97,6 +97,16 @@ const dict = {
     metaDesc: 'The questions I get most often before we start working together.',
     title: 'Anything else',
     titleEm: 'on your mind?',
+    items: [
+      { q: 'How much does it cost to start a project?', a: "Depends on scope. A simple static site with a contact form starts from €800. A small e-shop from €2,000. Web and mobile apps are always quoted individually — pricing depends on the spec, and a fixed price can only be set after a detailed brief. After our intro call you'll get an estimate and a timeline." },
+      { q: 'Do you work solo or with a team?', a: "Solo. I work as a freelancer. For larger projects, when capacity is tight, I have vetted subcontractors (design, mobile, DevOps), but one person is always accountable for communication and quality — me." },
+      { q: 'Why PHP / Laravel and not something "more modern"?', a: "Because Laravel is the most modern 🤯 — and the fastest way to ship a robust backend without burning the budget. FilamentPHP is killer, it saves weeks on admin UIs. When it makes sense I'll reach for Node or Go — but 80% of business projects are best served by Laravel." },
+      { q: 'Do you also do quick fixes on existing projects?', a: "Yes — monthly retainer from €400 (10 hours of work). Use it for bug fixes, new features, consultations or code reviews." },
+      { q: 'How does remote collaboration work?', a: "Mostly remote — Slack, Discord, Google Meet. Happy to meet in person for the kickoff and at major milestones." },
+      { q: 'Will you sign an NDA?', a: "Of course — happy to sign your NDA before our first call if needed. By default I keep all projects under wraps until the client gives the green light to publish." },
+      { q: 'Do you do design too, or only development?', a: "Both. I prefer when I can own the design — the result is more consistent and faster to ship. I'm also comfortable working from a delivered Figma file." },
+      { q: 'Do you charge VAT?', a: "No. I run a Czech sole proprietorship (živnost). Invoices go out monthly or against agreed milestones." },
+    ],
   },
   contact: {
     sectionLabel: "08 — Let's start",

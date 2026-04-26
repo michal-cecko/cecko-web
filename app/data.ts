@@ -202,15 +202,3 @@ export const TESTIMONIALS: Testimonial[] = [
   { quote: 'Najlepšia investícia tohto roka. Mobilná appka sa vyvíjala rýchlo, všetko transparentne, žiadne prekvapenia v cene.', name: 'Martin Blaho', role: 'COO, DeliveryNow', init: 'MB' },
 ];
 
-export type FAQ = { q: string; a: string };
-
-export const FAQS: FAQ[] = [
-  { q: 'Koľko stojí spustenie projektu?', a: 'Záleží od rozsahu. Jednoduchý statický web s kontaktným formulárom viem spraviť od 800 €. Menší jednoduchý e-shop od 2 000 €. Robustnejšie webové a mobilné aplikácie sa vždy naceňujú samostatne — ceny sa menia podľa špecifikácie a pevná cena sa dá stanoviť až po detailnom zadaní. Po úvodnom calle dostanete odhad a harmonogram.' },
-  { q: 'Pracujete sám alebo máte tím?', a: 'Sám. Pracujem ako freelancer. Na väčšie projekty, v prípade nízkych kapacít, mám preverených subcontractorov (dizajn, mobile, DevOps), ale vždy je za komunikáciu a kvalitu zodpovedný jeden človek — ja.' },
-  { q: 'Prečo PHP / Laravel a nie niečo "modernejšie"?', a: 'Pretože Laravel je najmodernejší 🤯 najrýchlejší spôsob ako dodať robustný backend za málo peňazí. FilamentPHP je pecka, šetrí týždne práce na admin rozhraniach. Kde treba, použijem Node alebo Go — ale 80% biznis projektov sa hodí najlepšie na Laravel.' },
-  { q: 'Robíte aj rýchle úpravy existujúcich projektov?', a: 'Áno, mesačný retainer od 400€ (10 hodín práce). Môžete ho použiť na bug fixy, nové featury, konzultácie alebo code review.' },
-  { q: 'Ako prebieha spolupráca na diaľku?', a: 'Väčšinu času remote — Slack, Discord, Google Meet. Rád sa osobne stretnem na kickoffe a prípadne pri väčších míľnikoch.' },
-  { q: 'Podpisujete NDA?', a: 'Samozrejme, rád podpíšem Vašu NDA pred prvým hovorom ak treba. Všetky projekty štandardne chránim pred zverejnením, kým nedostanem súhlas klienta.' },
-  { q: 'Viete spraviť aj dizajn alebo len vývoj?', a: 'Obidvoje. Preferujem keď môžem mať dizajn pod kontrolou — výsledok je konzistentný a rýchlejšie sa programuje. Viem pracovať aj z dodaného Figma filu.' },
-  { q: 'Fakturujete s DPH?', a: 'Nie. Mám založenú českú živnosť. Faktúry vystavujem mesačne alebo podľa dohodnutých míľnikov.' },
-];

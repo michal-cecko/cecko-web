@@ -7,17 +7,14 @@ export default function SmoothScroll() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Skip Lenis on touch / coarse-pointer devices — native scroll feels
+    // better on phones and avoids jank on lower-powered hardware.
+    if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
 
     const lenis = new Lenis({
-      // Lerp = how much of the gap to close every frame.
-      // Lower = smoother but slower to settle.
       lerp: 0.1,
-      // Easing curve used for programmatic .scrollTo() (anchor jumps,
-      // hashchange) — fast start, slow finish.
       easing: (t: number) => 1 - Math.pow(1 - t, 4),
       smoothWheel: true,
-      // Smooth touch + scrollbar drag too (mirrors wheel behaviour
-      // across all input methods).
       syncTouch: true,
       wheelMultiplier: 1,
       touchMultiplier: 2,
