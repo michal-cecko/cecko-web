@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { locales, defaultLocale, type Locale } from './app/i18n/config';
 
 const PUBLIC_FILE = /\.(.*)$/;
-const STATIC_PREFIXES = ['/_next', '/api', '/sitemap.xml', '/robots.txt', '/Michal_Cecko_CV.pdf', '/mark.svg'];
+const STATIC_PREFIXES = ['/_next', '/api', '/sitemap.xml', '/robots.txt', '/Michal_Cecko_CV.pdf', '/favicon.svg'];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       alternateLocale: Object.values(localeOgTag).filter((l) => l !== localeOgTag[locale as Locale]),
     },
     twitter: { card: 'summary_large_image', title: titleEn, description: desc },
-    icons: { icon: '/mark.svg' },
+    icons: { icon: '/favicon.svg' },
     robots: { index: true, follow: true },
   };
 }
