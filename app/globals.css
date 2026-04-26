@@ -59,7 +59,6 @@ html.lenis, html.lenis body { height: auto; }
 }
 .hero-top,
 .hero-preheading,
-.hero-heading,
 .hero-sub,
 .hero-foot {
   opacity: 0;
@@ -67,11 +66,20 @@ html.lenis, html.lenis body { height: auto; }
 }
 .hero-top         { animation-delay: 80ms; }
 .hero-preheading  { animation-delay: 200ms; }
-.hero-heading     { animation-delay: 320ms; }
-.hero-sub         { animation-delay: 520ms; }
-.hero-foot        { animation-delay: 700ms; }
+.hero-sub         { animation-delay: 720ms; }
+.hero-foot        { animation-delay: 900ms; }
+
+/* Each line of the hero heading animates in on its own — delay is set
+   inline by the component (320ms base + 140ms per line). */
+.hero-heading-line {
+  display: block;
+  opacity: 0;
+  animation: hero-fade-up 0.9s cubic-bezier(0.2, 0.7, 0, 1) forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-top, .hero-preheading, .hero-heading, .hero-sub, .hero-foot {
+  .hero-top, .hero-preheading, .hero-sub, .hero-foot,
+  .hero-heading-line {
     opacity: 1; animation: none;
   }
 }

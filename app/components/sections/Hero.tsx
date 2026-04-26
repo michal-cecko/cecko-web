@@ -34,7 +34,16 @@ export default function Hero({ locale, t }: { locale: Locale; t: Dict }) {
             <span className="hero-preheading-role">{t.hero.role}</span>
           </span>
         </div>
-        <h1 className="hero-heading" dangerouslySetInnerHTML={{ __html: t.hero.heading }} />
+        <h1 className="hero-heading">
+          {t.hero.heading.split(/<br\s*\/?>/i).map((line, i) => (
+            <span
+              key={i}
+              className="hero-heading-line"
+              style={{ animationDelay: `${320 + i * 140}ms` }}
+              dangerouslySetInnerHTML={{ __html: line }}
+            />
+          ))}
+        </h1>
       </div>
 
       <div className="hero-sub">
