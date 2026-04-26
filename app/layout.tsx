@@ -1,4 +1,5 @@
 import { headers } from 'next/headers';
+import NextTopLoader from 'nextjs-toploader';
 import './globals.css';
 import { defaultLocale, locales, localeHtmlTag, type Locale } from './i18n/config';
 
@@ -20,7 +21,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           rel="stylesheet"
         />
       </head>
-      <body data-theme="dark">{children}</body>
+      <body data-theme="dark">
+        <NextTopLoader
+          color="#49F0E0"
+          height={2}
+          showSpinner={false}
+          shadow="0 0 8px #49F0E0, 0 0 4px #49F0E0"
+          easing="cubic-bezier(0.2, 0.7, 0, 1)"
+          speed={300}
+          crawlSpeed={180}
+        />
+        {children}
+      </body>
     </html>
   );
 }
