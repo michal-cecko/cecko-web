@@ -90,6 +90,11 @@ html.lenis, html.lenis body { height: auto; }
   .services-grid > .reveal.span-12 { grid-column: span 12; }
 }
 
+/* Same trick for the tech stack — inner .stack-cat needs to fill the
+   Reveal wrapper so all four columns stretch to equal height on desktop. */
+.stack-grid > .reveal { display: flex; }
+.stack-grid > .reveal > .stack-cat { flex: 1; width: 100%; min-width: 0; }
+
 html, body {
   background: var(--bg);
   color: var(--fg);
