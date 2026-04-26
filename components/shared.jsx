@@ -1,0 +1,398 @@
+// Sections component file for Michal Čečko site
+const { useState: uS, useEffect: uE, useRef: uR } = React;
+
+const MARK = (
+  <svg viewBox="0 0 87 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 72.5V58.34l36.81 21.35v14.17L0 72.5Zm49.71-14.48L12.27 36.34V14.72L6.37 18.24 0 22.04v21.46l36.81 21.35 12.9 7.48v21.68l5.81-3.47 6.46-3.87V65.15l-12.27-7.12ZM24.89 7.16v21.8l49.79 28.87v21.24l5.59-3.33 6.4-3.82V50.73l-12-6.95L49.86 29.39 36.93 21.89V0l-6.32 3.77-5.72 3.4ZM49.86.33l36.81 21.35v14.6L49.86 14.93V.33Z" fill="currentColor"/>
+  </svg>
+);
+
+function LangSwitcher({ className = '' }) {
+  const [lang, setLang] = uS(() => {
+    try { return localStorage.getItem('mc_lang') || 'sk'; } catch { return 'sk'; }
+  });
+  uE(() => {
+    const onStorage = () => {
+      try { setLang(localStorage.getItem('mc_lang') || 'sk'); } catch {}
+    };
+    window.addEventListener('storage', onStorage);
+    window.addEventListener('mc:lang', onStorage);
+    return () => {
+      window.removeEventListener('storage', onStorage);
+      window.removeEventListener('mc:lang', onStorage);
+    };
+  }, []);
+  const pick = (v) => {
+    setLang(v);
+    try { localStorage.setItem('mc_lang', v); } catch {}
+    window.dispatchEvent(new Event('mc:lang'));
+  };
+  return (
+    <div className={`lang-switch ${className}`} role="group" aria-label="Jazyk">
+      {['sk', 'cz', 'en'].map(v => (
+        <button
+          key={v}
+          type="button"
+          className={`lang-opt ${lang === v ? 'is-active' : ''}`}
+          onClick={() => pick(v)}
+          aria-pressed={lang === v}
+        >{v.toUpperCase()}</button>
+      ))}
+    </div>
+  );
+}
+
+function Nav({ active = 'home' }) {
+  const [open, setOpen] = uS(false);
+  uE(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    document.body.classList.toggle('nav-overlay-open', open);
+    return () => { document.body.style.overflow = ''; document.body.classList.remove('nav-overlay-open'); };
+  }, [open]);
+  const close = () => setOpen(false);
+  const links = [
+    ['index.html', 'home', 'Domov'],
+    ['o-mne.html', 'about', 'O mne'],
+    ['sluzby.html', 'services', 'Služby'],
+    ['prace.html', 'work', 'Práce'],
+    ['cv.html', 'cv', 'CV'],
+    ['kontakt.html', 'contact', 'Kontakt'],
+  ];
+  return (
+    <>
+      <nav className={`nav ${open ? 'nav-open' : ''}`}>
+        <a href="index.html" className="nav-brand" onClick={close}>
+          <span className="nav-name">ČEČKO<em>.dev</em></span>
+        </a>
+        <ul className="nav-links">
+          {links.map(([href, key, label]) => (
+            <li key={key}><a href={href} onClick={close} className={active === key ? 'active' : ''}>{label}</a></li>
+          ))}
+        </ul>
+        <div className="nav-right">
+          <span className="nav-status"><span className="dot-live" /> K dispozícii — Jún 2026</span>
+          <LangSwitcher />
+          <a href="kontakt.html" className="nav-cta" onClick={close}>Napíšte mi</a>
+        </div>
+        <button
+          type="button"
+          className="nav-burger"
+          aria-label={open ? 'Zavrieť menu' : 'Otvoriť menu'}
+          aria-expanded={open}
+          onClick={() => setOpen(o => !o)}
+        >
+          <span /><span /><span />
+        </button>
+      </nav>
+      {ReactDOM.createPortal(
+        <div className={`nav-overlay ${open ? 'is-open' : ''}`} aria-hidden={!open}>
+          <ul className="nav-overlay-links">
+            {links.map(([href, key, label]) => (
+              <li key={key}><a href={href} onClick={close} className={active === key ? 'active' : ''}>{label}</a></li>
+            ))}
+            <li className="nav-overlay-cta">
+              <LangSwitcher className="lang-switch-lg" />
+              <a href="kontakt.html" className="btn btn-ghost" onClick={close}>Napíšte mi →</a>
+            </li>
+          </ul>
+        </div>,
+        document.body
+      )}
+    </>
+  );
+}
+
+function Cursor() {
+  const d = uR(null), r = uR(null);
+  uE(() => {
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    const onMove = (e) => {
+      mx = e.clientX; my = e.clientY;
+      if (d.current) { d.current.style.left = mx + 'px'; d.current.style.top = my + 'px'; }
+      const t = e.target;
+      if (t.closest('a, button, .service-card, .work-row, .faq-q, .stack-cat')) document.body.classList.add('hover-link');
+      else document.body.classList.remove('hover-link');
+    };
+    const loop = () => {
+      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+      if (r.current) { r.current.style.left = rx + 'px'; r.current.style.top = ry + 'px'; }
+      requestAnimationFrame(loop);
+    };
+    window.addEventListener('mousemove', onMove);
+    loop();
+    return () => window.removeEventListener('mousemove', onMove);
+  }, []);
+  return (<><div ref={d} className="cursor-dot" /><div ref={r} className="cursor-ring" /></>);
+}
+
+function WorkPreviewFollow() {
+  uE(() => {
+    const onMove = (e) => {
+      document.documentElement.style.setProperty('--mx', e.clientX + 'px');
+      document.documentElement.style.setProperty('--my', e.clientY + 'px');
+    };
+    window.addEventListener('mousemove', onMove);
+    return () => window.removeEventListener('mousemove', onMove);
+  }, []);
+  return null;
+}
+
+function Counter({ to, suffix = '', sup = '' }) {
+  const [n, setN] = uS(0);
+  const ref = uR(null);
+  uE(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        const start = performance.now();
+        const step = (t) => {
+          const p = Math.min(1, (t - start) / 1400);
+          const eased = 1 - Math.pow(1 - p, 3);
+          setN(Math.round(to * eased));
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+        io.disconnect();
+      }
+    }, { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [to]);
+  return <span ref={ref}>{n}{suffix}{sup && <sup>{sup}</sup>}</span>;
+}
+
+function Footer() {
+  return (
+    <footer className="footer">
+      <div className="footer-big">
+        <span className="footer-big-text">ČEČKO<em>.dev</em></span>
+      </div>
+      <div className="footer-meta">
+        <span>© 2026 Michal Čečko</span>
+        <span>Freelance · IČO 23260696</span>
+        <div style={{ display: 'flex', gap: 16 }}>
+          <a href="#">LinkedIn</a>
+          <a href="#">GitHub</a>
+          <a href="#">Telegram</a>
+        </div>
+        <span>Remote · Ostrava CZ / Žilina SK</span>
+        <LangSwitcher />
+      </div>
+    </footer>
+  );
+}
+
+// Data
+const SERVICES = [
+  { n: '01', title: 'Fullstack webový vývoj', desc: 'Interné dashboardy, CRM a databázové systémy, klientské portály, custom webové aplikácie, ale aj malé weby. Od databázy po UI — Laravel + FilamentPHP backend, moderný frontend.', tags: ['Laravel', 'Filament', 'Vue', 'CRM', 'Dashboards'], span: 'span-6' },
+  { n: '02', title: 'Mobilné aplikácie', desc: 'Flutter, Ionic, React Native, alebo natívne iOS/Android. Od MVP po App Store / Google Play release.', tags: ['Flutter', 'RN', 'Swift', 'Kotlin'], span: 'span-6' },
+  { n: '03', title: 'UI & UX dizajn', desc: 'Weby, aplikácie, logá, branding a vizuálna identita — AI-powered workflow pre rýchle iterácie. Od wireframu po produkčný design systém.', tags: ['UI/UX', 'Branding', 'Logo', 'AI workflow'], span: 'span-4' },
+  { n: '04', title: 'SaaS MVP', desc: 'End-to-end produktový launch: od brandingu, cez dizajn, web aj mobilnú appku, až po platby a go-to-market. Väčšie spolupráce 3–6 mesiacov.', tags: ['Product', 'Stripe', 'Multi-platform', 'GTM'], span: 'span-4' },
+  { n: '05', title: 'AI integrácie', desc: 'LLM API, chatboti, automatizácie. Claude, OpenAI, custom integrácie.', tags: ['OpenAI', 'Claude', 'RAG'], span: 'span-4' },
+];
+
+const STACK = [
+  {
+    title: 'Backend & DB', count: '12',
+    items: [
+      { n: 'PHP', p: true },
+      { n: 'Laravel', p: true },
+      { n: 'Livewire', p: true },
+      { n: 'FilamentPHP', p: true },
+      { n: 'Node.js', p: true },
+      { n: 'Go' },
+      { n: 'Python' },
+      { n: 'WordPress', p: true },
+      { n: 'Custom témy / WooCommerce / ACF' },
+      { n: 'MySQL / Postgres', p: true },
+      { n: 'Redis' },
+      { n: 'WebSockets' },
+    ]
+  },
+  {
+    title: 'Frontend', count: '09',
+    items: [
+      { n: 'JavaScript', p: true },
+      { n: 'TypeScript', p: true },
+      { n: 'Vue.js', p: true },
+      { n: 'Nuxt.js', p: true },
+      { n: 'React', p: true },
+      { n: 'Next.js', p: true },
+      { n: 'Tailwind CSS', p: true },
+      { n: 'Alpine.js' },
+      { n: 'HTML / CSS', p: true },
+    ]
+  },
+  {
+    title: 'Mobile', count: '05',
+    items: [
+      { n: 'Flutter', p: true },
+      { n: 'Ionic', p: true },
+      { n: 'React Native', p: true },
+      { n: 'Swift (iOS)' },
+      { n: 'Kotlin (Android)' },
+    ]
+  },
+  {
+    title: 'Design & Tooling', count: '07',
+    items: [
+      { n: 'Figma', p: true },
+      { n: 'Affinity', p: true },
+      { n: 'Git / GitHub', p: true },
+      { n: 'Docker' },
+      { n: 'CI/CD' },
+      { n: 'Linux / DevOps' },
+      { n: 'AWS / DigitalOcean' },
+    ]
+  },
+];
+
+const WORKS = [
+  {
+    id: 'bcz',
+    title: 'BCZ Club',
+    kind: 'SaaS platforma pre športové kluby',
+    year: '2026',
+    tags: ['Laravel', 'Filament', 'Alpine'],
+    url: 'https://bcz-club.com',
+    confidential: false,
+    duration: '—',
+    role: 'Fullstack + dizajn',
+    challenge: 'Športové kluby na Slovensku evidujú tréningy, súťaže a podujatia v excelových tabuľkách a papierových zošitoch. Chýbal jednotný systém.',
+    solution: 'SaaS platforma postavená na Laravel + FilamentPHP, ktorá zjednodušuje evidenciu športových tréningov, organizáciu súťaží a ďalších športových podujatí. Custom dizajn namieru, Alpine.js pre interaktivitu.',
+  },
+  {
+    id: 'friendlyfyzio',
+    title: 'FriendlyFyzio OS',
+    kind: 'Rezervačný, CMS & CRM systém pre fyziokliniku',
+    year: '2026',
+    tags: ['Laravel', 'Filament', 'Alpine'],
+    url: 'https://www.friendlyfyzio.cz',
+    confidential: false,
+    duration: '—',
+    role: 'Fullstack + dizajn',
+    challenge: 'Fyzioklinika potrebovala jednotný systém pre online rezervácie, správu obsahu webu a evidenciu pacientov — bez závislosti na troch rôznych nástrojoch.',
+    solution: 'Custom rezervačný systém s CMS a CRM postavený na FilamentPHP + Laravel. Admin rozhranie namieru pre recepciu, pacientsky portál, integrovaný CMS pre web. Celý dizajn + vývoj.',
+  },
+  {
+    id: 'idealnedvere',
+    title: 'Ideálne dvere',
+    kind: 'Portfólio web pre stolára',
+    year: '2025',
+    tags: ['Nuxt', 'Dizajn'],
+    url: 'https://idealnedvere.sk',
+    confidential: false,
+    duration: '—',
+    role: 'Dizajn + vývoj',
+    challenge: 'Stolár potreboval jednoduchý, reprezentatívny web ktorý ukáže jeho remeselnú prácu bez zbytočnej technickej ťarchy.',
+    solution: 'Jednoduchý portfólio web na Nuxt 3 s dizajnom namieru. Zameranie na fotografiu realizácií, čistú typografiu a rýchle načítanie.',
+  },
+  {
+    id: 'faktury',
+    title: 'Interný fakturačný systém',
+    kind: 'Vlastný faktura­čný nástroj',
+    year: '2025',
+    tags: ['Laravel', 'Filament'],
+    url: null,
+    confidential: true,
+    duration: '—',
+    role: 'Fullstack',
+    challenge: 'Existujúce fakturačné SaaS riešenia boli buď predražené alebo neflexibilné na moje workflow — potreboval som vlastný nástroj šitý na mieru.',
+    solution: 'Kompletný fakturačný systém postavený na Laravel + FilamentPHP. Klienti, projekty, opakované faktúry, exporty pre účtovníctvo, banking prehľad.',
+  },
+  {
+    id: 'songbook',
+    title: 'Songbook.app',
+    kind: 'Aplikácia pre kapelu · CMS',
+    year: '2024',
+    tags: ['Laravel', 'Filament', 'Mobile'],
+    url: null,
+    confidential: true,
+    duration: '—',
+    role: 'Fullstack + dizajn',
+    challenge: 'Kapela potrebovala nástroj na organizáciu textov piesní a tanečných kôl, kde si členovia vedia jednoducho spravovať obsah a mať ho vždy poruke.',
+    solution: 'Mobilná aplikácia s custom dizajnom namieru synchronizovaná s CMS systémom postaveným na Laravel + FilamentPHP. Členovia kapely editujú texty cez admin, appka ich automaticky syncuje.',
+  },
+  {
+    id: 'streetworkout',
+    title: 'Street Workout Kysuce',
+    kind: 'Web pre športový team · Blog + súťaže',
+    year: '2023',
+    tags: ['WordPress', 'Dizajn'],
+    url: 'https://www.streetworkoutkysuce.sk',
+    confidential: false,
+    duration: '—',
+    role: 'Dizajn + vývoj',
+    challenge: 'Športový team potreboval web na organizovanie súťaží, blog a komunikáciu s fanúšikmi — na platforme, ktorú dokážu sami ďalej spravovať.',
+    solution: 'WordPress web s custom dizajnom namieru. Stránka súťaží, blog, kalendár eventov. Team si všetko spravuje sám cez WP admin.',
+  },
+  {
+    id: 'oblock',
+    title: 'O-Block',
+    kind: 'Portfolio web pre barbershop',
+    year: '2023',
+    tags: ['HTML', 'CSS'],
+    url: null,
+    confidential: false,
+    duration: '—',
+    role: 'Dizajn + vývoj',
+    challenge: 'Barbershop potreboval čistý, minimalistický web bez zbytočnej administrácie — len solídna prezentácia služieb.',
+    solution: 'Statická HTML + CSS šablóna namieru. Rýchla, bez dependency, jednoduchá údržba.',
+  },
+  {
+    id: '3mbarbers',
+    title: '3M Barbers',
+    kind: 'Rezervačný systém pre barbershop',
+    year: '2022',
+    tags: ['WordPress', 'Vue', 'ACF'],
+    url: null,
+    confidential: false,
+    duration: '—',
+    role: 'Fullstack',
+    challenge: 'Barbershop potreboval rezervačný systém priamo vo WordPresse bez migrácie na iný stack — s vlastnou logikou dostupnosti barberov.',
+    solution: 'Custom WordPress plugin kombinujúci ACF pre administráciu a VueJS pre frontend rezervačného widgetu. Kalendár dostupnosti, výber barbera, potvrdenie cez email.',
+  },
+  {
+    id: 'mensvenue',
+    title: "Men's Venue",
+    kind: 'Portfolio web pre barbershop',
+    year: '2022',
+    tags: ['Nuxt', 'Dizajn'],
+    url: 'https://mensvenue.sk',
+    confidential: false,
+    duration: '—',
+    role: 'Dizajn + vývoj',
+    challenge: 'Barbershop chcel minimalistický, reprezentatívny web ktorý odlíši značku od konkurencie.',
+    solution: 'NuxtJS portfolio web s minimalistickým dizajnom namieru. Fokus na typografiu, dark mód a rýchlosť.',
+  },
+];
+
+const PROCESS = [
+  { n: '01', title: 'Prvý kontakt', dur: 'Email / telefón', desc: 'Napíšete alebo zavoláte. V mailu popíšete ľudskou rečou, čo potrebujete — žiadna technická reč, žiadne požiadavky na formu. Stačí ak viem o čom to je.', outputs: ['Email / call', 'Raw zadanie', 'Bez formátu'] },
+  { n: '02', title: 'Môj pohľad & odhad', dur: '2–4 dni', desc: 'Spravím si na projekt svoj pohľad — netechnickú špecifikáciu v ľudskej reči, priložím referencie a odkazy na podobné práce, a hrubý cenový odhad. Aby ste vedeli do čoho idete.', outputs: ['Netechnická špecifikácia', 'Referencie', 'Hrubý odhad ceny'] },
+  { n: '03', title: 'Detailná špecifikácia', dur: '1–2 týždne', desc: 'Ak vám to vyhovuje, pripravím detailnú, technickejšiu špecku. Toto je alfa a omega — presne opisuje čo bude odovzdané. Plus timeline, míľniky, a pri väčších projektoch rozdelenie na sprinty.', outputs: ['Detailná špecifikácia', 'Timeline & míľniky', 'Finálna cena'] },
+  { n: '04', title: 'Vývoj & odovzdanie', dur: '2–16 týždňov', desc: 'Väčšie appky idú v sprintoch — priebežne vidíte progress na stagingu. Menšie appky uvidíte naraz, keď sú hotové — odovzdám na kontrolu na staging verzii, opravím pripomienky, spustíme do produkcie.', outputs: ['Live staging verzia', 'Kontrola & pripomienky', 'Po kontrole odovzdanie do produkcie'] },
+];
+
+const TESTIMONIALS = [
+  { quote: 'Michal dodal presne to, čo sme potrebovali. Komunikácia je jasná, termíny dodržané, kvalita kódu prvotriedna. Odporúčam.', name: 'Peter Kováč', role: 'CEO, Medico s.r.o.', init: 'PK' },
+  { quote: 'Po dvoch neúspešných pokusoch s inými dodávateľmi nám Michal dorobil SaaS platformu za 10 týždňov. Stále s ním spolupracujeme.', name: 'Ivana Horváthová', role: 'Founder, TrainPro', init: 'IH' },
+  { quote: 'Najlepšia investícia tohto roka. Mobilná appka sa vyvíjala rýchlo, všetko transparentne, žiadne prekvapenia v cene.', name: 'Martin Blaho', role: 'COO, DeliveryNow', init: 'MB' },
+];
+
+const FAQS = [
+  { q: 'Koľko stojí spustenie projektu?', a: 'Záleží od rozsahu. Jednoduchý statický web s kontaktným formulárom viem spraviť od 800 €. Menší jednoduchý e-shop od 2 000 €. Robustnejšie webové a mobilné aplikácie sa vždy naceňujú samostatne — ceny sa menia podľa špecifikácie a pevná cena sa dá stanoviť až po detailnom zadaní. Po úvodnom calle dostanete odhad a harmonogram.' },
+  { q: 'Pracujete sám alebo máte tím?', a: 'Sám. Pracujem ako freelancer. Na väčšie projekty, v prípade nízkych kapacít, mám preverených subcontractorov (dizajn, mobile, DevOps), ale vždy je za komunikáciu a kvalitu zodpovedný jeden človek — ja.' },
+  { q: 'Prečo PHP / Laravel a nie niečo "modernejšie"?', a: 'Pretože Laravel je najmodernejší 🤯 najrýchlejší spôsob ako dodať robustný backend za málo peňazí. FilamentPHP je pecka, šetrí týždne práce na admin rozhraniach. Kde treba, použijem Node alebo Go — ale 80% biznis projektov sa hodí najlepšie na Laravel.' },
+  { q: 'Robíte aj rýchle úpravy existujúcich projektov?', a: 'Áno, mesačný retainer od 400€ (10 hodín práce). Môžete ho použiť na bug fixy, nové featury, konzultácie alebo code review.' },
+  { q: 'Ako prebieha spolupráca na diaľku?', a: 'Väčšinu času remote — Slack, Discord, Google Meet. Rád sa osobne stretnem na kickoffe a prípadne pri väčších míľnikoch.' },
+  { q: 'Podpisujete NDA?', a: 'Samozrejme, rád podpíšem Vašu NDA pred prvým hovorom ak treba. Všetky projekty štandardne chránim pred zverejnením, kým nedostanem súhlas klienta.' },
+  { q: 'Viete spraviť aj dizajn alebo len vývoj?', a: 'Obidvoje. Preferujem keď môžem mať dizajn pod kontrolou — výsledok je konzistentný a rýchlejšie sa programuje. Viem pracovať aj z dodaného Figma filu.' },
+  { q: 'Fakturujete s DPH?', a: 'Nie. Mám založenú českú živnosť. Faktúry vystavujem mesačne alebo podľa dohodnutých míľnikov.' },
+];
+
+Object.assign(window, {
+  Nav, Cursor, Footer, WorkPreviewFollow, Counter, MARK, LangSwitcher,
+  SERVICES, STACK, WORKS, PROCESS, TESTIMONIALS, FAQS
+});
