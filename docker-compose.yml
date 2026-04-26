@@ -28,6 +28,11 @@ services:
       - "3000"
     environment:
       - NODE_ENV=production
+      # Set in Dokploy → Environment (do NOT commit). Resend API key is
+      # required for the contact form; CONTACT_FROM/TO are optional.
+      - RESEND_API_KEY=${RESEND_API_KEY:-}
+      - CONTACT_FROM=${CONTACT_FROM:-}
+      - CONTACT_TO=${CONTACT_TO:-}
     restart: unless-stopped
 
 networks:

@@ -132,6 +132,8 @@ const dict: Dict = {
     formCustom: 'Vlastné',
     formCustomPlaceholder: 'Zadajte sumu…',
     formSubmit: 'Odoslať správu →',
+    formSending: 'Odosielam…',
+    formError: 'Nepodarilo sa odoslať. Skúste znova alebo mi napíšte priamo.',
     formNote: 'Odpoviem do 24 hodín. Informácie sú dôverné.',
     formSuccessTitle: 'Správa odoslaná',
     formSuccessBody: 'Ďakujem — ozvem sa do 24 hodín.',

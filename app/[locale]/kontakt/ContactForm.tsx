@@ -57,12 +57,25 @@ type FormState = {
   customBudget?: string;
   type: string;
   msg: string;
+  /** Honeypot field — bots fill it, humans don't see it. */
+  company?: string;
 };
 
+type Status = 'idle' | 'sending' | 'success' | 'error';
+
 export default function ContactForm({ t }: { t: Dict }) {
-  const [form, setForm] = useState<FormState>({ name: '', email: '', budget: '25k', type: 'web', msg: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState<FormState>({
+    name: '',
+    email: '',
+    budget: '25k',
+    type: 'web',
+    msg: '',
+    company: '',
+  });
+  const [status, setStatus] = useState<Status>('idle');
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const tc = t.contact;
+  const submitted = status === 'success';
 
   if (submitted) {
     return (
@@ -101,9 +114,28 @@ export default function ContactForm({ t }: { t: Dict }) {
 
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        setSubmitted(true);
+        if (status === 'sending') return;
+        setStatus('sending');
+        setErrorMsg(null);
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(form),
+          });
+          if (!res.ok) {
+            const data = (await res.json().catch(() => ({}))) as { error?: string };
+            setErrorMsg(data.error || `HTTP ${res.status}`);
+            setStatus('error');
+            return;
+          }
+          setStatus('success');
+        } catch (err) {
+          setErrorMsg(err instanceof Error ? err.message : 'network');
+          setStatus('error');
+        }
       }}
       style={{
         display: 'flex',
@@ -231,9 +263,37 @@ export default function ContactForm({ t }: { t: Dict }) {
           }}
         />
       </div>
-      <button type="submit" className="btn btn-primary" style={{ justifyContent: 'center', padding: '16px' }}>
-        {tc.formSubmit}
+      {/* Honeypot — hidden from real users, bots fill it. */}
+      <div style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, overflow: 'hidden' }} aria-hidden="true">
+        <label>
+          Company (leave empty)
+          <input
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={form.company || ''}
+            onChange={(e) => setForm({ ...form, company: e.target.value })}
+          />
+        </label>
+      </div>
+      <button
+        type="submit"
+        className="btn btn-primary"
+        disabled={status === 'sending'}
+        style={{
+          justifyContent: 'center',
+          padding: '16px',
+          opacity: status === 'sending' ? 0.6 : 1,
+          cursor: status === 'sending' ? 'wait' : 'pointer',
+        }}
+      >
+        {status === 'sending' ? tc.formSending : tc.formSubmit}
       </button>
+      {status === 'error' && (
+        <p style={{ fontSize: 12, color: '#ff6b4a', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
+          {tc.formError} {errorMsg ? <span style={{ opacity: 0.6 }}>({errorMsg})</span> : null}
+        </p>
+      )}
       <p style={{ fontSize: 12, color: 'var(--fg-muted)', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
         {tc.formNote}
       </p>

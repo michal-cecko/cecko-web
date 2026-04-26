@@ -130,6 +130,8 @@ const dict = {
     formCustom: 'Custom',
     formCustomPlaceholder: 'Enter amount…',
     formSubmit: 'Send message →',
+    formSending: 'Sending…',
+    formError: "Couldn't send. Try again or email me directly.",
     formNote: "I'll reply within 24 hours. Everything you share is confidential.",
     formSuccessTitle: 'Message sent',
     formSuccessBody: "Thanks — I'll be in touch within 24 hours.",
