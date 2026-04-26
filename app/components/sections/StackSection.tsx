@@ -45,7 +45,7 @@ export default function StackSection() {
                   aria-expanded={open}
                 >
                   <h3 className="stack-cat-title">{cat.title}</h3>
-                  <span className="stack-cat-count">{cat.count}</span>
+                  <span className="stack-cat-count">{String(cat.items.length).padStart(2, '0')}</span>
                   <span className="stack-cat-chev" aria-hidden="true">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                       <path d="M3 5l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

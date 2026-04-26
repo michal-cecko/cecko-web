@@ -54,8 +54,8 @@ export default function AboutPage() {
               parťáka, ktorý im to postaví. Bez korporátnej byrokracie, agilu ako samoúčelu, alebo &quot;ticketov&quot;.
             </p>
             <p>
-              Keď nekódujem, pijem podozrivo veľa kávy, mučím sa na workoutovom ihrisku a na Strave systematicky
-              ponižujem svoje vlastné minuloročné behy. (Občas vyhrám.)
+              Keď nekódujem, pijem podozrivo veľa kávy, makám na workoutovom ihrisku a na Strave postupne
+              beatujem svoje vlastné minuloročné rekordy. (klamem, haha)
             </p>
           </div>
 

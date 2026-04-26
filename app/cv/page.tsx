@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import PrintButton from './PrintButton';
+import { STACK } from '../data';
 
 export const metadata: Metadata = {
   title: 'CV',
@@ -200,27 +201,11 @@ export default function CVPage() {
           Technické zručnosti
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
-          {(
-            [
-              {
-                area: 'Backend',
-                main: ['Laravel', 'PHP', 'WordPress', 'REST API Design', 'TDD', 'PHPUnit', 'Pest', 'Livewire', 'FilamentPHP', 'Laravel 1st party packages'],
-                extra: ['Nette', 'Symfony', 'Java', 'C', 'Python'],
-              },
-              { area: 'Data', main: ['MySQL / MariaDB', 'PostgreSQL', 'Redis'], extra: [] },
-              {
-                area: 'Frontend',
-                main: ['JavaScript', 'Vue 3', 'Nuxt 4', 'Bootstrap 5', 'TailwindCSS', 'Inertia.js', 'jQuery', 'PrimeVue'],
-                extra: ['React', 'Vue Query', 'Pinia'],
-              },
-              { area: 'Hybrid Mobile', main: ['Ionic (Vue 3 + Capacitor.js)'], extra: ['React', 'Android', 'Kotlin'] },
-              {
-                area: 'DevOps + Sysadmin',
-                main: ['Docker', 'Traefik', 'Nginx', 'Apache', 'Linux', 'Bash', 'Digital Ocean (Droplets, S3)', 'Sentry'],
-                extra: ['Grafana', 'Prometheus', 'Jenkins', 'Portainer'],
-              },
-            ] as { area: string; main: string[]; extra: string[] }[]
-          ).map((g) => (
+          {STACK.map((cat) => {
+            const main = cat.items.filter((i) => i.p).map((i) => i.n);
+            const extra = cat.items.filter((i) => !i.p).map((i) => i.n);
+            const g = { area: cat.title, main, extra };
+            return (
             <div key={g.area} style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: 32, alignItems: 'start' }}>
               <div className="mono" style={{ color: 'var(--lime)' }}>
                 {g.area}
@@ -254,7 +239,8 @@ export default function CVPage() {
                 )}
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
