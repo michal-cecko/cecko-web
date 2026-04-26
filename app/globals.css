@@ -717,6 +717,7 @@ body[data-theme="light"] .nav {
   letter-spacing: -0.04em;
   font-weight: 500;
   max-width: 1400px;
+  padding: 32px 0;
 }
 .hero-heading em {
   color: var(--lime);

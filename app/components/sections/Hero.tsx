@@ -27,13 +27,6 @@ export default function Hero({ locale, t }: { locale: Locale; t: Dict }) {
       </div>
 
       <div className="hero-center">
-        <div className="hero-preheading hero-preheading-author">
-          <span className="hero-photo" aria-label={t.hero.name} />
-          <span className="hero-preheading-text">
-            <span className="hero-preheading-name">{t.hero.name}</span>
-            <span className="hero-preheading-role">{t.hero.role}</span>
-          </span>
-        </div>
         <h1 className="hero-heading">
           {t.hero.heading.split(/<br\s*\/?>/i).map((line, i) => (
             <span
