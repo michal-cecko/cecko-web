@@ -23,7 +23,7 @@ const dict = {
     location: 'Remote · Ostrava CZ / Žilina SK',
     name: 'Michal Čečko',
     role: 'Freelance Full-Stack Developer',
-    heading: 'Full products.<br/>Zero <em>middlemen.</em><br/>Just <em>me.</em>',
+    heading: 'Skip the agency.<br/>Skip the <em>meetings.</em><br/>Ship the <em>product.</em>',
     sub: "I'm a <strong>fullstack developer</strong> with a deep PHP / Laravel specialty. I design, build and ship <strong>websites, mobile apps and SaaS products</strong> — wireframe to production, end to end. One point of contact, no agile theater, one person on the hook.",
     ctaPrimary: 'Start a project',
     ctaGhost: 'See my work',
