@@ -55,7 +55,7 @@ type FormState = {
   email: string;
   budget: string;
   customBudget?: string;
-  type: string;
+  subject: string;
   msg: string;
   /** Honeypot field — bots fill it, humans don't see it. */
   company?: string;
@@ -68,7 +68,7 @@ export default function ContactForm({ t }: { t: Dict }) {
     name: '',
     email: '',
     budget: '1-2.5k',
-    type: 'web',
+    subject: 'quote',
     msg: '',
     company: '',
   });
@@ -97,12 +97,12 @@ export default function ContactForm({ t }: { t: Dict }) {
     );
   }
 
-  const projectTypes: [string, string][] = [
-    ['web', tc.typeWeb],
-    ['mobile', tc.typeMobile],
-    ['saas', tc.typeSaas],
-    ['ai', tc.typeAi],
-    ['design', tc.typeDesign],
+  const subjects: [string, string][] = [
+    ['quote', tc.subjectQuote],
+    ['longterm', tc.subjectLongterm],
+    ['consultation', tc.subjectConsultation],
+    ['maintenance', tc.subjectMaintenance],
+    ['other', tc.subjectOther],
   ];
   const budgets: [string, string][] = [
     ['<1k', '< 1 000 €'],
@@ -151,18 +151,18 @@ export default function ContactForm({ t }: { t: Dict }) {
         <Field label={tc.formEmail} val={form.email} on={(v) => setForm({ ...form, email: v })} type="email" req />
       </div>
       <div>
-        <FieldLabel>{tc.formType}</FieldLabel>
+        <FieldLabel>{tc.formSubject}</FieldLabel>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          {projectTypes.map(([k, l]) => (
+          {subjects.map(([k, l]) => (
             <button
               type="button"
               key={k}
-              onClick={() => setForm({ ...form, type: k })}
+              onClick={() => setForm({ ...form, subject: k })}
               style={{
                 padding: '10px 16px',
-                border: '1px solid ' + (form.type === k ? 'var(--lime)' : 'var(--border-hi)'),
-                background: form.type === k ? 'var(--lime)' : 'transparent',
-                color: form.type === k ? 'var(--bg)' : 'var(--fg-dim)',
+                border: '1px solid ' + (form.subject === k ? 'var(--lime)' : 'var(--border-hi)'),
+                background: form.subject === k ? 'var(--lime)' : 'transparent',
+                color: form.subject === k ? 'var(--bg)' : 'var(--fg-dim)',
                 borderRadius: 999,
                 cursor: 'pointer',
                 fontSize: 12,

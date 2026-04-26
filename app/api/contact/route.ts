@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 type Payload = {
   name?: unknown;
   email?: unknown;
-  type?: unknown;
+  subject?: unknown;
   budget?: unknown;
   customBudget?: unknown;
   msg?: unknown;
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
   const name = asString(body.name, 120);
   const email = asString(body.email, 200);
   const msg = asString(body.msg, 4000);
-  const type = asString(body.type, 40) ?? 'web';
+  const subject = asString(body.subject, 40) ?? 'quote';
   const budget = asString(body.budget, 40) ?? '—';
   const customBudget = asString(body.customBudget, 80);
 
@@ -66,15 +66,15 @@ export async function POST(request: NextRequest) {
   const to = process.env.CONTACT_TO ?? CONTACT.email;
 
   const budgetLine = budget === 'custom' && customBudget ? `Custom: ${customBudget}` : budget;
-  const subject = `[cecko.dev] ${name} — ${type}`;
+  const mailSubject = `[cecko.dev] ${name} — ${subject}`;
 
   const text = [
     `New contact-form submission from cecko.dev`,
     ``,
-    `Name:    ${name}`,
-    `Email:   ${email}`,
-    `Type:    ${type}`,
-    `Budget:  ${budgetLine}`,
+    `Name:     ${name}`,
+    `Email:    ${email}`,
+    `Subject:  ${subject}`,
+    `Budget:   ${budgetLine}`,
     ``,
     `Message:`,
     msg,
@@ -86,7 +86,7 @@ export async function POST(request: NextRequest) {
       <table style="border-collapse: collapse; width: 100%; font-size: 14px;">
         <tr><td style="padding: 6px 12px 6px 0; color: #555; width: 90px;">Name</td><td style="padding: 6px 0;"><strong>${escapeHtml(name)}</strong></td></tr>
         <tr><td style="padding: 6px 12px 6px 0; color: #555;">Email</td><td style="padding: 6px 0;"><a href="mailto:${escapeAttr(email)}" style="color: #0e8a82;">${escapeHtml(email)}</a></td></tr>
-        <tr><td style="padding: 6px 12px 6px 0; color: #555;">Type</td><td style="padding: 6px 0;">${escapeHtml(type)}</td></tr>
+        <tr><td style="padding: 6px 12px 6px 0; color: #555;">Subject</td><td style="padding: 6px 0;">${escapeHtml(subject)}</td></tr>
         <tr><td style="padding: 6px 12px 6px 0; color: #555;">Budget</td><td style="padding: 6px 0;">${escapeHtml(budgetLine)}</td></tr>
       </table>
       <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;" />
@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
       from,
       to,
       replyTo: email,
-      subject,
+      subject: mailSubject,
       text,
       html,
     });
