@@ -1,44 +1,58 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { WORKS } from '../../data';
-import ContactSection from '../../components/sections/ContactSection';
+import { WORKS } from '../../../data';
+import ContactSection from '../../../components/sections/ContactSection';
+import { type Locale, locales, defaultLocale } from '../../../i18n/config';
+import { getDictionary } from '../../../i18n/dictionaries';
 
 export function generateStaticParams() {
-  return WORKS.map((w) => ({ slug: w.id }));
+  return locales.flatMap((locale) => WORKS.map((w) => ({ locale, slug: w.id })));
 }
 
-type Params = { params: Promise<{ slug: string }> };
+type Params = { params: Promise<{ locale: string; slug: string }> };
+
+function localizedHref(locale: Locale, path: string): string {
+  if (locale === defaultLocale) return path;
+  return `/${locale}${path}`;
+}
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale: rawLocale, slug } = await params;
+  const locale = ((locales as readonly string[]).includes(rawLocale) ? rawLocale : defaultLocale) as Locale;
   const project = WORKS.find((w) => w.id === slug);
-  if (!project) return { title: 'Prípadová štúdia' };
+  const t = getDictionary(locale);
+  if (!project) return { title: t.nav.work };
+  const path = localizedHref(locale, `/pripadova-studia/${project.id}`);
   return {
     title: project.title,
     description: `${project.kind} · ${project.year}. ${project.challenge.slice(0, 140)}`,
-    alternates: { canonical: `/pripadova-studia/${project.id}` },
+    alternates: { canonical: path },
     openGraph: {
       title: `${project.title} — ${project.kind}`,
       description: project.challenge,
-      url: `/pripadova-studia/${project.id}`,
+      url: path,
       type: 'article',
     },
   };
 }
 
 export default async function CaseStudyPage({ params }: Params) {
-  const { slug } = await params;
+  const { locale: rawLocale, slug } = await params;
+  const locale = ((locales as readonly string[]).includes(rawLocale) ? rawLocale : defaultLocale) as Locale;
+  const t = getDictionary(locale);
   const project = WORKS.find((w) => w.id === slug);
   if (!project) notFound();
   const idx = WORKS.findIndex((w) => w.id === project.id);
   const next = WORKS[(idx + 1) % WORKS.length];
 
+  const tw = t.work;
+
   return (
     <>
       <section className="section" style={{ paddingTop: 140 }}>
         <Link
-          href="/prace"
+          href={localizedHref(locale, '/prace')}
           style={{
             fontFamily: 'var(--font-mono)',
             fontSize: 12,
@@ -49,7 +63,7 @@ export default async function CaseStudyPage({ params }: Params) {
             display: 'inline-block',
           }}
         >
-          ← Späť na práce
+          {tw.backToWork}
         </Link>
 
         <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: 40, marginBottom: 40 }}>
@@ -58,7 +72,7 @@ export default async function CaseStudyPage({ params }: Params) {
             <span className="mono">{project.kind}</span>
             {project.confidential && (
               <span className="chip" style={{ borderColor: 'var(--border-hi)', color: 'var(--fg-muted)' }}>
-                ● Dôverné
+                {tw.confidential}
               </span>
             )}
           </div>
@@ -75,9 +89,9 @@ export default async function CaseStudyPage({ params }: Params) {
             {project.title}
           </h1>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
-            {project.tags.map((t) => (
-              <span key={t} className="chip">
-                {t}
+            {project.tags.map((tag) => (
+              <span key={tag} className="chip">
+                {tag}
               </span>
             ))}
             {project.url && (
@@ -132,7 +146,7 @@ export default async function CaseStudyPage({ params }: Params) {
               letterSpacing: '0.1em',
             }}
           >
-            placeholder — screenshot doplním
+            {tw.placeholderHero}
           </div>
         </div>
 
@@ -149,7 +163,7 @@ export default async function CaseStudyPage({ params }: Params) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
             <div>
               <div className="mono" style={{ marginBottom: 12, color: 'var(--lime)' }}>
-                Výzva
+                {tw.challenge}
               </div>
               <p
                 style={{
@@ -166,7 +180,7 @@ export default async function CaseStudyPage({ params }: Params) {
             </div>
             <div>
               <div className="mono" style={{ marginBottom: 12, color: 'var(--lime)' }}>
-                Riešenie
+                {tw.solution}
               </div>
               <p style={{ fontSize: 16, lineHeight: 1.6, color: 'var(--fg-dim)' }}>{project.solution}</p>
             </div>
@@ -183,16 +197,16 @@ export default async function CaseStudyPage({ params }: Params) {
             }}
           >
             <div className="mono" style={{ marginBottom: 16 }}>
-              Detaily projektu
+              {tw.detailsTitle}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {(
                 [
-                  ['Rok', project.year],
-                  ['Role', project.role],
-                  ['Stack', project.tags.join(' · ')],
-                  ['Status', project.url ? 'Live' : project.confidential ? 'Dôverné / interné' : 'Dokončené'],
-                  ['Web', project.url ? project.url.replace(/^https?:\/\//, '').replace(/\/$/, '') : '—'],
+                  [tw.year, project.year],
+                  [tw.role, project.role],
+                  [tw.stack, project.tags.join(' · ')],
+                  [tw.status, project.url ? tw.statusLive : project.confidential ? tw.statusConfidential : tw.statusDone],
+                  [tw.web, project.url ? project.url.replace(/^https?:\/\//, '').replace(/\/$/, '') : '—'],
                 ] as [string, string][]
               ).map(([k, v]) => (
                 <div
@@ -229,7 +243,7 @@ export default async function CaseStudyPage({ params }: Params) {
                 className="btn btn-primary"
                 style={{ marginTop: 20, width: '100%', justifyContent: 'center' }}
               >
-                Otvoriť web ↗
+                {tw.openWeb}
               </a>
             )}
           </div>
@@ -258,7 +272,7 @@ export default async function CaseStudyPage({ params }: Params) {
               borderRadius: 999,
             }}
           >
-            placeholder — detailný screenshot
+            {tw.placeholderShot}
           </div>
         </div>
 
@@ -273,18 +287,18 @@ export default async function CaseStudyPage({ params }: Params) {
             flexWrap: 'wrap',
           }}
         >
-          <Link href="/prace" className="btn btn-ghost">
-            ← Všetky práce
+          <Link href={localizedHref(locale, '/prace')} className="btn btn-ghost">
+            {tw.backToWork.replace('← ', '← ')}
           </Link>
-          <Link href={`/pripadova-studia/${next.id}`} className="btn btn-ghost">
-            Ďalší projekt: {next.title} →
+          <Link href={localizedHref(locale, `/pripadova-studia/${next.id}`)} className="btn btn-ghost">
+            {t.caseStudy.nextProject} {next.title} →
           </Link>
-          <Link href="/kontakt" className="btn btn-primary">
-            Mám podobný projekt →
+          <Link href={localizedHref(locale, '/kontakt')} className="btn btn-primary">
+            {tw.similarProject}
           </Link>
         </div>
       </section>
-      <ContactSection />
+      <ContactSection t={t} />
     </>
   );
 }

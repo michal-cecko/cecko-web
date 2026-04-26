@@ -1,27 +1,33 @@
 import Link from 'next/link';
 import { SERVICES } from '../../data';
 import Reveal from '../Reveal';
+import { defaultLocale, type Locale } from '../../i18n/config';
+import type { Dict } from '../../i18n/dictionaries';
 
-export default function ServicesSection() {
+function localizedHref(locale: Locale, path: string): string {
+  if (locale === defaultLocale) return path;
+  if (path === '/') return `/${locale}`;
+  return `/${locale}${path}`;
+}
+
+export default function ServicesSection({ locale, t }: { locale: Locale; t: Dict }) {
   return (
     <section className="section" id="services" data-screen-label="02 Services">
       <Reveal>
         <div className="section-head">
           <div className="section-head-meta">
-            <span className="mono">02 — Služby</span>
-            <span className="section-head-meta-desc">
-              Čo pre vás viem spraviť. Od prototypu po produkciu, od databázy po dizajn.
-            </span>
+            <span className="mono">{t.services.metaLabel}</span>
+            <span className="section-head-meta-desc">{t.services.metaDesc}</span>
           </div>
           <h2 className="section-title">
-            Čokoľvek, čo potrebuje <em>kód alebo dizajn.</em>
+            {t.services.title} <em>{t.services.titleEm}</em>
           </h2>
         </div>
       </Reveal>
       <div className="services-grid">
         {SERVICES.map((s, i) => (
           <Reveal key={s.n} delay={i * 60} className={s.span}>
-            <Link href="/sluzby" className={`service-card`}>
+            <Link href={localizedHref(locale, '/sluzby')} className={`service-card`}>
               <span className="service-card-bg-num">{s.n.replace('0', '')}</span>
               <h3 className="service-card-title">{s.title}</h3>
               <p className="service-card-desc">{s.desc}</p>

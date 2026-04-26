@@ -1,8 +1,9 @@
 'use client';
 
-import { useLocalePhone } from '../components/LocalePhone';
+import { useLocalePhone } from '../../components/LocalePhone';
+import type { Dict } from '../../i18n/dictionaries';
 
-export default function PhoneCard() {
+export default function PhoneCard({ t }: { t: Dict }) {
   const phone = useLocalePhone();
   return (
     <a
@@ -23,7 +24,7 @@ export default function PhoneCard() {
     >
       <div style={{ minWidth: 0 }}>
         <div className="mono" style={{ marginBottom: 2, fontSize: 10 }}>
-          Telefón / WhatsApp
+          {t.contact.phoneLabel}
         </div>
         <div
           style={{

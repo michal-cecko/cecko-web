@@ -1,7 +1,15 @@
 import Link from 'next/link';
 import Counter from '../Counter';
+import { defaultLocale, type Locale } from '../../i18n/config';
+import type { Dict } from '../../i18n/dictionaries';
 
-export default function Hero() {
+function localizedHref(locale: Locale, path: string): string {
+  if (locale === defaultLocale) return path;
+  if (path === '/') return `/${locale}`;
+  return `/${locale}${path}`;
+}
+
+export default function Hero({ locale, t }: { locale: Locale; t: Dict }) {
   return (
     <section className="hero" data-screen-label="01 Hero">
       <div className="hero-grid-bg" />
@@ -12,42 +20,34 @@ export default function Hero() {
         <div className="hero-availability">
           <span className="hero-availability-dot" />
           <span className="hero-availability-label">
-            Voľné kapacity na nové projekty <b>Júna 2026</b>
+            {t.hero.availability} <b>{t.hero.availabilityMonth}</b>
           </span>
         </div>
-        <span className="hero-location">Remote · Ostrava CZ / Žilina SK</span>
+        <span className="hero-location">{t.hero.location}</span>
       </div>
 
       <div className="hero-center">
         <div className="hero-preheading hero-preheading-author">
-          <span className="hero-photo" aria-label="Michal Čečko" />
+          <span className="hero-photo" aria-label={t.hero.name} />
           <span className="hero-preheading-text">
-            <span className="hero-preheading-name">Michal Čečko</span>
-            <span className="hero-preheading-role">Freelance Full-Stack Developer</span>
+            <span className="hero-preheading-name">{t.hero.name}</span>
+            <span className="hero-preheading-role">{t.hero.role}</span>
           </span>
         </div>
-        <h1 className="hero-heading">
-          Postavím váš<br />
-          produkt <em>od&nbsp;A</em><br />
-          po <em>Z.</em> Sám.
-        </h1>
+        <h1 className="hero-heading" dangerouslySetInnerHTML={{ __html: t.hero.heading }} />
       </div>
 
       <div className="hero-sub">
-        <p className="hero-sub-text">
-          Som <strong>fullstack developer</strong> so špecializáciou na PHP / Laravel.
-          Navrhujem, programujem a spúšťam <strong>weby, mobilné aplikácie a SaaS produkty</strong> —
-          od prvého wireframu po produkčný deploy.
-        </p>
+        <p className="hero-sub-text" dangerouslySetInnerHTML={{ __html: t.hero.sub }} />
         <div className="hero-actions">
-          <Link href="/kontakt" className="btn btn-primary">
-            Začať projekt
+          <Link href={localizedHref(locale, '/kontakt')} className="btn btn-primary">
+            {t.hero.ctaPrimary}
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M3 7h8m0 0L8 4m3 3l-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
-          <Link href="/prace" className="btn btn-ghost">
-            Pozrieť práce
+          <Link href={localizedHref(locale, '/prace')} className="btn btn-ghost">
+            {t.hero.ctaGhost}
           </Link>
         </div>
       </div>
@@ -57,25 +57,25 @@ export default function Hero() {
           <div className="hero-stat-num">
             <Counter to={8} sup="+" />
           </div>
-          <div className="hero-stat-label">Rokov praxe</div>
+          <div className="hero-stat-label">{t.hero.statYears}</div>
         </div>
         <div className="hero-stat">
           <div className="hero-stat-num">
             <Counter to={62} sup="+" />
           </div>
-          <div className="hero-stat-label">Dodaných projektov</div>
+          <div className="hero-stat-label">{t.hero.statProjects}</div>
         </div>
         <div className="hero-stat">
           <div className="hero-stat-num">
             <Counter to={14} />
           </div>
-          <div className="hero-stat-label">Spokojných klientov 2025</div>
+          <div className="hero-stat-label">{t.hero.statClients}</div>
         </div>
         <div className="hero-stat">
           <div className="hero-stat-num">
             100<sup>%</sup>
           </div>
-          <div className="hero-stat-label">Odovzdaných v termíne</div>
+          <div className="hero-stat-label">{t.hero.statOnTime}</div>
         </div>
       </div>
     </section>

@@ -1,45 +1,17 @@
-import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import './globals.css';
-import Chrome from './components/Chrome';
+import { defaultLocale, locales, localeHtmlTag, type Locale } from './i18n/config';
 
-const SITE_URL = 'https://cecko.dev';
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const h = await headers();
+  const headerLocale = h.get('x-locale');
+  const locale: Locale =
+    headerLocale && (locales as readonly string[]).includes(headerLocale)
+      ? (headerLocale as Locale)
+      : defaultLocale;
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: 'Michal Čečko — Full-Stack Developer · Remote',
-    template: '%s — Michal Čečko',
-  },
-  description:
-    'Freelance fullstack developer. Laravel, Vue. Weby, mobilné aplikácie a SaaS produkty od A po Z.',
-  applicationName: 'Michal Čečko',
-  authors: [{ name: 'Michal Čečko', url: SITE_URL }],
-  creator: 'Michal Čečko',
-  alternates: { canonical: '/' },
-  openGraph: {
-    type: 'website',
-    locale: 'sk_SK',
-    url: SITE_URL,
-    siteName: 'Michal Čečko',
-    title: 'Michal Čečko — Full-Stack Developer · Remote',
-    description:
-      'Freelance fullstack developer. Laravel, Vue. Weby, mobilné aplikácie a SaaS produkty od A po Z.',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Michal Čečko — Full-Stack Developer · Remote',
-    description:
-      'Freelance fullstack developer. Laravel, Vue. Weby, mobilné aplikácie a SaaS produkty od A po Z.',
-  },
-  icons: {
-    icon: '/mark.svg',
-  },
-  robots: { index: true, follow: true },
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="sk">
+    <html lang={localeHtmlTag[locale]}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -48,9 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body data-theme="dark">
-        <Chrome>{children}</Chrome>
-      </body>
+      <body data-theme="dark">{children}</body>
     </html>
   );
 }

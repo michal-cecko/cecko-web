@@ -1,45 +1,58 @@
 import type { Metadata } from 'next';
 import ContactForm from './ContactForm';
 import PhoneCard from './PhoneCard';
-import { CONTACT } from '../data';
+import { CONTACT } from '../../data';
+import { type Locale, locales, defaultLocale } from '../../i18n/config';
+import { getDictionary } from '../../i18n/dictionaries';
 
-export const metadata: Metadata = {
-  title: 'Kontakt',
-  description:
-    'Napíšte mi o projekte. Do 24 hodín odpoviem. Email, telefón, WhatsApp. Remote · Ostrava CZ / Žilina SK.',
-  alternates: { canonical: '/kontakt' },
-  openGraph: {
-    title: 'Kontakt — Michal Čečko',
-    description: 'Napíšte mi o projekte. Do 24 hodín odpoviem.',
-    url: '/kontakt',
-  },
-};
+type Params = { params: Promise<{ locale: string }> };
 
-export default function ContactPage() {
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale = ((locales as readonly string[]).includes(raw) ? raw : defaultLocale) as Locale;
+  const t = getDictionary(locale);
+  const path = locale === defaultLocale ? '/kontakt' : `/${locale}/kontakt`;
+  return {
+    title: t.nav.contact,
+    description: t.contact.pageMetaDesc,
+    alternates: { canonical: path },
+    openGraph: {
+      title: `${t.nav.contact} — Michal Čečko`,
+      description: t.contact.pageMetaDesc,
+      url: path,
+    },
+  };
+}
+
+export default async function ContactPage({ params }: Params) {
+  const { locale: raw } = await params;
+  const locale = ((locales as readonly string[]).includes(raw) ? raw : defaultLocale) as Locale;
+  const t = getDictionary(locale);
+
   return (
     <section className="section" style={{ paddingTop: 140 }}>
       <div className="section-head">
         <div className="section-head-meta">
-          <span className="mono">— Kontakt</span>
-          <span className="section-head-meta-desc">Napíšte mi. Do 24 hodín odpoviem s návrhom ďalších krokov.</span>
+          <span className="mono">{t.contact.pageMetaLabel}</span>
+          <span className="section-head-meta-desc">{t.contact.pageMetaDesc}</span>
         </div>
         <h1 className="section-title">
-          Poďme sa <em>porozprávať.</em>
+          {t.contact.pageTitle} <em>{t.contact.pageTitleEm}</em>
         </h1>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 60, alignItems: 'start' }}>
         <div>
-          <ContactForm />
+          <ContactForm t={t} />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           <div style={{ padding: '18px 22px', background: 'var(--bg-2)', border: '1px solid var(--border)', borderRadius: 14 }}>
             <div className="mono" style={{ marginBottom: 8, color: 'var(--lime)', fontSize: 11 }}>
-              ● Voľné kapacity
+              {t.contact.capacityLabel}
             </div>
             <p style={{ fontSize: 13, color: 'var(--fg-dim)', lineHeight: 1.5, margin: 0 }}>
-              Prijímam projekty so štartom ihneď.
+              {t.contact.capacityText}
             </p>
           </div>
 
@@ -47,20 +60,20 @@ export default function ContactPage() {
             {(
               [
                 {
-                  label: 'Email',
+                  label: t.contact.emailLabel,
                   val: CONTACT.email,
                   href: `mailto:${CONTACT.email}`,
                   full: true,
                   external: false,
                 },
                 {
-                  label: 'LinkedIn',
+                  label: t.contact.linkedinLabel,
                   val: CONTACT.linkedinHandle,
                   href: CONTACT.linkedinUrl,
                   external: true,
                 },
                 {
-                  label: 'GitHub',
+                  label: t.contact.githubLabel,
                   val: '@michal-cecko',
                   href: 'https://github.com/michal-cecko',
                   external: true,
@@ -112,17 +125,15 @@ export default function ContactPage() {
                 </svg>
               </a>
             ))}
-            <PhoneCard />
+            <PhoneCard t={t} />
           </div>
 
           <div style={{ padding: '18px 22px', background: 'var(--bg-2)', border: '1px solid var(--border)', borderRadius: 14 }}>
             <div className="mono" style={{ marginBottom: 8, fontSize: 11 }}>
-              Fakturačné údaje
+              {t.contact.billingTitle}
             </div>
-            <div style={{ fontSize: 13, color: 'var(--fg-dim)', lineHeight: 1.6 }}>
-              Michal Čečko · Freelance · Remote
-              <br />
-              IČO: 23260696
+            <div style={{ fontSize: 13, color: 'var(--fg-dim)', lineHeight: 1.6, whiteSpace: 'pre-line' }}>
+              {t.contact.billingBody}
             </div>
           </div>
         </div>

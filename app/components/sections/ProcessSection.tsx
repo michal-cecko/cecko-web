@@ -1,17 +1,18 @@
 import { PROCESS } from '../../data';
 import Reveal from '../Reveal';
+import type { Dict } from '../../i18n/dictionaries';
 
-export default function ProcessSection() {
+export default function ProcessSection({ t }: { t: Dict }) {
   return (
     <section className="section" id="process" data-screen-label="05 Process">
       <Reveal>
         <div className="section-head">
           <div className="section-head-meta">
-            <span className="mono">05 — Ako pracujem</span>
-            <span className="section-head-meta-desc">Štyri fázy. Bez prekvapení. Vždy viete kde stojíme.</span>
+            <span className="mono">{t.process.metaLabel}</span>
+            <span className="section-head-meta-desc">{t.process.metaDesc}</span>
           </div>
           <h2 className="section-title">
-            Od prvého mailu po <em>launch.</em>
+            {t.process.title} <em>{t.process.titleEm}</em>
           </h2>
         </div>
       </Reveal>

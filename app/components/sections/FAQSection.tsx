@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { FAQS } from '../../data';
 import Reveal from '../Reveal';
+import type { Dict } from '../../i18n/dictionaries';
 
-export default function FAQSection() {
+export default function FAQSection({ t }: { t: Dict }) {
   const [open, setOpen] = useState(0);
 
   return (
@@ -12,11 +13,11 @@ export default function FAQSection() {
       <Reveal>
         <div className="section-head">
           <div className="section-head-meta">
-            <span className="mono">07 — Časté otázky</span>
-            <span className="section-head-meta-desc">Najčastejšie otázky, ktoré dostávam pred začatím spolupráce.</span>
+            <span className="mono">{t.faq.metaLabel}</span>
+            <span className="section-head-meta-desc">{t.faq.metaDesc}</span>
           </div>
           <h2 className="section-title">
-            Čo by ste sa ešte chceli <em>spýtať?</em>
+            {t.faq.title} <em>{t.faq.titleEm}</em>
           </h2>
         </div>
       </Reveal>

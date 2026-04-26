@@ -1,25 +1,42 @@
 import type { MetadataRoute } from 'next';
 import { WORKS } from './data';
+import { locales, defaultLocale, type Locale } from './i18n/config';
 
 const SITE_URL = 'https://cecko.dev';
 
+const staticPaths = ['/', '/o-mne', '/sluzby', '/prace', '/kontakt', '/cv'];
+
+function urlFor(locale: Locale, path: string): string {
+  const prefix = locale === defaultLocale ? '' : `/${locale}`;
+  if (path === '/') return `${SITE_URL}${prefix || '/'}`;
+  return `${SITE_URL}${prefix}${path}`;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const routes: MetadataRoute.Sitemap = [
-    { url: `${SITE_URL}/`, lastModified: now, changeFrequency: 'monthly', priority: 1 },
-    { url: `${SITE_URL}/o-mne`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${SITE_URL}/sluzby`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${SITE_URL}/prace`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${SITE_URL}/kontakt`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${SITE_URL}/cv`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-  ];
-  for (const w of WORKS) {
-    routes.push({
-      url: `${SITE_URL}/pripadova-studia/${w.id}`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    });
+  const routes: MetadataRoute.Sitemap = [];
+
+  for (const path of staticPaths) {
+    for (const locale of locales) {
+      routes.push({
+        url: urlFor(locale, path),
+        lastModified: now,
+        changeFrequency: path === '/prace' ? 'weekly' : 'monthly',
+        priority: path === '/' ? 1 : path === '/sluzby' || path === '/prace' ? 0.9 : 0.7,
+      });
+    }
   }
+
+  for (const w of WORKS) {
+    for (const locale of locales) {
+      routes.push({
+        url: urlFor(locale, `/pripadova-studia/${w.id}`),
+        lastModified: now,
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      });
+    }
+  }
+
   return routes;
 }

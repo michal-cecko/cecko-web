@@ -1,35 +1,51 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { SERVICES } from '../data';
-import ProcessSection from '../components/sections/ProcessSection';
-import FAQSection from '../components/sections/FAQSection';
-import ContactSection from '../components/sections/ContactSection';
+import { SERVICES } from '../../data';
+import ProcessSection from '../../components/sections/ProcessSection';
+import FAQSection from '../../components/sections/FAQSection';
+import ContactSection from '../../components/sections/ContactSection';
+import { type Locale, locales, defaultLocale } from '../../i18n/config';
+import { getDictionary } from '../../i18n/dictionaries';
 
-export const metadata: Metadata = {
-  title: 'Služby',
-  description:
-    'Web a mobilné aplikácie, SaaS MVP, AI integrácie, UI/UX dizajn. Cenník od 800 €. Doručenie 1–24 týždňov.',
-  alternates: { canonical: '/sluzby' },
-  openGraph: {
-    title: 'Služby — Michal Čečko',
-    description: 'Sedem oblastí, v ktorých viem dodať výsledok. Cenník a trvanie.',
-    url: '/sluzby',
-  },
-};
+type Params = { params: Promise<{ locale: string }> };
 
-export default function ServicesPage() {
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale = ((locales as readonly string[]).includes(raw) ? raw : defaultLocale) as Locale;
+  const t = getDictionary(locale);
+  const path = locale === defaultLocale ? '/sluzby' : `/${locale}/sluzby`;
+  return {
+    title: t.nav.services,
+    description: t.servicesPage.metaDesc,
+    alternates: { canonical: path },
+    openGraph: {
+      title: `${t.nav.services} — Michal Čečko`,
+      description: t.servicesPage.metaDesc,
+      url: path,
+    },
+  };
+}
+
+function localizedHref(locale: Locale, path: string): string {
+  if (locale === defaultLocale) return path;
+  return `/${locale}${path}`;
+}
+
+export default async function ServicesPage({ params }: Params) {
+  const { locale: raw } = await params;
+  const locale = ((locales as readonly string[]).includes(raw) ? raw : defaultLocale) as Locale;
+  const t = getDictionary(locale);
+
   return (
     <>
       <section className="section" style={{ paddingTop: 140 }}>
         <div className="section-head">
           <div className="section-head-meta">
-            <span className="mono">— Služby</span>
-            <span className="section-head-meta-desc">
-              Sedem oblastí, v ktorých viem dodať výsledok. Kombinujem ich podľa potreby projektu.
-            </span>
+            <span className="mono">{t.servicesPage.metaLabel}</span>
+            <span className="section-head-meta-desc">{t.servicesPage.metaDesc}</span>
           </div>
           <h1 className="section-title">
-            Čo pre vás <em>postavím.</em>
+            {t.servicesPage.title} <em>{t.servicesPage.titleEm}</em>
           </h1>
         </div>
 
@@ -85,7 +101,7 @@ export default function ServicesPage() {
                     marginBottom: 12,
                   }}
                 >
-                  V cene
+                  {t.servicesPage.inPrice}
                 </div>
                 <ul
                   style={{
@@ -124,7 +140,7 @@ export default function ServicesPage() {
                       marginBottom: 6,
                     }}
                   >
-                    Cena
+                    {t.servicesPage.price}
                   </div>
                   <div
                     style={{
@@ -148,25 +164,25 @@ export default function ServicesPage() {
                       marginBottom: 6,
                     }}
                   >
-                    Trvanie
+                    {t.servicesPage.duration}
                   </div>
                   <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 500 }}>{s.dur}</div>
                 </div>
                 <Link
-                  href="/kontakt"
+                  href={localizedHref(locale, '/kontakt')}
                   className="btn btn-primary btn-sm"
                   style={{ justifyContent: 'center', marginTop: 8 }}
                 >
-                  Spýtať sa →
+                  {t.servicesPage.inquire}
                 </Link>
               </div>
             </div>
           ))}
         </div>
       </section>
-      <ProcessSection />
-      <FAQSection />
-      <ContactSection />
+      <ProcessSection t={t} />
+      <FAQSection t={t} />
+      <ContactSection t={t} />
     </>
   );
 }

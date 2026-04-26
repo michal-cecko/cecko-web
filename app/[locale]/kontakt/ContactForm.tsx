@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import type { Dict } from '../../i18n/dictionaries';
 
 function FieldLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -58,9 +59,10 @@ type FormState = {
   msg: string;
 };
 
-export default function ContactForm() {
+export default function ContactForm({ t }: { t: Dict }) {
   const [form, setForm] = useState<FormState>({ name: '', email: '', budget: '25k', type: 'web', msg: '' });
   const [submitted, setSubmitted] = useState(false);
+  const tc = t.contact;
 
   if (submitted) {
     return (
@@ -75,12 +77,27 @@ export default function ContactForm() {
       >
         <div style={{ fontFamily: 'var(--font-display)', fontSize: 48, color: 'var(--lime)', marginBottom: 16 }}>✓</div>
         <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 28, marginBottom: 12, fontWeight: 500, letterSpacing: '-0.01em' }}>
-          Správa odoslaná
+          {tc.formSuccessTitle}
         </h3>
-        <p style={{ color: 'var(--fg-dim)' }}>Ďakujem — ozvem sa do 24 hodín.</p>
+        <p style={{ color: 'var(--fg-dim)' }}>{tc.formSuccessBody}</p>
       </div>
     );
   }
+
+  const projectTypes: [string, string][] = [
+    ['web', tc.typeWeb],
+    ['mobile', tc.typeMobile],
+    ['saas', tc.typeSaas],
+    ['ai', tc.typeAi],
+    ['design', tc.typeDesign],
+  ];
+  const budgets: [string, string][] = [
+    ['5k', '< 5 000 €'],
+    ['15k', '5–15k €'],
+    ['25k', '15–30k €'],
+    ['50k', '30–60k €'],
+    ['100k', '60k+ €'],
+  ];
 
   return (
     <form
@@ -99,21 +116,13 @@ export default function ContactForm() {
       }}
     >
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-        <Field label="Meno" val={form.name} on={(v) => setForm({ ...form, name: v })} req />
-        <Field label="Email" val={form.email} on={(v) => setForm({ ...form, email: v })} type="email" req />
+        <Field label={tc.formName} val={form.name} on={(v) => setForm({ ...form, name: v })} req />
+        <Field label={tc.formEmail} val={form.email} on={(v) => setForm({ ...form, email: v })} type="email" req />
       </div>
       <div>
-        <FieldLabel>Typ projektu</FieldLabel>
+        <FieldLabel>{tc.formType}</FieldLabel>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          {(
-            [
-              ['web', 'Web / aplikácia'],
-              ['mobile', 'Mobilná appka'],
-              ['saas', 'SaaS MVP'],
-              ['ai', 'AI integrácia'],
-              ['design', 'UI/UX / Branding'],
-            ] as [string, string][]
-          ).map(([k, l]) => (
+          {projectTypes.map(([k, l]) => (
             <button
               type="button"
               key={k}
@@ -137,17 +146,9 @@ export default function ContactForm() {
         </div>
       </div>
       <div>
-        <FieldLabel>Rozpočet</FieldLabel>
+        <FieldLabel>{tc.formBudget}</FieldLabel>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
-          {(
-            [
-              ['5k', '< 5 000 €'],
-              ['15k', '5–15k €'],
-              ['25k', '15–30k €'],
-              ['50k', '30–60k €'],
-              ['100k', '60k+ €'],
-            ] as [string, string][]
-          ).map(([k, l]) => (
+          {budgets.map(([k, l]) => (
             <button
               type="button"
               key={k}
@@ -184,7 +185,7 @@ export default function ContactForm() {
               letterSpacing: '0.05em',
             }}
           >
-            Vlastné
+            {tc.formCustom}
           </button>
           {form.budget === 'custom' && (
             <input
@@ -192,7 +193,7 @@ export default function ContactForm() {
               autoFocus
               value={form.customBudget || ''}
               onChange={(e) => setForm({ ...form, customBudget: e.target.value })}
-              placeholder="Zadajte sumu…"
+              placeholder={tc.formCustomPlaceholder}
               style={{
                 padding: '10px 16px',
                 border: '1px solid var(--lime)',
@@ -210,13 +211,13 @@ export default function ContactForm() {
         </div>
       </div>
       <div>
-        <FieldLabel>Opíšte projekt</FieldLabel>
+        <FieldLabel>{tc.formMessage}</FieldLabel>
         <textarea
           value={form.msg}
           onChange={(e) => setForm({ ...form, msg: e.target.value })}
           required
           rows={6}
-          placeholder="Pár viet o tom, čo potrebujete, časovom rámci, a kde ste v procese..."
+          placeholder={tc.formMessagePlaceholder}
           style={{
             width: '100%',
             padding: 16,
@@ -231,10 +232,10 @@ export default function ContactForm() {
         />
       </div>
       <button type="submit" className="btn btn-primary" style={{ justifyContent: 'center', padding: '16px' }}>
-        Odoslať správu →
+        {tc.formSubmit}
       </button>
       <p style={{ fontSize: 12, color: 'var(--fg-muted)', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
-        Odpoviem do 24 hodín. Informácie sú dôverné.
+        {tc.formNote}
       </p>
     </form>
   );

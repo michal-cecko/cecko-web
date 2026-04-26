@@ -1,31 +1,32 @@
 import { TESTIMONIALS } from '../../data';
 import Reveal from '../Reveal';
+import type { Dict } from '../../i18n/dictionaries';
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({ t }: { t: Dict }) {
   return (
     <section className="section" id="reviews" data-screen-label="06 Reviews">
       <Reveal>
         <div className="section-head">
           <div className="section-head-meta">
-            <span className="mono">06 — Recenzie klientov</span>
-            <span className="section-head-meta-desc">Čo o mne hovoria ľudia, s ktorými som pracoval.</span>
+            <span className="mono">{t.testimonials.metaLabel}</span>
+            <span className="section-head-meta-desc">{t.testimonials.metaDesc}</span>
           </div>
           <h2 className="section-title">
-            Slová <em>spokojných</em> klientov.
+            {t.testimonials.title} <em>{t.testimonials.titleEm}</em> {t.testimonials.titleAfter}
           </h2>
         </div>
       </Reveal>
       <div className="testimonials">
-        {TESTIMONIALS.map((t, i) => (
+        {TESTIMONIALS.map((tn, i) => (
           <Reveal key={i} delay={i * 80}>
             <div className="testimonial">
               <div className="testimonial-quote-mark">&ldquo;</div>
-              <p className="testimonial-quote">{t.quote}</p>
+              <p className="testimonial-quote">{tn.quote}</p>
               <div className="testimonial-author">
-                <div className="testimonial-avatar">{t.init}</div>
+                <div className="testimonial-avatar">{tn.init}</div>
                 <div className="testimonial-author-info">
-                  <span className="testimonial-author-name">{t.name}</span>
-                  <span className="testimonial-author-role">{t.role}</span>
+                  <span className="testimonial-author-name">{tn.name}</span>
+                  <span className="testimonial-author-role">{tn.role}</span>
                 </div>
               </div>
             </div>
