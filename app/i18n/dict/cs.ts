@@ -85,6 +85,12 @@ const dict: Dict = {
     metaDesc: 'Čtyři fáze. Bez překvapení. Vždycky víte, kde stojíme.',
     title: 'Od prvního mailu po',
     titleEm: 'launch.',
+    steps: [
+      { n: '01', title: 'První kontakt', dur: 'Email / telefon', desc: 'Napíšete nebo zavoláte. V mailu lidskou řečí popíšete, co potřebujete — žádný technický slovník, žádné požadavky na formu. Stačí, když vím, o čem to je.', outputs: ['Email / call', 'Raw zadání', 'Bez formátu'] },
+      { n: '02', title: 'Můj pohled & odhad', dur: '2–4 dny', desc: 'Udělám si na projekt vlastní pohled — netechnickou specifikaci lidskou řečí, přidám reference a odkazy na podobné práce a hrubý cenový odhad. Abyste věděli, do čeho jdete.', outputs: ['Netechnická specifikace', 'Reference', 'Hrubý odhad ceny'] },
+      { n: '03', title: 'Detailní specifikace', dur: '1–2 týdny', desc: 'Pokud vám to vyhovuje, připravím detailní, technickou specku. To je alfa a omega — přesně popisuje, co bude předáno. Plus timeline, milníky a u větších projektů rozdělení na sprinty.', outputs: ['Detailní specifikace', 'Timeline & milníky', 'Finální cena'] },
+      { n: '04', title: 'Vývoj & předání', dur: '2–16 týdnů', desc: 'Větší aplikace běží ve sprintech — průběžně vidíte progress na stagingu. Menší appky uvidíte najednou, když jsou hotové — předám ke kontrole na staging verzi, opravím připomínky, nasadíme do produkce.', outputs: ['Živá staging verze', 'Kontrola & připomínky', 'Po kontrole nasazení do produkce'] },
+    ],
   },
   testimonials: {
     metaLabel: '06 — Reference klientů',
@@ -93,6 +99,11 @@ const dict: Dict = {
     titleEmPre: '',
     titleEm: 'spokojených',
     titleAfter: 'klientů.',
+    items: [
+      { quote: 'Michal dodal přesně to, co jsme potřebovali. Komunikace jasná, termíny dodržené, kvalita kódu prvotřídní. Doporučuji.', name: 'Peter Kováč', role: 'CEO, Medico s.r.o.', init: 'PK' },
+      { quote: 'Po dvou neúspěšných pokusech s jinými dodavateli nám Michal dotáhl SaaS platformu za 10 týdnů. Pořád s ním spolupracujeme.', name: 'Ivana Horváthová', role: 'Founder, TrainPro', init: 'IH' },
+      { quote: 'Nejlepší investice tohoto roku. Mobilní appka se vyvíjela rychle, všechno transparentně, žádná překvapení v ceně.', name: 'Martin Blaho', role: 'COO, DeliveryNow', init: 'MB' },
+    ],
   },
   faq: {
     metaLabel: '07 — Časté otázky',

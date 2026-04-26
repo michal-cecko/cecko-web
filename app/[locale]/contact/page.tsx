@@ -44,7 +44,7 @@ export default async function ContactPage({ params }: Params) {
         </div>
       </Reveal>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 60, alignItems: 'start' }}>
+      <div className="contact-grid">
         <Reveal delay={120}>
           <ContactForm t={t} />
         </Reveal>

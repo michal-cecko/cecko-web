@@ -1,4 +1,3 @@
-import { TESTIMONIALS } from '../../data';
 import Reveal from '../Reveal';
 import type { Dict } from '../../i18n/dictionaries';
 
@@ -17,7 +16,7 @@ export default function TestimonialsSection({ t }: { t: Dict }) {
         </div>
       </Reveal>
       <div className="testimonials">
-        {TESTIMONIALS.map((tn, i) => (
+        {t.testimonials.items.map((tn, i) => (
           <Reveal key={i} delay={i * 80}>
             <div className="testimonial">
               <div className="testimonial-quote-mark">&ldquo;</div>

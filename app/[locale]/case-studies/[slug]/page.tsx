@@ -159,16 +159,7 @@ export default async function CaseStudyPage({ params }: Params) {
         </Reveal>
 
         <Reveal delay={80}>
-        <div
-          className="case-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 320px',
-            gap: 80,
-            alignItems: 'start',
-            marginBottom: 80,
-          }}
-        >
+        <div className="case-grid">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
             <div>
               <div className="mono" style={{ marginBottom: 12, color: 'var(--lime)' }}>

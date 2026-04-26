@@ -1,4 +1,3 @@
-import { PROCESS } from '../../data';
 import Reveal from '../Reveal';
 import type { Dict } from '../../i18n/dictionaries';
 
@@ -17,7 +16,7 @@ export default function ProcessSection({ t }: { t: Dict }) {
         </div>
       </Reveal>
       <div className="process-steps">
-        {PROCESS.map((p, i) => (
+        {t.process.steps.map((p, i) => (
           <Reveal key={p.n} delay={i * 80}>
             <div className="process-step">
               <div className="process-step-n">{p.n}</div>

@@ -57,15 +57,14 @@ export default async function ServicesPage({ params }: Params) {
             <Reveal key={s.n} delay={i * 60} offset={20}>
             <div
               key={s.n}
+              id={`service-${s.n}`}
+              className="services-card"
               style={{
                 background: 'var(--bg-2)',
                 border: '1px solid var(--border)',
                 borderRadius: 20,
                 padding: '40px',
-                display: 'grid',
-                gridTemplateColumns: '80px 1fr 280px',
-                gap: 32,
-                alignItems: 'start',
+                scrollMarginTop: 100,
               }}
             >
               <div
@@ -125,12 +124,11 @@ export default async function ServicesPage({ params }: Params) {
                 </ul>
               </div>
               <div
+                className="services-card-meta"
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
                   gap: 16,
-                  paddingLeft: 24,
-                  borderLeft: '1px solid var(--border)',
                 }}
               >
                 <div>

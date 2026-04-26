@@ -83,6 +83,12 @@ const dict = {
     metaDesc: 'Four phases. No surprises. You always know where we stand.',
     title: 'From first email to',
     titleEm: 'launch.',
+    steps: [
+      { n: '01', title: 'First contact', dur: 'Email / phone', desc: "You write or call. Describe what you need in plain language — no tech jargon required, no formatting rules. As long as I get the gist of it, that's enough.", outputs: ['Email / call', 'Raw brief', 'No format required'] },
+      { n: '02', title: 'My take & estimate', dur: '2–4 days', desc: 'I form my own view on the project — a non-technical spec in plain language, with references and links to similar work, plus a rough budget estimate. So you know what you’re getting into.', outputs: ['Non-technical spec', 'References', 'Rough estimate'] },
+      { n: '03', title: 'Detailed spec', dur: '1–2 weeks', desc: 'If it suits you, I’ll prepare a detailed, more technical spec. This is the alpha and omega — it describes exactly what gets delivered. Plus timeline, milestones and, on bigger projects, a sprint breakdown.', outputs: ['Detailed spec', 'Timeline & milestones', 'Final price'] },
+      { n: '04', title: 'Build & handoff', dur: '2–16 weeks', desc: 'Larger apps run in sprints — you see progress continuously on staging. Smaller apps you’ll see in one go when finished — I hand off on a staging URL for review, fix the feedback, then ship to production.', outputs: ['Live staging build', 'Review & feedback', 'Production handoff after sign-off'] },
+    ],
   },
   testimonials: {
     metaLabel: '06 — Client reviews',
@@ -91,6 +97,11 @@ const dict = {
     titleEmPre: '',
     titleEm: 'happy',
     titleAfter: 'clients.',
+    items: [
+      { quote: 'Michal delivered exactly what we needed. Communication was clear, deadlines held, code quality top-shelf. Highly recommended.', name: 'Peter Kováč', role: 'CEO, Medico s.r.o.', init: 'PK' },
+      { quote: 'After two failed attempts with other vendors, Michal shipped our SaaS platform in 10 weeks. We’re still working with him.', name: 'Ivana Horváthová', role: 'Founder, TrainPro', init: 'IH' },
+      { quote: 'Best investment of the year. The mobile app moved fast, everything was transparent, no surprises in the bill.', name: 'Martin Blaho', role: 'COO, DeliveryNow', init: 'MB' },
+    ],
   },
   faq: {
     metaLabel: '07 — Frequently asked',

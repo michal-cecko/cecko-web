@@ -30,7 +30,7 @@ function CVList({ t, items }: { t: Dict; items: { yr: string; role: string; co: 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
       {items.map((it, i) => (
-        <div key={i} style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: 32 }}>
+        <div key={i} className="cv-row">
           <div>
             <div className="mono" style={{ color: 'var(--lime)' }}>
               {it.yr}
@@ -158,7 +158,7 @@ export default async function CVPage({ params }: Params) {
             const main = cat.items.filter((i) => i.p).map((i) => i.n);
             const extra = cat.items.filter((i) => !i.p).map((i) => i.n);
             return (
-              <div key={cat.title} style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: 32, alignItems: 'start' }}>
+              <div key={cat.title} className="cv-row" style={{ alignItems: 'start' }}>
                 <div className="mono" style={{ color: 'var(--lime)' }}>
                   {cat.title}
                 </div>
@@ -200,7 +200,7 @@ export default async function CVPage({ params }: Params) {
       <Reveal>
       <div style={{ marginBottom: 48 }}>
         <h2 style={sectionH2}>{tcv.softTitle}</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
+        <div className="cv-soft-grid">
           {tcv.soft.map(([title, desc]) => (
             <div key={title} style={{ padding: 20, background: 'var(--bg-2)', border: '1px solid var(--border)', borderRadius: 14 }}>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 500, marginBottom: 8 }}>{title}</div>
@@ -214,7 +214,7 @@ export default async function CVPage({ params }: Params) {
       <Reveal>
       <div style={{ marginBottom: 48 }}>
         <h2 style={sectionH2}>{tcv.languagesTitle}</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
+        <div className="cv-lang-grid">
           {tcv.languages.map(([l, lvl]) => (
             <div key={l} style={{ padding: 20, background: 'var(--bg-2)', border: '1px solid var(--border)', borderRadius: 14 }}>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 500 }}>{l}</div>

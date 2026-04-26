@@ -185,20 +185,5 @@ export const WORKS: Work[] = [
 
 export type WorkId = (typeof WORKS)[number]['id'];
 
-export type ProcessStep = { n: string; title: string; dur: string; desc: string; outputs: string[] };
 
-export const PROCESS: ProcessStep[] = [
-  { n: '01', title: 'Prvý kontakt', dur: 'Email / telefón', desc: 'Napíšete alebo zavoláte. V mailu popíšete ľudskou rečou, čo potrebujete — žiadna technická reč, žiadne požiadavky na formu. Stačí ak viem o čom to je.', outputs: ['Email / call', 'Raw zadanie', 'Bez formátu'] },
-  { n: '02', title: 'Môj pohľad & odhad', dur: '2–4 dni', desc: 'Spravím si na projekt svoj pohľad — netechnickú špecifikáciu v ľudskej reči, priložím referencie a odkazy na podobné práce, a hrubý cenový odhad. Aby ste vedeli do čoho idete.', outputs: ['Netechnická špecifikácia', 'Referencie', 'Hrubý odhad ceny'] },
-  { n: '03', title: 'Detailná špecifikácia', dur: '1–2 týždne', desc: 'Ak vám to vyhovuje, pripravím detailnú, technickejšiu špecku. Toto je alfa a omega — presne opisuje čo bude odovzdané. Plus timeline, míľniky, a pri väčších projektoch rozdelenie na sprinty.', outputs: ['Detailná špecifikácia', 'Timeline & míľniky', 'Finálna cena'] },
-  { n: '04', title: 'Vývoj & odovzdanie', dur: '2–16 týždňov', desc: 'Väčšie appky idú v sprintoch — priebežne vidíte progress na stagingu. Menšie appky uvidíte naraz, keď sú hotové — odovzdám na kontrolu na staging verzii, opravím pripomienky, spustíme do produkcie.', outputs: ['Live staging verzia', 'Kontrola & pripomienky', 'Po kontrole odovzdanie do produkcie'] },
-];
-
-export type Testimonial = { quote: string; name: string; role: string; init: string };
-
-export const TESTIMONIALS: Testimonial[] = [
-  { quote: 'Michal dodal presne to, čo sme potrebovali. Komunikácia je jasná, termíny dodržané, kvalita kódu prvotriedna. Odporúčam.', name: 'Peter Kováč', role: 'CEO, Medico s.r.o.', init: 'PK' },
-  { quote: 'Po dvoch neúspešných pokusoch s inými dodávateľmi nám Michal dorobil SaaS platformu za 10 týždňov. Stále s ním spolupracujeme.', name: 'Ivana Horváthová', role: 'Founder, TrainPro', init: 'IH' },
-  { quote: 'Najlepšia investícia tohto roka. Mobilná appka sa vyvíjala rýchlo, všetko transparentne, žiadne prekvapenia v cene.', name: 'Martin Blaho', role: 'COO, DeliveryNow', init: 'MB' },
-];
 
