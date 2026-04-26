@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { STACK } from '../../data';
+import Reveal from '../Reveal';
 
 export default function StackSection() {
   const [openState, setOpenState] = useState<Record<string, boolean>>({});
@@ -19,23 +20,25 @@ export default function StackSection() {
   return (
     <section className="stack" id="stack" data-screen-label="03 Stack">
       <div className="stack-inner">
-        <div className="section-head">
-          <div className="section-head-meta">
-            <span className="mono">03 — Tech stack</span>
-            <span className="section-head-meta-desc">
-              Nástroje ktoré používam denne. Zelená bodka = primárny stack, šedá = viem v tom, ak treba.
-            </span>
+        <Reveal>
+          <div className="section-head">
+            <div className="section-head-meta">
+              <span className="mono">03 — Tech stack</span>
+              <span className="section-head-meta-desc">
+                Nástroje ktoré používam denne. Zelená bodka = primárny stack, šedá = viem v tom, ak treba.
+              </span>
+            </div>
+            <h2 className="section-title">
+              <em>PHP-first.</em> Ale nie iba.
+            </h2>
           </div>
-          <h2 className="section-title">
-            <em>PHP-first.</em> Ale nie iba.
-          </h2>
-        </div>
+        </Reveal>
         <div className="stack-grid">
-          {STACK.map((cat) => {
+          {STACK.map((cat, ci) => {
             const open = !isMobile || openState[cat.title];
             return (
+              <Reveal key={cat.title} delay={ci * 80}>
               <div
-                key={cat.title}
                 className={`stack-cat ${isMobile ? 'stack-cat-collapsible' : ''} ${open ? 'is-open' : ''}`}
               >
                 <button
@@ -62,6 +65,7 @@ export default function StackSection() {
                   </div>
                 )}
               </div>
+              </Reveal>
             );
           })}
         </div>

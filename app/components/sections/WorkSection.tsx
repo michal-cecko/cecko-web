@@ -1,26 +1,30 @@
 import Link from 'next/link';
 import { WORKS } from '../../data';
+import Reveal from '../Reveal';
 
 export default function WorkSection() {
   return (
     <section className="section" id="work" data-screen-label="04 Work">
-      <div className="section-head">
-        <div className="section-head-meta">
-          <span className="mono">04 — Vybrané práce</span>
-          <span className="section-head-meta-desc">
-            Projekty, ktoré ma niečo naučili a klientom priniesli výsledok.
-          </span>
+      <Reveal>
+        <div className="section-head">
+          <div className="section-head-meta">
+            <span className="mono">04 — Vybrané práce</span>
+            <span className="section-head-meta-desc">
+              Projekty, ktoré ma niečo naučili a klientom priniesli výsledok.
+            </span>
+          </div>
+          <h2 className="section-title">
+            Z posledných <em>rokov.</em>
+          </h2>
+          <Link href="/prace" className="btn btn-ghost section-cta">
+            Všetky práce →
+          </Link>
         </div>
-        <h2 className="section-title">
-          Z posledných <em>rokov.</em>
-        </h2>
-        <Link href="/prace" className="btn btn-ghost section-cta">
-          Všetky práce →
-        </Link>
-      </div>
+      </Reveal>
       <div className="work-list">
         {WORKS.slice(0, 6).map((w, i) => (
-          <Link key={w.id} href={`/pripadova-studia/${w.id}`} className="work-row">
+          <Reveal key={w.id} delay={i * 50} offset={16}>
+          <Link href={`/pripadova-studia/${w.id}`} className="work-row">
             <span className="work-row-n">({String(i + 1).padStart(2, '0')})</span>
             <div className="work-row-main">
               <h3 className="work-row-title">{w.title}</h3>
@@ -58,6 +62,7 @@ export default function WorkSection() {
               </div>
             </div>
           </Link>
+          </Reveal>
         ))}
       </div>
     </section>

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { CONTACT } from '../../data';
 import { useLocalePhone } from '../LocalePhone';
+import Reveal from '../Reveal';
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -11,6 +12,7 @@ export default function ContactSection() {
 
   return (
     <section className="contact" id="contact" data-screen-label="08 Contact">
+      <Reveal>
       <div className="contact-inner">
         <span className="mono" style={{ color: 'var(--lime)' }}>
           08 — Začnime
@@ -67,6 +69,7 @@ export default function ContactSection() {
           <span>IČO: 23260696</span>
         </div>
       </div>
+      </Reveal>
     </section>
   );
 }
