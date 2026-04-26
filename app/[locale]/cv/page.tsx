@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import PrintButton from './PrintButton';
+import Reveal from '../../components/Reveal';
 import { STACK } from '../../data';
 import { type Locale, locales, defaultLocale } from '../../i18n/config';
 import { getDictionary, type Dict } from '../../i18n/dictionaries';
@@ -72,6 +73,7 @@ export default async function CVPage({ params }: Params) {
 
   return (
     <section className="section" style={{ paddingTop: 140, maxWidth: 1000 }}>
+      <Reveal>
       <div
         style={{
           display: 'flex',
@@ -125,22 +127,30 @@ export default async function CVPage({ params }: Params) {
         </div>
         <PrintButton label={tcv.downloadPdf} locale={locale} />
       </div>
+      </Reveal>
 
+      <Reveal delay={60}>
       <div style={{ marginBottom: 48 }}>
         <h2 style={{ ...sectionH2, marginBottom: 20 }}>{tcv.aboutTitle}</h2>
         <p style={{ fontSize: 16, color: 'var(--fg-dim)', lineHeight: 1.6, maxWidth: 780 }}>{tcv.aboutBody}</p>
       </div>
+      </Reveal>
 
+      <Reveal>
       <div style={{ marginBottom: 48 }}>
         <h2 style={sectionH2}>{tcv.workTitle}</h2>
         <CVList t={t} items={tcv.work as unknown as { yr: string; role: string; co: string; desc?: string }[]} />
       </div>
+      </Reveal>
 
+      <Reveal>
       <div style={{ marginBottom: 48 }}>
         <h2 style={sectionH2}>{tcv.educationTitle}</h2>
         <CVList t={t} items={tcv.education as unknown as { yr: string; role: string; co: string; desc?: string }[]} />
       </div>
+      </Reveal>
 
+      <Reveal>
       <div style={{ marginBottom: 48 }}>
         <h2 style={sectionH2}>{tcv.skillsTitle}</h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
@@ -185,7 +195,9 @@ export default async function CVPage({ params }: Params) {
           })}
         </div>
       </div>
+      </Reveal>
 
+      <Reveal>
       <div style={{ marginBottom: 48 }}>
         <h2 style={sectionH2}>{tcv.softTitle}</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
@@ -197,7 +209,9 @@ export default async function CVPage({ params }: Params) {
           ))}
         </div>
       </div>
+      </Reveal>
 
+      <Reveal>
       <div style={{ marginBottom: 48 }}>
         <h2 style={sectionH2}>{tcv.languagesTitle}</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
@@ -211,6 +225,7 @@ export default async function CVPage({ params }: Params) {
           ))}
         </div>
       </div>
+      </Reveal>
     </section>
   );
 }

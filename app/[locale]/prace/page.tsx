@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import WorkList from './WorkList';
 import ContactSection from '../../components/sections/ContactSection';
+import Reveal from '../../components/Reveal';
 import { type Locale, locales, defaultLocale } from '../../i18n/config';
 import { getDictionary } from '../../i18n/dictionaries';
 
@@ -31,17 +32,21 @@ export default async function WorkPage({ params }: Params) {
   return (
     <>
       <section className="section" style={{ paddingTop: 140 }}>
-        <div className="section-head">
-          <div className="section-head-meta">
-            <span className="mono">{t.work.pageMetaLabel}</span>
-            <span className="section-head-meta-desc">{t.work.pageMetaDesc}</span>
+        <Reveal>
+          <div className="section-head">
+            <div className="section-head-meta">
+              <span className="mono">{t.work.pageMetaLabel}</span>
+              <span className="section-head-meta-desc">{t.work.pageMetaDesc}</span>
+            </div>
+            <h1 className="section-title">
+              {t.work.pageTitle} <em>{t.work.pageTitleEm}</em>
+            </h1>
           </div>
-          <h1 className="section-title">
-            {t.work.pageTitle} <em>{t.work.pageTitleEm}</em>
-          </h1>
-        </div>
+        </Reveal>
 
-        <WorkList locale={locale} t={t} />
+        <Reveal delay={120}>
+          <WorkList locale={locale} t={t} />
+        </Reveal>
       </section>
       <ContactSection t={t} />
     </>

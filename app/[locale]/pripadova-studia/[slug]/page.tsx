@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { WORKS } from '../../../data';
 import ContactSection from '../../../components/sections/ContactSection';
+import Reveal from '../../../components/Reveal';
 import { type Locale, locales, defaultLocale } from '../../../i18n/config';
 import { getDictionary } from '../../../i18n/dictionaries';
 
@@ -66,6 +67,7 @@ export default async function CaseStudyPage({ params }: Params) {
           {tw.backToWork}
         </Link>
 
+        <Reveal>
         <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: 40, marginBottom: 40 }}>
           <div style={{ display: 'flex', gap: 16, marginBottom: 24, alignItems: 'center', flexWrap: 'wrap' }}>
             <span className="chip chip-accent">{project.year}</span>
@@ -107,7 +109,9 @@ export default async function CaseStudyPage({ params }: Params) {
             )}
           </div>
         </div>
+        </Reveal>
 
+        <Reveal delay={120}>
         <div
           style={{
             aspectRatio: '16/9',
@@ -149,7 +153,9 @@ export default async function CaseStudyPage({ params }: Params) {
             {tw.placeholderHero}
           </div>
         </div>
+        </Reveal>
 
+        <Reveal delay={80}>
         <div
           className="case-grid"
           style={{
@@ -248,7 +254,9 @@ export default async function CaseStudyPage({ params }: Params) {
             )}
           </div>
         </div>
+        </Reveal>
 
+        <Reveal>
         <div
           style={{
             aspectRatio: '16/10',
@@ -275,7 +283,9 @@ export default async function CaseStudyPage({ params }: Params) {
             {tw.placeholderShot}
           </div>
         </div>
+        </Reveal>
 
+        <Reveal>
         <div
           style={{
             display: 'flex',
@@ -297,6 +307,7 @@ export default async function CaseStudyPage({ params }: Params) {
             {tw.similarProject}
           </Link>
         </div>
+        </Reveal>
       </section>
       <ContactSection t={t} />
     </>

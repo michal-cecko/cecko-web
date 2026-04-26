@@ -3,6 +3,7 @@ import StackSection from '../../components/sections/StackSection';
 import ProcessSection from '../../components/sections/ProcessSection';
 import TestimonialsSection from '../../components/sections/TestimonialsSection';
 import ContactSection from '../../components/sections/ContactSection';
+import Reveal from '../../components/Reveal';
 import { type Locale, locales, defaultLocale } from '../../i18n/config';
 import { getDictionary } from '../../i18n/dictionaries';
 
@@ -33,18 +34,21 @@ export default async function AboutPage({ params }: Params) {
   return (
     <>
       <section className="section" style={{ paddingTop: 140 }}>
-        <div className="section-head">
-          <div className="section-head-meta">
-            <span className="mono">{t.about.metaLabel}</span>
-            <span className="section-head-meta-desc">{t.about.metaDesc}</span>
+        <Reveal>
+          <div className="section-head">
+            <div className="section-head-meta">
+              <span className="mono">{t.about.metaLabel}</span>
+              <span className="section-head-meta-desc">{t.about.metaDesc}</span>
+            </div>
+            <h1 className="section-title">
+              {t.about.title} <em>{t.about.titleEm}</em>
+              <br />
+              <span className="section-title-dim">{t.about.subtitle}</span>
+            </h1>
           </div>
-          <h1 className="section-title">
-            {t.about.title} <em>{t.about.titleEm}</em>
-            <br />
-            <span className="section-title-dim">{t.about.subtitle}</span>
-          </h1>
-        </div>
+        </Reveal>
 
+        <Reveal delay={120}>
         <div className="about">
           <div className="about-text">
             {t.about.body.map((p, i) => (
@@ -91,6 +95,7 @@ export default async function AboutPage({ params }: Params) {
             </div>
           </div>
         </div>
+        </Reveal>
       </section>
 
       <StackSection t={t} />

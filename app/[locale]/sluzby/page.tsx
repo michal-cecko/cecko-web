@@ -4,6 +4,7 @@ import { SERVICES } from '../../data';
 import ProcessSection from '../../components/sections/ProcessSection';
 import FAQSection from '../../components/sections/FAQSection';
 import ContactSection from '../../components/sections/ContactSection';
+import Reveal from '../../components/Reveal';
 import { type Locale, locales, defaultLocale } from '../../i18n/config';
 import { getDictionary } from '../../i18n/dictionaries';
 
@@ -39,18 +40,21 @@ export default async function ServicesPage({ params }: Params) {
   return (
     <>
       <section className="section" style={{ paddingTop: 140 }}>
-        <div className="section-head">
-          <div className="section-head-meta">
-            <span className="mono">{t.servicesPage.metaLabel}</span>
-            <span className="section-head-meta-desc">{t.servicesPage.metaDesc}</span>
+        <Reveal>
+          <div className="section-head">
+            <div className="section-head-meta">
+              <span className="mono">{t.servicesPage.metaLabel}</span>
+              <span className="section-head-meta-desc">{t.servicesPage.metaDesc}</span>
+            </div>
+            <h1 className="section-title">
+              {t.servicesPage.title} <em>{t.servicesPage.titleEm}</em>
+            </h1>
           </div>
-          <h1 className="section-title">
-            {t.servicesPage.title} <em>{t.servicesPage.titleEm}</em>
-          </h1>
-        </div>
+        </Reveal>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          {SERVICES.map((s) => (
+          {SERVICES.map((s, i) => (
+            <Reveal key={s.n} delay={i * 60} offset={20}>
             <div
               key={s.n}
               style={{
@@ -177,6 +181,7 @@ export default async function ServicesPage({ params }: Params) {
                 </Link>
               </div>
             </div>
+            </Reveal>
           ))}
         </div>
       </section>

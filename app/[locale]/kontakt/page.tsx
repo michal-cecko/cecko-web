@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import ContactForm from './ContactForm';
 import PhoneCard from './PhoneCard';
+import Reveal from '../../components/Reveal';
 import { CONTACT } from '../../data';
 import { type Locale, locales, defaultLocale } from '../../i18n/config';
 import { getDictionary } from '../../i18n/dictionaries';
@@ -31,21 +32,24 @@ export default async function ContactPage({ params }: Params) {
 
   return (
     <section className="section" style={{ paddingTop: 140 }}>
-      <div className="section-head">
-        <div className="section-head-meta">
-          <span className="mono">{t.contact.pageMetaLabel}</span>
-          <span className="section-head-meta-desc">{t.contact.pageMetaDesc}</span>
+      <Reveal>
+        <div className="section-head">
+          <div className="section-head-meta">
+            <span className="mono">{t.contact.pageMetaLabel}</span>
+            <span className="section-head-meta-desc">{t.contact.pageMetaDesc}</span>
+          </div>
+          <h1 className="section-title">
+            {t.contact.pageTitle} <em>{t.contact.pageTitleEm}</em>
+          </h1>
         </div>
-        <h1 className="section-title">
-          {t.contact.pageTitle} <em>{t.contact.pageTitleEm}</em>
-        </h1>
-      </div>
+      </Reveal>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 60, alignItems: 'start' }}>
-        <div>
+        <Reveal delay={120}>
           <ContactForm t={t} />
-        </div>
+        </Reveal>
 
+        <Reveal delay={180}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           <div style={{ padding: '18px 22px', background: 'var(--bg-2)', border: '1px solid var(--border)', borderRadius: 14 }}>
             <div className="mono" style={{ marginBottom: 8, color: 'var(--lime)', fontSize: 11 }}>
@@ -137,6 +141,7 @@ export default async function ContactPage({ params }: Params) {
             </div>
           </div>
         </div>
+        </Reveal>
       </div>
     </section>
   );
