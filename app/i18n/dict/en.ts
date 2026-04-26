@@ -200,13 +200,13 @@ const dict = {
       ['Transparent communication', "Open and honest — if I don't know something, I say so and commit to finding the answer."],
       ['Lifelong learner', 'Curious and proactive — unfamiliar territory is a growth opportunity, not a blocker.'],
       ['Team player', "The kind of person you can chat with over a beer, at the gym, or on a hike — good projects start with good relationships."],
-    ] as [string, string][],
+    ],
     languages: [
       ['Slovak', 'Native'],
       ['Czech', 'Fluent'],
       ['English', 'Advanced'],
       ['German', 'Basic (B1)'],
-    ] as [string, string][],
+    ],
     work: [
       {
         yr: '01/2023 — present',
@@ -323,7 +323,7 @@ const dict = {
         'A Nuxt portfolio site with a custom minimalist design. Focus on typography, dark mode, and speed.',
     },
   },
-} as const;
+};
 
 export default dict;
 export type Dict = typeof dict;
