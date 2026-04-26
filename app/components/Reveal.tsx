@@ -42,7 +42,7 @@ export default function Reveal({ children, delay = 0, offset = 24, as = 'div', c
     <Tag
       // @ts-expect-error — passing ref through to whatever HTML tag was chosen
       ref={ref}
-      className={`reveal ${shown ? 'reveal-in' : ''} ${className}`.trim()}
+      className={`reveal ${shown ? 'visible' : ''} ${className}`.trim()}
       style={{
         transitionDelay: shown && delay ? `${delay}ms` : undefined,
         ['--reveal-offset' as string]: `${offset}px`,
