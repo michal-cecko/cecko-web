@@ -1679,3 +1679,53 @@ body[data-theme="light"] .service-card-bg-num { color: var(--bg-2); }
   transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0, 1);
 }
 .reveal.visible { opacity: 1; transform: none; }
+
+/* ============================================ PRINT / PDF ============================================
+   Used by the CV → PDF generator (scripts/generate-cv-pdfs.mjs) and
+   anyone who hits Cmd+P on /cv. Strips chrome, animations, and the
+   noisy body::before noise overlay. Keeps the dark theme so the PDF
+   matches the brand.
+*/
+@media print {
+  body::before { display: none !important; }
+  .nav,
+  .nav-overlay,
+  .footer,
+  .cursor-dot,
+  .cursor-ring,
+  #nprogress,
+  .lenis-stopped,
+  [data-screen-label]::after { display: none !important; }
+
+  /* Defeat all reveal/hero on-load animations so content is visible. */
+  .reveal,
+  .hero-top, .hero-preheading, .hero-heading, .hero-sub, .hero-foot {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  html, body {
+    background: #0b0b0c !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* CV page-only print tweaks */
+  body[data-cv-print] {
+    overflow: visible !important;
+  }
+  body[data-cv-print] .section {
+    padding-top: 24px !important;
+  }
+  body[data-cv-print] .btn-ghost,
+  body[data-cv-print] [data-print-hide] { display: none !important; }
+
+  /* Avoid awkward page breaks inside CV cards. */
+  .about-fact, .stack-cat, .testimonial, .process-step,
+  .case-grid > *, [class^="cv-"], [class*=" cv-"] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

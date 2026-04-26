@@ -123,7 +123,7 @@ export default async function CVPage({ params }: Params) {
             </a>
           </div>
         </div>
-        <PrintButton label={tcv.downloadPdf} />
+        <PrintButton label={tcv.downloadPdf} locale={locale} />
       </div>
 
       <div style={{ marginBottom: 48 }}>

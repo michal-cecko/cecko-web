@@ -3,6 +3,9 @@
 # ---------- 1. deps: install only production-relevant deps ----------
 FROM node:22-alpine AS deps
 WORKDIR /app
+# Puppeteer is only used by scripts/generate-cv-pdfs.mjs locally; skip
+# the ~150 MB Chromium download in Docker builds.
+ENV PUPPETEER_SKIP_DOWNLOAD=true
 COPY package.json package-lock.json* ./
 RUN npm ci
 
@@ -10,6 +13,7 @@ RUN npm ci
 FROM node:22-alpine AS builder
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV PUPPETEER_SKIP_DOWNLOAD=true
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
