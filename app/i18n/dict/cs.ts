@@ -237,6 +237,89 @@ const dict: Dict = {
   caseStudy: {
     nextProject: 'Další projekt:',
   },
+  tagLabels: {
+    Dizajn: 'Design',
+  } as Record<string, string>,
+  works: {
+    bcz: {
+      title: 'BCZ Club',
+      kind: 'SaaS platforma pro sportovní kluby',
+      role: 'Fullstack + design',
+      challenge:
+        'Sportovní kluby na Slovensku evidují tréninky, soutěže a akce v Excelu a papírových sešitech. Chyběl jim jednotný systém.',
+      solution:
+        'SaaS platforma postavená na Laravel + FilamentPHP, která zjednodušuje evidenci tréninků, organizaci soutěží a dalších sportovních akcí. Custom design na míru, Alpine.js pro interaktivitu.',
+    },
+    friendlyfyzio: {
+      title: 'FriendlyFyzio OS',
+      kind: 'Rezervační, CMS & CRM systém pro fyzioterapeutickou kliniku',
+      role: 'Fullstack + design',
+      challenge:
+        'Fyzioklinika potřebovala jednotný systém pro online rezervace, správu obsahu webu a evidenci pacientů — bez závislosti na třech různých nástrojích.',
+      solution:
+        'Custom rezervační systém s CMS a CRM postavený na FilamentPHP + Laravel. Admin rozhraní na míru pro recepci, pacientský portál, integrovaný CMS pro web. Celý design + vývoj.',
+    },
+    idealnedvere: {
+      title: 'Ideálne dvere',
+      kind: 'Portfolio web pro truhláře',
+      role: 'Design + vývoj',
+      challenge:
+        'Truhlář potřeboval jednoduchý, reprezentativní web, který ukáže jeho řemeslnou práci bez zbytečné technické zátěže.',
+      solution:
+        'Jednoduchý portfolio web na Nuxt 3 s designem na míru. Zaměření na fotografii realizací, čistou typografii a rychlé načítání.',
+    },
+    faktury: {
+      title: 'Interní fakturační systém',
+      kind: 'Vlastní fakturační nástroj',
+      role: 'Fullstack',
+      challenge:
+        'Existující fakturační SaaS řešení byla buď předražená, nebo nedostatečně flexibilní pro můj workflow — potřeboval jsem vlastní nástroj na míru.',
+      solution:
+        'Kompletní fakturační systém postavený na Laravel + FilamentPHP. Klienti, projekty, opakované faktury, exporty pro účetnictví, banking přehled.',
+    },
+    songbook: {
+      title: 'Songbook.app',
+      kind: 'Aplikace pro kapelu · CMS',
+      role: 'Fullstack + design',
+      challenge:
+        'Kapela potřebovala nástroj pro organizaci textů písní a tanečních kol, kde si členové mohou jednoduše spravovat obsah a mít ho vždy po ruce.',
+      solution:
+        'Mobilní aplikace s designem na míru synchronizovaná s CMS systémem postaveným na Laravel + FilamentPHP. Členové kapely editují texty přes admin, apka je automaticky synchronizuje.',
+    },
+    streetworkout: {
+      title: 'Street Workout Kysuce',
+      kind: 'Web pro sportovní team · Blog + soutěže',
+      role: 'Design + vývoj',
+      challenge:
+        'Sportovní team potřeboval web pro organizování soutěží, blog a komunikaci s fanoušky — na platformě, kterou si dokážou sami spravovat.',
+      solution:
+        'WordPress web s designem na míru. Stránka soutěží, blog, kalendář akcí. Team si vše spravuje sám přes WP admin.',
+    },
+    oblock: {
+      title: 'O-Block',
+      kind: 'Portfolio web pro barbershop',
+      role: 'Design + vývoj',
+      challenge:
+        'Barbershop potřeboval čistý, minimalistický web bez zbytečné administrace — jen solidní prezentaci služeb.',
+      solution: 'Statická HTML + CSS šablona na míru. Rychlá, bez závislostí, jednoduchá údržba.',
+    },
+    '3mbarbers': {
+      title: '3M Barbers',
+      kind: 'Rezervační systém pro barbershop',
+      role: 'Fullstack',
+      challenge:
+        'Barbershop potřeboval rezervační systém přímo ve WordPressu bez migrace na jiný stack — s vlastní logikou dostupnosti barberů.',
+      solution:
+        'Custom WordPress plugin kombinující ACF pro administraci a Vue.js pro frontend rezervačního widgetu. Kalendář dostupnosti, výběr barbera, potvrzení e-mailem.',
+    },
+    mensvenue: {
+      title: "Men's Venue",
+      kind: 'Portfolio web pro barbershop',
+      role: 'Design + vývoj',
+      challenge: 'Barbershop chtěl minimalistický, reprezentativní web, který odliší značku od konkurence.',
+      solution: 'Nuxt portfolio web s minimalistickým designem na míru. Důraz na typografii, dark mode a rychlost.',
+    },
+  },
 };
 
 export default dict;

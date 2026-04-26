@@ -160,139 +160,30 @@ export const STACK: StackCategory[] = [
   },
 ];
 
+/** Structural work data — id, year, tags, url, confidentiality.
+ *  Localized text fields (title, kind, role, challenge, solution)
+ *  live in app/i18n/dict/{en,sk,cs}.ts under `works[id]`. */
 export type Work = {
   id: string;
-  title: string;
-  kind: string;
   year: string;
   tags: string[];
   url: string | null;
   confidential: boolean;
-  duration: string;
-  role: string;
-  challenge: string;
-  solution: string;
 };
 
 export const WORKS: Work[] = [
-  {
-    id: 'bcz',
-    title: 'BCZ Club',
-    kind: 'SaaS platforma pre športové kluby',
-    year: '2026',
-    tags: ['Laravel', 'Filament', 'Alpine'],
-    url: 'https://bcz-club.com',
-    confidential: false,
-    duration: '—',
-    role: 'Fullstack + dizajn',
-    challenge: 'Športové kluby na Slovensku evidujú tréningy, súťaže a podujatia v excelových tabuľkách a papierových zošitoch. Chýbal jednotný systém.',
-    solution: 'SaaS platforma postavená na Laravel + FilamentPHP, ktorá zjednodušuje evidenciu športových tréningov, organizáciu súťaží a ďalších športových podujatí. Custom dizajn namieru, Alpine.js pre interaktivitu.',
-  },
-  {
-    id: 'friendlyfyzio',
-    title: 'FriendlyFyzio OS',
-    kind: 'Rezervačný, CMS & CRM systém pre fyziokliniku',
-    year: '2026',
-    tags: ['Laravel', 'Filament', 'Alpine'],
-    url: 'https://www.friendlyfyzio.cz',
-    confidential: false,
-    duration: '—',
-    role: 'Fullstack + dizajn',
-    challenge: 'Fyzioklinika potrebovala jednotný systém pre online rezervácie, správu obsahu webu a evidenciu pacientov — bez závislosti na troch rôznych nástrojoch.',
-    solution: 'Custom rezervačný systém s CMS a CRM postavený na FilamentPHP + Laravel. Admin rozhranie namieru pre recepciu, pacientsky portál, integrovaný CMS pre web. Celý dizajn + vývoj.',
-  },
-  {
-    id: 'idealnedvere',
-    title: 'Ideálne dvere',
-    kind: 'Portfólio web pre stolára',
-    year: '2025',
-    tags: ['Nuxt', 'Dizajn'],
-    url: 'https://idealnedvere.sk',
-    confidential: false,
-    duration: '—',
-    role: 'Dizajn + vývoj',
-    challenge: 'Stolár potreboval jednoduchý, reprezentatívny web ktorý ukáže jeho remeselnú prácu bez zbytočnej technickej ťarchy.',
-    solution: 'Jednoduchý portfólio web na Nuxt 3 s dizajnom namieru. Zameranie na fotografiu realizácií, čistú typografiu a rýchle načítanie.',
-  },
-  {
-    id: 'faktury',
-    title: 'Interný fakturačný systém',
-    kind: 'Vlastný fakturačný nástroj',
-    year: '2025',
-    tags: ['Laravel', 'Filament'],
-    url: null,
-    confidential: true,
-    duration: '—',
-    role: 'Fullstack',
-    challenge: 'Existujúce fakturačné SaaS riešenia boli buď predražené alebo neflexibilné na moje workflow — potreboval som vlastný nástroj šitý na mieru.',
-    solution: 'Kompletný fakturačný systém postavený na Laravel + FilamentPHP. Klienti, projekty, opakované faktúry, exporty pre účtovníctvo, banking prehľad.',
-  },
-  {
-    id: 'songbook',
-    title: 'Songbook.app',
-    kind: 'Aplikácia pre kapelu · CMS',
-    year: '2024',
-    tags: ['Laravel', 'Filament', 'Mobile'],
-    url: null,
-    confidential: true,
-    duration: '—',
-    role: 'Fullstack + dizajn',
-    challenge: 'Kapela potrebovala nástroj na organizáciu textov piesní a tanečných kôl, kde si členovia vedia jednoducho spravovať obsah a mať ho vždy poruke.',
-    solution: 'Mobilná aplikácia s custom dizajnom namieru synchronizovaná s CMS systémom postaveným na Laravel + FilamentPHP. Členovia kapely editujú texty cez admin, appka ich automaticky syncuje.',
-  },
-  {
-    id: 'streetworkout',
-    title: 'Street Workout Kysuce',
-    kind: 'Web pre športový team · Blog + súťaže',
-    year: '2023',
-    tags: ['WordPress', 'Dizajn'],
-    url: 'https://www.streetworkoutkysuce.sk',
-    confidential: false,
-    duration: '—',
-    role: 'Dizajn + vývoj',
-    challenge: 'Športový team potreboval web na organizovanie súťaží, blog a komunikáciu s fanúšikmi — na platforme, ktorú dokážu sami ďalej spravovať.',
-    solution: 'WordPress web s custom dizajnom namieru. Stránka súťaží, blog, kalendár eventov. Team si všetko spravuje sám cez WP admin.',
-  },
-  {
-    id: 'oblock',
-    title: 'O-Block',
-    kind: 'Portfolio web pre barbershop',
-    year: '2023',
-    tags: ['HTML', 'CSS'],
-    url: null,
-    confidential: false,
-    duration: '—',
-    role: 'Dizajn + vývoj',
-    challenge: 'Barbershop potreboval čistý, minimalistický web bez zbytočnej administrácie — len solídna prezentácia služieb.',
-    solution: 'Statická HTML + CSS šablóna namieru. Rýchla, bez dependency, jednoduchá údržba.',
-  },
-  {
-    id: '3mbarbers',
-    title: '3M Barbers',
-    kind: 'Rezervačný systém pre barbershop',
-    year: '2022',
-    tags: ['WordPress', 'Vue', 'ACF'],
-    url: null,
-    confidential: false,
-    duration: '—',
-    role: 'Fullstack',
-    challenge: 'Barbershop potreboval rezervačný systém priamo vo WordPresse bez migrácie na iný stack — s vlastnou logikou dostupnosti barberov.',
-    solution: 'Custom WordPress plugin kombinujúci ACF pre administráciu a VueJS pre frontend rezervačného widgetu. Kalendár dostupnosti, výber barbera, potvrdenie cez email.',
-  },
-  {
-    id: 'mensvenue',
-    title: "Men's Venue",
-    kind: 'Portfolio web pre barbershop',
-    year: '2022',
-    tags: ['Nuxt', 'Dizajn'],
-    url: 'https://mensvenue.sk',
-    confidential: false,
-    duration: '—',
-    role: 'Dizajn + vývoj',
-    challenge: 'Barbershop chcel minimalistický, reprezentatívny web ktorý odlíši značku od konkurencie.',
-    solution: 'NuxtJS portfolio web s minimalistickým dizajnom namieru. Fokus na typografiu, dark mód a rýchlosť.',
-  },
+  { id: 'bcz',           year: '2026', tags: ['Laravel', 'Filament', 'Alpine'], url: 'https://bcz-club.com',                  confidential: false },
+  { id: 'friendlyfyzio', year: '2026', tags: ['Laravel', 'Filament', 'Alpine'], url: 'https://www.friendlyfyzio.cz',          confidential: false },
+  { id: 'idealnedvere',  year: '2025', tags: ['Nuxt', 'Dizajn'],                url: 'https://idealnedvere.sk',               confidential: false },
+  { id: 'faktury',       year: '2025', tags: ['Laravel', 'Filament'],          url: null,                                    confidential: true  },
+  { id: 'songbook',      year: '2024', tags: ['Laravel', 'Filament', 'Mobile'],url: null,                                    confidential: true  },
+  { id: 'streetworkout', year: '2023', tags: ['WordPress', 'Dizajn'],          url: 'https://www.streetworkoutkysuce.sk',    confidential: false },
+  { id: 'oblock',        year: '2023', tags: ['HTML', 'CSS'],                  url: null,                                    confidential: false },
+  { id: '3mbarbers',     year: '2022', tags: ['WordPress', 'Vue', 'ACF'],      url: null,                                    confidential: false },
+  { id: 'mensvenue',     year: '2022', tags: ['Nuxt', 'Dizajn'],               url: 'https://mensvenue.sk',                  confidential: false },
 ];
+
+export type WorkId = (typeof WORKS)[number]['id'];
 
 export type ProcessStep = { n: string; title: string; dur: string; desc: string; outputs: string[] };
 

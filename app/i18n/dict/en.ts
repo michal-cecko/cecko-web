@@ -235,6 +235,94 @@ const dict = {
   caseStudy: {
     nextProject: 'Next:',
   },
+  /** Tag labels for /prace + work-row chips. Tags not listed here render
+   *  as-is (most are tech names — universal across locales). */
+  tagLabels: {
+    Dizajn: 'Design',
+  } as Record<string, string>,
+  works: {
+    bcz: {
+      title: 'BCZ Club',
+      kind: 'SaaS platform for sports clubs',
+      role: 'Fullstack + design',
+      challenge:
+        'Sports clubs in Slovakia track trainings, tournaments and events in spreadsheets and paper notebooks. They were missing a unified system.',
+      solution:
+        'A SaaS platform built on Laravel + FilamentPHP that simplifies tracking trainings, organising tournaments and other club events. Custom-made design, Alpine.js for interactivity.',
+    },
+    friendlyfyzio: {
+      title: 'FriendlyFyzio OS',
+      kind: 'Booking, CMS & CRM system for a physio clinic',
+      role: 'Fullstack + design',
+      challenge:
+        'A physio clinic needed a unified system for online bookings, website content management and patient records — without juggling three separate tools.',
+      solution:
+        'A custom booking system with CMS and CRM, built on FilamentPHP + Laravel. Tailored admin for the front desk, a patient portal, integrated CMS for the public site. Full design + build.',
+    },
+    idealnedvere: {
+      title: 'Ideálne dvere',
+      kind: 'Portfolio website for a carpenter',
+      role: 'Design + development',
+      challenge:
+        'A carpenter wanted a clean, representative website to showcase his craftsmanship — with no unnecessary technical baggage.',
+      solution:
+        'A minimal Nuxt 3 portfolio with custom design. Focus on project photography, clean typography, and fast loading.',
+    },
+    faktury: {
+      title: 'Internal invoicing system',
+      kind: 'Custom invoicing tool',
+      role: 'Fullstack',
+      challenge:
+        'Existing invoicing SaaS tools were either overpriced or too rigid for my workflow — I needed something tailor-made.',
+      solution:
+        'A full invoicing system built on Laravel + FilamentPHP. Clients, projects, recurring invoices, accounting exports, and a banking overview.',
+    },
+    songbook: {
+      title: 'Songbook.app',
+      kind: 'App for a band · CMS',
+      role: 'Fullstack + design',
+      challenge:
+        'A band needed a tool for organising lyrics and dance circles, where members can manage content easily and always have it to hand.',
+      solution:
+        'A mobile app with custom-made design, synced to a CMS built on Laravel + FilamentPHP. Members edit lyrics in the admin and the app pulls them automatically.',
+    },
+    streetworkout: {
+      title: 'Street Workout Kysuce',
+      kind: 'Website for a sports team · blog + tournaments',
+      role: 'Design + development',
+      challenge:
+        'A sports team needed a website to organise tournaments, host a blog, and engage with fans — on a platform they could keep running themselves.',
+      solution:
+        'A WordPress site with custom design. Tournaments page, blog, events calendar. The team manages everything from WP admin.',
+    },
+    oblock: {
+      title: 'O-Block',
+      kind: 'Portfolio site for a barbershop',
+      role: 'Design + development',
+      challenge:
+        'The barbershop wanted a clean, minimalist site with no unnecessary admin — just a solid presentation of services.',
+      solution:
+        'A bespoke static HTML + CSS template. Fast, dependency-free, easy to maintain.',
+    },
+    '3mbarbers': {
+      title: '3M Barbers',
+      kind: 'Booking system for a barbershop',
+      role: 'Fullstack',
+      challenge:
+        'The barbershop needed a booking system inside WordPress — no migration to a different stack — with custom logic for barber availability.',
+      solution:
+        'A custom WordPress plugin combining ACF for the admin and Vue.js for the booking widget. Availability calendar, barber selection, email confirmations.',
+    },
+    mensvenue: {
+      title: "Men's Venue",
+      kind: 'Portfolio site for a barbershop',
+      role: 'Design + development',
+      challenge:
+        'The barbershop wanted a minimalist signature site that would set the brand apart from the competition.',
+      solution:
+        'A Nuxt portfolio site with a custom minimalist design. Focus on typography, dark mode, and speed.',
+    },
+  },
 } as const;
 
 export default dict;

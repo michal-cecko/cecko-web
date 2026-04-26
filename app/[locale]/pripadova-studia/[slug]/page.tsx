@@ -25,13 +25,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const t = getDictionary(locale);
   if (!project) return { title: t.nav.work };
   const path = localizedHref(locale, `/pripadova-studia/${project.id}`);
+  const wt = t.works[project.id as keyof typeof t.works];
   return {
-    title: project.title,
-    description: `${project.kind} · ${project.year}. ${project.challenge.slice(0, 140)}`,
+    title: wt.title,
+    description: `${wt.kind} · ${project.year}. ${wt.challenge.slice(0, 140)}`,
     alternates: { canonical: path },
     openGraph: {
-      title: `${project.title} — ${project.kind}`,
-      description: project.challenge,
+      title: `${wt.title} — ${wt.kind}`,
+      description: wt.challenge,
       url: path,
       type: 'article',
     },
@@ -48,6 +49,8 @@ export default async function CaseStudyPage({ params }: Params) {
   const next = WORKS[(idx + 1) % WORKS.length];
 
   const tw = t.work;
+  const wt = t.works[project.id as keyof typeof t.works];
+  const nextWt = t.works[next.id as keyof typeof t.works];
 
   return (
     <>
@@ -71,7 +74,7 @@ export default async function CaseStudyPage({ params }: Params) {
         <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: 40, marginBottom: 40 }}>
           <div style={{ display: 'flex', gap: 16, marginBottom: 24, alignItems: 'center', flexWrap: 'wrap' }}>
             <span className="chip chip-accent">{project.year}</span>
-            <span className="mono">{project.kind}</span>
+            <span className="mono">{wt.kind}</span>
             {project.confidential && (
               <span className="chip" style={{ borderColor: 'var(--border-hi)', color: 'var(--fg-muted)' }}>
                 {tw.confidential}
@@ -88,12 +91,12 @@ export default async function CaseStudyPage({ params }: Params) {
               marginBottom: 20,
             }}
           >
-            {project.title}
+            {wt.title}
           </h1>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
             {project.tags.map((tag) => (
               <span key={tag} className="chip">
-                {tag}
+                {t.tagLabels[tag] ?? tag}
               </span>
             ))}
             {project.url && (
@@ -136,7 +139,7 @@ export default async function CaseStudyPage({ params }: Params) {
               padding: '0 20px',
             }}
           >
-            {project.title}
+            {wt.title}
           </div>
           <div
             style={{
@@ -181,14 +184,14 @@ export default async function CaseStudyPage({ params }: Params) {
                   letterSpacing: '-0.01em',
                 }}
               >
-                {project.challenge}
+                {wt.challenge}
               </p>
             </div>
             <div>
               <div className="mono" style={{ marginBottom: 12, color: 'var(--lime)' }}>
                 {tw.solution}
               </div>
-              <p style={{ fontSize: 16, lineHeight: 1.6, color: 'var(--fg-dim)' }}>{project.solution}</p>
+              <p style={{ fontSize: 16, lineHeight: 1.6, color: 'var(--fg-dim)' }}>{wt.solution}</p>
             </div>
           </div>
 
@@ -209,8 +212,8 @@ export default async function CaseStudyPage({ params }: Params) {
               {(
                 [
                   [tw.year, project.year],
-                  [tw.role, project.role],
-                  [tw.stack, project.tags.join(' · ')],
+                  [tw.role, wt.role],
+                  [tw.stack, project.tags.map((tag) => t.tagLabels[tag] ?? tag).join(' · ')],
                   [tw.status, project.url ? tw.statusLive : project.confidential ? tw.statusConfidential : tw.statusDone],
                   [tw.web, project.url ? project.url.replace(/^https?:\/\//, '').replace(/\/$/, '') : '—'],
                 ] as [string, string][]
@@ -301,7 +304,7 @@ export default async function CaseStudyPage({ params }: Params) {
             {tw.backToWork.replace('← ', '← ')}
           </Link>
           <Link href={localizedHref(locale, `/pripadova-studia/${next.id}`)} className="btn btn-ghost">
-            {t.caseStudy.nextProject} {next.title} →
+            {t.caseStudy.nextProject} {nextWt.title} →
           </Link>
           <Link href={localizedHref(locale, '/kontakt')} className="btn btn-primary">
             {tw.similarProject}
