@@ -63,7 +63,7 @@ export default function WorkList({ locale, t }: { locale: Locale; t: Dict }) {
         {filtered.map((w, i) => {
           const wt = t.works[w.id as keyof typeof t.works];
           return (
-            <Link key={w.id} href={localizedHref(locale, `/pripadova-studia/${w.id}`)} className="work-row">
+            <Link key={w.id} href={localizedHref(locale, `/case-studies/${w.id}`)} className="work-row">
               <span className="work-row-n">({String(i + 1).padStart(2, '0')})</span>
               <div className="work-row-main">
                 <h3 className="work-row-title">{wt.title}</h3>

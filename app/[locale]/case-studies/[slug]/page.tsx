@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const project = WORKS.find((w) => w.id === slug);
   const t = getDictionary(locale);
   if (!project) return { title: t.nav.work };
-  const path = localizedHref(locale, `/pripadova-studia/${project.id}`);
+  const path = localizedHref(locale, `/case-studies/${project.id}`);
   const wt = t.works[project.id as keyof typeof t.works];
   return {
     title: wt.title,
@@ -56,7 +56,7 @@ export default async function CaseStudyPage({ params }: Params) {
     <>
       <section className="section" style={{ paddingTop: 140 }}>
         <Link
-          href={localizedHref(locale, '/prace')}
+          href={localizedHref(locale, '/work')}
           style={{
             fontFamily: 'var(--font-mono)',
             fontSize: 12,
@@ -300,13 +300,13 @@ export default async function CaseStudyPage({ params }: Params) {
             flexWrap: 'wrap',
           }}
         >
-          <Link href={localizedHref(locale, '/prace')} className="btn btn-ghost">
+          <Link href={localizedHref(locale, '/work')} className="btn btn-ghost">
             {tw.backToWork.replace('← ', '← ')}
           </Link>
-          <Link href={localizedHref(locale, `/pripadova-studia/${next.id}`)} className="btn btn-ghost">
+          <Link href={localizedHref(locale, `/case-studies/${next.id}`)} className="btn btn-ghost">
             {t.caseStudy.nextProject} {nextWt.title} →
           </Link>
-          <Link href={localizedHref(locale, '/kontakt')} className="btn btn-primary">
+          <Link href={localizedHref(locale, '/contact')} className="btn btn-primary">
             {tw.similarProject}
           </Link>
         </div>

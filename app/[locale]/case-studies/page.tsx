@@ -6,5 +6,5 @@ export default async function CaseStudyIndex({ params }: { params: Promise<{ loc
   const { locale: raw } = await params;
   const locale = ((locales as readonly string[]).includes(raw) ? raw : defaultLocale) as Locale;
   const prefix = locale === defaultLocale ? '' : `/${locale}`;
-  redirect(`${prefix}/pripadova-studia/${WORKS[0].id}`);
+  redirect(`${prefix}/case-studies/${WORKS[0].id}`);
 }

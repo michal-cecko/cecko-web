@@ -40,11 +40,11 @@ export default function Nav({
 
   const links: [string, string, string][] = [
     ['/', 'home', t.nav.home],
-    ['/o-mne', 'about', t.nav.about],
-    ['/sluzby', 'services', t.nav.services],
-    ['/prace', 'work', t.nav.work],
+    ['/about', 'about', t.nav.about],
+    ['/services', 'services', t.nav.services],
+    ['/work', 'work', t.nav.work],
     ['/cv', 'cv', t.nav.cv],
-    ['/kontakt', 'contact', t.nav.contact],
+    ['/contact', 'contact', t.nav.contact],
   ];
 
   return (
@@ -73,7 +73,7 @@ export default function Nav({
             <span className="dot-live" /> {t.nav.available}
           </span>
           <LangSwitcher locale={locale} groupLabel={t.nav.langGroup} />
-          <Link href={localizedHref(locale, '/kontakt')} className="nav-cta" onClick={close}>
+          <Link href={localizedHref(locale, '/contact')} className="nav-cta" onClick={close}>
             {t.nav.cta}
           </Link>
         </div>
@@ -106,7 +106,7 @@ export default function Nav({
               ))}
               <li className="nav-overlay-cta">
                 <LangSwitcher className="lang-switch-lg" locale={locale} groupLabel={t.nav.langGroup} />
-                <Link href={localizedHref(locale, '/kontakt')} className="btn btn-ghost" onClick={close}>
+                <Link href={localizedHref(locale, '/contact')} className="btn btn-ghost" onClick={close}>
                   {t.nav.cta} →
                 </Link>
               </li>

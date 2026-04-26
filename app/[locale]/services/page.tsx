@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale = ((locales as readonly string[]).includes(raw) ? raw : defaultLocale) as Locale;
   const t = getDictionary(locale);
-  const path = locale === defaultLocale ? '/sluzby' : `/${locale}/sluzby`;
+  const path = locale === defaultLocale ? '/services' : `/${locale}/services`;
   return {
     title: t.nav.services,
     description: t.servicesPage.metaDesc,
@@ -173,7 +173,7 @@ export default async function ServicesPage({ params }: Params) {
                   <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 500 }}>{s.dur}</div>
                 </div>
                 <Link
-                  href={localizedHref(locale, '/kontakt')}
+                  href={localizedHref(locale, '/contact')}
                   className="btn btn-primary btn-sm"
                   style={{ justifyContent: 'center', marginTop: 8 }}
                 >

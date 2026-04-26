@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale = ((locales as readonly string[]).includes(raw) ? raw : defaultLocale) as Locale;
   const t = getDictionary(locale);
-  const path = locale === defaultLocale ? '/kontakt' : `/${locale}/kontakt`;
+  const path = locale === defaultLocale ? '/contact' : `/${locale}/contact`;
   return {
     title: t.nav.contact,
     description: t.contact.pageMetaDesc,

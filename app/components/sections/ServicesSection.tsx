@@ -27,7 +27,7 @@ export default function ServicesSection({ locale, t }: { locale: Locale; t: Dict
       <div className="services-grid">
         {SERVICES.map((s, i) => (
           <Reveal key={s.n} delay={i * 60} className={s.span}>
-            <Link href={localizedHref(locale, '/sluzby')} className={`service-card`}>
+            <Link href={localizedHref(locale, '/services')} className={`service-card`}>
               <span className="service-card-bg-num">{s.n.replace('0', '')}</span>
               <h3 className="service-card-title">{s.title}</h3>
               <p className="service-card-desc">{s.desc}</p>

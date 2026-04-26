@@ -40,13 +40,13 @@ export default function Hero({ locale, t }: { locale: Locale; t: Dict }) {
       <div className="hero-sub">
         <p className="hero-sub-text" dangerouslySetInnerHTML={{ __html: t.hero.sub }} />
         <div className="hero-actions">
-          <Link href={localizedHref(locale, '/kontakt')} className="btn btn-primary">
+          <Link href={localizedHref(locale, '/contact')} className="btn btn-primary">
             {t.hero.ctaPrimary}
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M3 7h8m0 0L8 4m3 3l-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
-          <Link href={localizedHref(locale, '/prace')} className="btn btn-ghost">
+          <Link href={localizedHref(locale, '/work')} className="btn btn-ghost">
             {t.hero.ctaGhost}
           </Link>
         </div>

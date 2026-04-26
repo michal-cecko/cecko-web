@@ -10,11 +10,11 @@ import type { Dict } from '../i18n/dictionaries';
 
 const PATH_TO_KEY: Record<string, string> = {
   '/': 'home',
-  '/o-mne': 'about',
-  '/sluzby': 'services',
-  '/prace': 'work',
-  '/pripadova-studia': 'work',
-  '/kontakt': 'contact',
+  '/about': 'about',
+  '/services': 'services',
+  '/work': 'work',
+  '/case-studies': 'work',
+  '/contact': 'contact',
   '/cv': 'cv',
 };
 

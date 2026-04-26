@@ -22,7 +22,7 @@ export default function WorkSection({ locale, t }: { locale: Locale; t: Dict }) 
           <h2 className="section-title">
             {t.work.title} <em>{t.work.titleEm}</em>
           </h2>
-          <Link href={localizedHref(locale, '/prace')} className="btn btn-ghost section-cta">
+          <Link href={localizedHref(locale, '/work')} className="btn btn-ghost section-cta">
             {t.work.cta}
           </Link>
         </div>
@@ -32,7 +32,7 @@ export default function WorkSection({ locale, t }: { locale: Locale; t: Dict }) 
           const wt = t.works[w.id as keyof typeof t.works];
           return (
             <Reveal key={w.id} delay={i * 50} offset={16}>
-              <Link href={localizedHref(locale, `/pripadova-studia/${w.id}`)} className="work-row">
+              <Link href={localizedHref(locale, `/case-studies/${w.id}`)} className="work-row">
                 <span className="work-row-n">({String(i + 1).padStart(2, '0')})</span>
                 <div className="work-row-main">
                   <h3 className="work-row-title">{wt.title}</h3>

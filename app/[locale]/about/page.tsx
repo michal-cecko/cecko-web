@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale = ((locales as readonly string[]).includes(raw) ? raw : defaultLocale) as Locale;
   const t = getDictionary(locale);
-  const path = locale === defaultLocale ? '/o-mne' : `/${locale}/o-mne`;
+  const path = locale === defaultLocale ? '/about' : `/${locale}/about`;
   return {
     title: t.nav.about,
     description: t.about.metaDesc,

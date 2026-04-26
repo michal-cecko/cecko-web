@@ -27,8 +27,8 @@ export function middleware(request: NextRequest) {
     return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
-  // Rewrite (not redirect) so the URL stays clean: cecko.dev/sluzby
-  // internally serves /en/sluzby content.
+  // Rewrite (not redirect) so the URL stays clean: cecko.dev/services
+  // internally serves /en/services content.
   const url = request.nextUrl.clone();
   url.pathname = `/${defaultLocale}${pathname === '/' ? '' : pathname}`;
   return NextResponse.rewrite(url, { request: { headers: requestHeaders } });

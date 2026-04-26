@@ -4,7 +4,7 @@ import { locales, defaultLocale, type Locale } from './i18n/config';
 
 const SITE_URL = 'https://cecko.dev';
 
-const staticPaths = ['/', '/o-mne', '/sluzby', '/prace', '/kontakt', '/cv'];
+const staticPaths = ['/', '/about', '/services', '/work', '/contact', '/cv'];
 
 function urlFor(locale: Locale, path: string): string {
   const prefix = locale === defaultLocale ? '' : `/${locale}`;
@@ -21,8 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       routes.push({
         url: urlFor(locale, path),
         lastModified: now,
-        changeFrequency: path === '/prace' ? 'weekly' : 'monthly',
-        priority: path === '/' ? 1 : path === '/sluzby' || path === '/prace' ? 0.9 : 0.7,
+        changeFrequency: path === '/work' ? 'weekly' : 'monthly',
+        priority: path === '/' ? 1 : path === '/services' || path === '/work' ? 0.9 : 0.7,
       });
     }
   }
@@ -30,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const w of WORKS) {
     for (const locale of locales) {
       routes.push({
-        url: urlFor(locale, `/pripadova-studia/${w.id}`),
+        url: urlFor(locale, `/case-studies/${w.id}`),
         lastModified: now,
         changeFrequency: 'monthly',
         priority: 0.7,
