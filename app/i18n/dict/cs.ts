@@ -25,7 +25,7 @@ const dict: Dict = {
     location: 'Remote · Ostrava CZ / Žilina SK',
     name: 'Michal Čečko',
     role: 'Freelance Full-Stack Developer',
-    heading: 'Kód. <em>Design.</em><br/><em>Launch.</em><br/>Všechno já.',
+    heading: 'Kód. <em>Design.</em><br/><em>Spuštění.</em><br/>Všechno já sám.',
     sub: 'Postavím vám <strong>web, mobilní appku nebo online nástroj</strong> — od prvního nápadu až po okamžik, kdy to spustíme naživo. Jeden člověk, který se vám stará o všechno: design, programování i provoz. Žádné zbytečné meetingy a žádné přehazování zodpovědnosti.',
     ctaPrimary: 'Začít projekt',
     ctaGhost: 'Podívat se na práce',
