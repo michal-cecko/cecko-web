@@ -9,7 +9,15 @@ function localizedHref(locale: Locale, path: string): string {
   return `/${locale}${path}`;
 }
 
+const INTL_LOCALES: Record<Locale, string> = { en: 'en-US', sk: 'sk-SK', cs: 'cs-CZ' };
+
+function currentMonthLabel(locale: Locale): string {
+  const formatted = new Intl.DateTimeFormat(INTL_LOCALES[locale], { month: 'long', year: 'numeric' }).format(new Date());
+  return formatted.charAt(0).toUpperCase() + formatted.slice(1);
+}
+
 export default function Hero({ locale, t }: { locale: Locale; t: Dict }) {
+  const availabilityMonth = currentMonthLabel(locale);
   return (
     <section className="hero" data-screen-label="01 Hero">
       <div className="hero-grid-bg" />
@@ -20,7 +28,7 @@ export default function Hero({ locale, t }: { locale: Locale; t: Dict }) {
         <div className="hero-availability">
           <span className="hero-availability-dot" />
           <span className="hero-availability-label">
-            {t.hero.availability} <b>{t.hero.availabilityMonth}</b>
+            {t.hero.availability} <b>{availabilityMonth}</b>
           </span>
         </div>
         <span className="hero-location">{t.hero.location}</span>

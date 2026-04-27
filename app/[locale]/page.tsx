@@ -31,6 +31,8 @@ const websiteJsonLd = {
   name: 'Michal Čečko — Full-Stack Developer',
 };
 
+export const revalidate = 86400;
+
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const locale = ((locales as readonly string[]).includes(rawLocale) ? rawLocale : 'en') as Locale;
