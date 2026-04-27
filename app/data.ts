@@ -11,15 +11,16 @@ export const CONTACT = {
 
 export type Lang = keyof typeof CONTACT.phones;
 
-export type Service = { n: string; span: string };
+export type WorkFilter = 'web' | 'mobile' | 'saas';
+export type Service = { n: string; span: string; workFilter?: WorkFilter };
 
 export const SERVICES: Service[] = [
-  { n: '01', span: 'span-6' },
-  { n: '02', span: 'span-6' },
-  { n: '03', span: 'span-4' },
-  { n: '04', span: 'span-4' },
+  { n: '01', span: 'span-6', workFilter: 'web' },
+  { n: '02', span: 'span-6', workFilter: 'web' },
+  { n: '03', span: 'span-4', workFilter: 'saas' },
+  { n: '04', span: 'span-4', workFilter: 'mobile' },
   { n: '05', span: 'span-4' },
-  { n: '06', span: 'span-6' },
+  { n: '06', span: 'span-6', workFilter: 'saas' },
   { n: '07', span: 'span-6' },
 ];
 

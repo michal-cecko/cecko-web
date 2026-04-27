@@ -265,6 +265,7 @@ const dict: Dict = {
     price: 'Cena',
     duration: 'Trvanie',
     inquire: 'Spýtať sa →',
+    seeProjects: 'Pozrieť projekty →',
   },
   cv: {
     metaLabel: '— CV / Resume',

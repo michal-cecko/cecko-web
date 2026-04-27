@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { WORKS } from '../../data';
 import { defaultLocale, type Locale } from '../../i18n/config';
 import type { Dict } from '../../i18n/dictionaries';
@@ -12,13 +13,17 @@ const TAG_FILTER: Record<string, string[]> = {
   saas: ['Filament'],
 };
 
+const VALID_FILTERS = new Set(['all', 'web', 'mobile', 'saas']);
+
 function localizedHref(locale: Locale, path: string): string {
   if (locale === defaultLocale) return path;
   return `/${locale}${path}`;
 }
 
 export default function WorkList({ locale, t }: { locale: Locale; t: Dict }) {
-  const [filter, setFilter] = useState('all');
+  const searchParams = useSearchParams();
+  const initial = searchParams.get('filter');
+  const [filter, setFilter] = useState(initial && VALID_FILTERS.has(initial) ? initial : 'all');
   const filters: { k: string; l: string }[] = [
     { k: 'all', l: t.work.filterAll },
     { k: 'web', l: t.work.filterWeb },

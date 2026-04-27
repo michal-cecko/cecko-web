@@ -29,7 +29,7 @@ export default function ServicesSection({ locale, t }: { locale: Locale; t: Dict
           const c = t.services.cards[s.n as keyof typeof t.services.cards];
           return (
           <Reveal key={s.n} delay={i * 60} className={s.span}>
-            <Link href={`${localizedHref(locale, '/services')}#service-${s.n}`} className={`service-card`}>
+            <Link href={`${localizedHref(locale, '/services')}#service-${s.n}`} className="service-card">
               <span className="service-card-bg-num">{s.n.replace('0', '')}</span>
               <h3 className="service-card-title">{c.title}</h3>
               <p className="service-card-desc">{c.desc}</p>

@@ -179,6 +179,15 @@ export default async function ServicesPage({ params }: Params) {
                 >
                   {t.servicesPage.inquire}
                 </Link>
+                {s.workFilter && (
+                  <Link
+                    href={`${localizedHref(locale, '/work')}?filter=${s.workFilter}`}
+                    className="btn btn-ghost btn-sm"
+                    style={{ justifyContent: 'center' }}
+                  >
+                    {t.servicesPage.seeProjects}
+                  </Link>
+                )}
               </div>
             </div>
             </Reveal>

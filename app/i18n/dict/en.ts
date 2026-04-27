@@ -263,6 +263,7 @@ const dict = {
     price: 'Price',
     duration: 'Duration',
     inquire: 'Get a quote →',
+    seeProjects: 'See projects →',
   },
   cv: {
     metaLabel: '— CV / Resume',

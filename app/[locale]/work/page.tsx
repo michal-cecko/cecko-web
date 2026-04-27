@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import WorkList from './WorkList';
 import ContactSection from '../../components/sections/ContactSection';
 import Reveal from '../../components/Reveal';
@@ -45,7 +46,9 @@ export default async function WorkPage({ params }: Params) {
         </Reveal>
 
         <Reveal delay={120}>
-          <WorkList locale={locale} t={t} />
+          <Suspense fallback={null}>
+            <WorkList locale={locale} t={t} />
+          </Suspense>
         </Reveal>
       </section>
       <ContactSection t={t} />
