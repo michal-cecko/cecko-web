@@ -26,7 +26,7 @@ const dict: Dict = {
     name: 'Michal Čečko',
     role: 'Freelance Full-Stack Developer',
     heading: 'Kód. <em>Dizajn.</em><br/><em>Launch.</em><br/>Všetko ja.',
-    sub: 'Som <strong>fullstack developer</strong> so špecializáciou na PHP / Laravel. Navrhujem, programujem a spúšťam <strong>weby, mobilné aplikácie a SaaS produkty</strong> — od prvého wireframu po produkčný deploy. Jeden kontakt, žiadne zbytočné meetingy, jedna zodpovednosť.',
+    sub: 'Postavím vám <strong>web, mobilnú appku alebo online nástroj</strong> — od prvého nápadu až po moment keď to spustíme naživo. Jeden človek, ktorý sa vám stará o všetko: dizajn, programovanie aj prevádzku. Žiadne zbytočné meetingy a žiadne prehadzovanie zodpovednosti.',
     ctaPrimary: 'Začať projekt',
     ctaGhost: 'Pozrieť práce',
     statYears: 'Rokov praxe',

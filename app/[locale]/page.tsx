@@ -1,7 +1,6 @@
 import Hero from '../components/sections/Hero';
 import Marquee from '../components/sections/Marquee';
 import ServicesSection from '../components/sections/ServicesSection';
-import StackSection from '../components/sections/StackSection';
 import WorkSection from '../components/sections/WorkSection';
 import ProcessSection from '../components/sections/ProcessSection';
 import TestimonialsSection from '../components/sections/TestimonialsSection';
@@ -44,7 +43,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <Hero locale={locale} t={t} />
       <Marquee />
       <ServicesSection locale={locale} t={t} />
-      <StackSection t={t} />
       <WorkSection locale={locale} t={t} />
       <ProcessSection t={t} />
       <TestimonialsSection t={t} />

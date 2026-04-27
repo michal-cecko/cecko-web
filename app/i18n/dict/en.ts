@@ -24,7 +24,7 @@ const dict = {
     name: 'Michal Čečko',
     role: 'Freelance Full-Stack Developer',
     heading: 'One person.<br/>Whole <em>product.</em><br/>End to <em>end.</em>',
-    sub: "I'm a <strong>fullstack developer</strong> with a deep PHP / Laravel specialty. I design, build and ship <strong>websites, mobile apps and SaaS products</strong> — wireframe to production, end to end. One point of contact, no agile theater, one person on the hook.",
+    sub: "I'll build you a <strong>website, a mobile app, or an online tool</strong> — from the first idea right up to the moment we ship it live. One person handling everything: design, code, and the day-to-day running. No needless meetings, no passing the buck.",
     ctaPrimary: 'Start a project',
     ctaGhost: 'See my work',
     statYears: 'Years shipping',
