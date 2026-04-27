@@ -1,4 +1,7 @@
-export default function Marquee() {
+import type { Dict } from '../../i18n/dictionaries';
+
+export default function Marquee({ t }: { t: Dict }) {
+  const items = t.marquee.items;
   return (
     <section className="marquee">
       <div className="marquee-track">
@@ -6,7 +9,11 @@ export default function Marquee() {
           .fill(0)
           .map((_, i) => (
             <span key={i}>
-              Laravel <i>✦</i> FilamentPHP <i>✦</i> Vue.js <i>✦</i> Nuxt <i>✦</i> React <i>✦</i> Flutter <i>✦</i> Ionic <i>✦</i> React Native <i>✦</i> Tailwind <i>✦</i> Node.js <i>✦</i> AI integrácie <i>✦</i>{' '}
+              {items.map((label, j) => (
+                <span key={j}>
+                  {label} <i>✦</i>{' '}
+                </span>
+              ))}
             </span>
           ))}
       </div>

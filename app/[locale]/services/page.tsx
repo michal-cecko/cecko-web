@@ -53,7 +53,9 @@ export default async function ServicesPage({ params }: Params) {
         </Reveal>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          {SERVICES.map((s, i) => (
+          {SERVICES.map((s, i) => {
+            const c = t.services.cards[s.n as keyof typeof t.services.cards];
+            return (
             <Reveal key={s.n} delay={i * 60} offset={20}>
             <div
               key={s.n}
@@ -89,10 +91,10 @@ export default async function ServicesPage({ params }: Params) {
                     marginBottom: 16,
                   }}
                 >
-                  {s.title}
+                  {c.title}
                 </h3>
                 <p style={{ color: 'var(--fg-dim)', fontSize: 16, lineHeight: 1.5, marginBottom: 24, maxWidth: 600 }}>
-                  {s.desc}
+                  {c.desc}
                 </p>
                 <div
                   style={{
@@ -115,10 +117,10 @@ export default async function ServicesPage({ params }: Params) {
                     maxWidth: 600,
                   }}
                 >
-                  {s.includes.map((i) => (
-                    <li key={i} style={{ fontSize: 14, color: 'var(--fg-dim)', paddingLeft: 16, position: 'relative' }}>
+                  {c.includes.map((it) => (
+                    <li key={it} style={{ fontSize: 14, color: 'var(--fg-dim)', paddingLeft: 16, position: 'relative' }}>
                       <span style={{ position: 'absolute', left: 0, color: 'var(--lime)' }}>→</span>
-                      {i}
+                      {it}
                     </li>
                   ))}
                 </ul>
@@ -152,7 +154,7 @@ export default async function ServicesPage({ params }: Params) {
                       color: 'var(--lime)',
                     }}
                   >
-                    {s.price}
+                    {c.price}
                   </div>
                 </div>
                 <div>
@@ -168,7 +170,7 @@ export default async function ServicesPage({ params }: Params) {
                   >
                     {t.servicesPage.duration}
                   </div>
-                  <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 500 }}>{s.dur}</div>
+                  <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 500 }}>{c.dur}</div>
                 </div>
                 <Link
                   href={localizedHref(locale, '/contact')}
@@ -180,7 +182,8 @@ export default async function ServicesPage({ params }: Params) {
               </div>
             </div>
             </Reveal>
-          ))}
+            );
+          })}
         </div>
       </section>
       <ProcessSection t={t} />

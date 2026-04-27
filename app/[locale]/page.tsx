@@ -41,7 +41,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
       <Hero locale={locale} t={t} />
-      <Marquee />
+      <Marquee t={t} />
       <ServicesSection locale={locale} t={t} />
       <WorkSection locale={locale} t={t} />
       <ProcessSection t={t} />
