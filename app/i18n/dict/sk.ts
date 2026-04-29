@@ -130,6 +130,7 @@ const dict: Dict = {
     statusLive: 'Live',
     statusConfidential: 'Dôverné / interné',
     statusDone: 'Dokončené',
+    statusInProgress: '● Rozpracované',
     openWeb: 'Otvoriť web ↗',
     confidential: '● Dôverné',
     nextProject: 'Ďalší projekt',
@@ -338,13 +339,40 @@ const dict: Dict = {
         'SaaS platforma postavená na Laravel + FilamentPHP, ktorá zjednodušuje evidenciu športových tréningov, organizáciu súťaží a ďalších športových podujatí. Custom dizajn namieru, Alpine.js pre interaktivitu.',
     },
     friendlyfyzio: {
-      title: 'FriendlyFyzio OS',
+      title: 'FriendlyFyzio',
       kind: 'Rezervačný, CMS & CRM systém pre fyziokliniku',
       role: 'Fullstack + dizajn',
       challenge:
         'Fyzioklinika potrebovala jednotný systém pre online rezervácie, správu obsahu webu a evidenciu pacientov — bez závislosti na troch rôznych nástrojoch.',
       solution:
         'Custom rezervačný systém s CMS a CRM postavený na FilamentPHP + Laravel. Admin rozhranie namieru pre recepciu, pacientsky portál, integrovaný CMS pre web. Celý dizajn + vývoj.',
+    },
+    cekokam: {
+      title: 'Cekokam',
+      kind: 'Interný CRM systém pre klienta',
+      role: 'Fullstack',
+      challenge:
+        'Klient potreboval vlastný interný nástroj na evidenciu zákazníkov, platieb a predplatených služieb — bez závislosti na drahých SaaS riešeniach a šitý presne na ich workflow.',
+      solution:
+        'Custom CRM postavený na Laravel + FilamentPHP. Evidencia zákazníkov, platobné prehľady, správa služieb predplatených klientmi. Beží len interne v rámci firmy, bez verejného prístupu.',
+    },
+    naskin: {
+      title: 'Naskin',
+      kind: 'Web pre kozmetický salón · Multirole dashboard + rezervácie',
+      role: 'Fullstack + dizajn',
+      challenge:
+        'Kozmetický salón potreboval reprezentatívny web s online rezervačným systémom pre zákazníkov a interným dashboardom pre rôzne role — editor obsahu, terapeut, majiteľ — kde každý vidí len to, čo potrebuje.',
+      solution:
+        'Custom WordPress téma s Vue + ACF pre frontend, Laravel backend pre rezervačný systém a CRM. Multirole dashboard (Editor, Terapeut, Majiteľ) s prístupovými právami namieru. Rezervácie pre zákazníkov, CRM pre administrátorov.',
+    },
+    dodoworkout: {
+      title: 'DodoWorkout',
+      kind: 'Verejný web s blogom, registráciou na eventy a CMS',
+      role: 'Fullstack',
+      challenge:
+        'Klient potreboval verejný web s blogom, registráciou zákazníkov na eventy, prepojením na platby a interným CMS — všetko v jednom systéme namiesto zopár nesúladných nástrojov.',
+      solution:
+        'Postavené na Laravel + FilamentPHP. Verejný web s blogom, používateľský dashboard pre prihlásenie na eventy, notifikácie pre prijaté platby a kompletný CMS pre administrátorov.',
     },
     idealnedvere: {
       title: 'Ideálne dvere',

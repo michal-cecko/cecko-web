@@ -205,7 +205,7 @@ export default async function CaseStudyPage({ params }: Params) {
                   [tw.year, project.year],
                   [tw.role, wt.role],
                   [tw.stack, project.tags.map((tag) => t.tagLabels[tag] ?? tag).join(' · ')],
-                  [tw.status, project.url ? tw.statusLive : project.confidential ? tw.statusConfidential : tw.statusDone],
+                  [tw.status, project.inProgress ? tw.statusInProgress : project.url ? tw.statusLive : project.confidential ? tw.statusConfidential : tw.statusDone],
                   [tw.web, project.url ? project.url.replace(/^https?:\/\//, '').replace(/\/$/, '') : '—'],
                 ] as [string, string][]
               ).map(([k, v]) => (

@@ -106,11 +106,15 @@ export type Work = {
   tags: string[];
   url: string | null;
   confidential: boolean;
+  inProgress?: boolean;
 };
 
 export const WORKS: Work[] = [
   { id: 'bcz',           year: '2026', tags: ['Laravel', 'Filament', 'Alpine'], url: 'https://bcz-club.com',                  confidential: false },
-  { id: 'friendlyfyzio', year: '2026', tags: ['Laravel', 'Filament', 'Alpine'], url: 'https://www.friendlyfyzio.cz',          confidential: false },
+  { id: 'friendlyfyzio', year: '2026', tags: ['Laravel', 'Filament', 'Alpine'], url: 'https://www.friendlyfyzio.cz',          confidential: false, inProgress: true },
+  { id: 'cekokam',       year: '2026', tags: ['Laravel', 'Filament'],           url: null,                                    confidential: true  },
+  { id: 'naskin',        year: '2025', tags: ['WordPress', 'Vue', 'ACF', 'Laravel'], url: 'https://naskin.sk',                 confidential: false },
+  { id: 'dodoworkout',   year: '2025', tags: ['Laravel', 'Filament'],           url: 'https://dodoworkout.com',               confidential: false },
   { id: 'idealnedvere',  year: '2025', tags: ['Nuxt', 'Dizajn'],                url: 'https://idealnedvere.sk',               confidential: false },
   { id: 'faktury',       year: '2025', tags: ['Laravel', 'Filament'],          url: null,                                    confidential: true  },
   { id: 'songbook',      year: '2024', tags: ['Laravel', 'Filament', 'Mobile'],url: null,                                    confidential: true  },

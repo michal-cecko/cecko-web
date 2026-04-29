@@ -128,6 +128,7 @@ const dict = {
     statusLive: 'Live',
     statusConfidential: 'Confidential / internal',
     statusDone: 'Completed',
+    statusInProgress: '● In progress',
     openWeb: 'Open website ↗',
     confidential: '● Confidential',
     nextProject: 'Next project',
@@ -338,13 +339,40 @@ const dict = {
         'A SaaS platform built on Laravel + FilamentPHP that simplifies tracking trainings, organising tournaments and other club events. Custom-made design, Alpine.js for interactivity.',
     },
     friendlyfyzio: {
-      title: 'FriendlyFyzio OS',
+      title: 'FriendlyFyzio',
       kind: 'Booking, CMS & CRM system for a physio clinic',
       role: 'Fullstack + design',
       challenge:
         'A physio clinic needed a unified system for online bookings, website content management and patient records — without juggling three separate tools.',
       solution:
         'A custom booking system with CMS and CRM, built on FilamentPHP + Laravel. Tailored admin for the front desk, a patient portal, integrated CMS for the public site. Full design + build.',
+    },
+    cekokam: {
+      title: 'Cekokam',
+      kind: 'Internal CRM for a client',
+      role: 'Fullstack',
+      challenge:
+        'The client needed their own internal tool to track customers, payments and subscribed services — without depending on overpriced SaaS, tailored exactly to their workflow.',
+      solution:
+        'A custom CRM built on Laravel + FilamentPHP. Customer records, payment overview, management of services subscribed by clients. Runs internally within the company, no public access.',
+    },
+    naskin: {
+      title: 'Naskin',
+      kind: 'Beauty salon site · Multirole dashboard + bookings',
+      role: 'Fullstack + design',
+      challenge:
+        'A beauty salon needed a representative website with online bookings for customers and an internal dashboard for several roles — content editor, therapist, owner — where each role sees only what they need.',
+      solution:
+        'A custom WordPress theme with Vue + ACF on the frontend and a Laravel backend for the booking system and CRM. Multirole dashboard (Editor, Therapist, Owner) with bespoke access rules. Reservations for customers, CRM for admins.',
+    },
+    dodoworkout: {
+      title: 'DodoWorkout',
+      kind: 'Public site with blog, event sign-ups and CMS',
+      role: 'Fullstack',
+      challenge:
+        'The client needed a public website with a blog, customer event registrations, payment integration and an internal CMS — all in one system instead of a handful of disconnected tools.',
+      solution:
+        'Built on Laravel + FilamentPHP. Public-facing site with blog, customer dashboard for event sign-ups, notifications on incoming payments and a full CMS for admins.',
     },
     idealnedvere: {
       title: 'Ideálne dvere',
