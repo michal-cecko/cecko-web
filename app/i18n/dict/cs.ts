@@ -271,7 +271,7 @@ const dict: Dict = {
   cv: {
     metaLabel: '— CV / Resume',
     name: 'Michal Čečko',
-    titles: 'Fullstack Vue + Laravel Dev · Fullstack Livewire + Laravel Dev · Backend Dev',
+    titles: 'Fullstack Laravel Developer',
     location: 'Žilina, SK / Ostrava, CZ',
     downloadPdf: 'Stáhnout PDF',
     aboutTitle: 'O mně',
