@@ -284,6 +284,12 @@ const dict: Dict = {
     skillsExtra: 'Skúsenosť s',
     softTitle: 'Soft skills',
     languagesTitle: 'Jazyky',
+    availabilityTitle: 'Dostupnosť',
+    availabilityValue: 'Full-time · Part-time · Kontrakt / projektovo',
+    selectedWorkTitle: 'Vybrané projekty',
+    selectedWorkAll: 'Všetky projekty →',
+    selectedWorkCase: 'Detail →',
+    portfolioLabel: 'Portfólio',
     soft: [
       ['Leadership & spolupráca', 'Skúsenosť s vedením tímov, podpora spolupráce a dovedenie projektov k úspechu.'],
       ['Project management', 'Plánovanie, organizácia a efektívne doručenie projektov.'],
@@ -302,7 +308,7 @@ const dict: Dict = {
         yr: '01/2023 — dnes',
         role: 'Laravel Developer',
         co: 'Madelo · Ostrava, CZ',
-        desc: 'Vediem backend vývoj a som product owner viacerých úspešných projektov. Navrhujem, vyvíjam a testujem robustné API. Úzko spolupracujem s frontend tímami a dizajnérmi pri integrácii UI a API. Pravidelne komunikujem s klientami a riešim ich požiadavky.',
+        desc: 'Vediem backend vývoj a som product owner viacerých úspešných projektov, vrátane vedenia 5-členného developerského tímu. Navrhujem, vyvíjam a testujem robustné Laravel API — vrátane niekoľkých dlhodobých projektov s niekoľkoročným vývojom. Úzko spolupracujem s frontend tímami a dizajnérmi pri integrácii UI a API. Pravidelne komunikujem s klientami a riešim ich požiadavky.',
       },
       {
         yr: '04/2022 — 04/2023',
@@ -314,7 +320,7 @@ const dict: Dict = {
         yr: '03/2019 — dnes',
         role: 'Freelance Developer',
         co: 'Self-Employed · Žilina, SK',
-        desc: 'Riadim kompletný životný cyklus projektov — od špecifikácie cez dizajn, frontend, backend až po deployment. Doručujem spoľahlivé a user-friendly weby a aplikácie pre rôznych klientov.',
+        desc: 'Riadim kompletný životný cyklus menších projektov — od špecifikácie cez dizajn, frontend, backend až po deployment a správu na vlastnom VPS. Doručujem spoľahlivé a user-friendly weby a aplikácie pre rôznych klientov.',
       },
     ],
     education: [

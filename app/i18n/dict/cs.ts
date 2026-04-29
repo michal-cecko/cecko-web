@@ -284,6 +284,12 @@ const dict: Dict = {
     skillsExtra: 'Zkušenost s',
     softTitle: 'Soft skills',
     languagesTitle: 'Jazyky',
+    availabilityTitle: 'Dostupnost',
+    availabilityValue: 'Full-time · Part-time · Kontrakt / projektově',
+    selectedWorkTitle: 'Vybrané projekty',
+    selectedWorkAll: 'Všechny projekty →',
+    selectedWorkCase: 'Detail →',
+    portfolioLabel: 'Portfolio',
     soft: [
       ['Leadership & spolupráce', 'Zkušenost s vedením týmů, podpora spolupráce a dotažení projektů k úspěchu.'],
       ['Project management', 'Plánování, organizace a efektivní dodávka projektů.'],
@@ -302,7 +308,7 @@ const dict: Dict = {
         yr: '01/2023 — dnes',
         role: 'Laravel Developer',
         co: 'Madelo · Ostrava, CZ',
-        desc: 'Vedu backend vývoj a jsem product owner několika úspěšných projektů. Navrhuji, vyvíjím a testuji robustní API. Úzce spolupracuji s frontend týmy a designéry při integraci UI a API. Pravidelně komunikuji s klienty a řeším jejich požadavky.',
+        desc: 'Vedu backend vývoj a jsem product owner několika úspěšných projektů, včetně vedení 5členného developerského týmu. Navrhuji, vyvíjím a testuji robustní Laravel API — včetně několika dlouhodobých projektů s několikaletým vývojem. Úzce spolupracuji s frontend týmy a designéry při integraci UI a API. Pravidelně komunikuji s klienty a řeším jejich požadavky.',
       },
       {
         yr: '04/2022 — 04/2023',
@@ -314,7 +320,7 @@ const dict: Dict = {
         yr: '03/2019 — dnes',
         role: 'Freelance Developer',
         co: 'Self-Employed · Žilina, SK',
-        desc: 'Řídím kompletní životní cyklus projektů — od specifikace přes design, frontend, backend až po deployment. Dodávám spolehlivé a user-friendly weby a aplikace pro různé klienty.',
+        desc: 'Řídím kompletní životní cyklus menších projektů — od specifikace přes design, frontend, backend až po deployment a správu na vlastním VPS. Dodávám spolehlivé a user-friendly weby a aplikace pro různé klienty.',
       },
     ],
     education: [

@@ -1,9 +1,17 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import PrintButton from './PrintButton';
 import Reveal from '../../components/Reveal';
-import { STACK } from '../../data';
+import { CONTACT, STACK, WORKS, type Lang } from '../../data';
 import { type Locale, locales, defaultLocale } from '../../i18n/config';
 import { getDictionary, type Dict } from '../../i18n/dictionaries';
+
+const LOCALE_TO_PHONE: Record<Locale, Lang> = { en: 'en', sk: 'sk', cs: 'cz' };
+
+function localizedHref(locale: Locale, path: string): string {
+  if (locale === defaultLocale) return path;
+  return `/${locale}${path}`;
+}
 
 type Params = { params: Promise<{ locale: string }> };
 
@@ -118,11 +126,36 @@ export default async function CVPage({ params }: Params) {
           >
             <span>{tcv.location}</span>
             <span>·</span>
-            <a href="mailto:ceckomichal@gmail.com">ceckomichal@gmail.com</a>
+            <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
             <span>·</span>
-            <a href="https://www.linkedin.com/in/michal-cecko/" target="_blank" rel="noreferrer">
+            <a href={CONTACT.phones[LOCALE_TO_PHONE[locale]].href}>
+              {CONTACT.phones[LOCALE_TO_PHONE[locale]].display}
+            </a>
+            <span>·</span>
+            <a href={CONTACT.linkedinUrl} target="_blank" rel="noreferrer">
               LinkedIn
             </a>
+            <span>·</span>
+            <Link href={localizedHref(locale, '/work')}>{tcv.portfolioLabel}</Link>
+          </div>
+          <div
+            style={{
+              marginTop: 14,
+              display: 'flex',
+              gap: 10,
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              fontFamily: 'var(--font-mono)',
+              fontSize: 11,
+              color: 'var(--fg-muted)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+            }}
+          >
+            <span style={{ color: 'var(--lime)' }}>{tcv.availabilityTitle}:</span>
+            <span style={{ color: 'var(--fg-dim)', textTransform: 'none', letterSpacing: 0, fontSize: 12 }}>
+              {tcv.availabilityValue}
+            </span>
           </div>
         </div>
         <PrintButton label={tcv.downloadPdf} locale={locale} />
@@ -140,6 +173,63 @@ export default async function CVPage({ params }: Params) {
       <div style={{ marginBottom: 48 }}>
         <h2 style={sectionH2}>{tcv.workTitle}</h2>
         <CVList t={t} items={tcv.work as unknown as { yr: string; role: string; co: string; desc?: string }[]} />
+      </div>
+      </Reveal>
+
+      <Reveal>
+      <div style={{ marginBottom: 48 }}>
+        <h2 style={sectionH2}>{tcv.selectedWorkTitle}</h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          {WORKS.slice(0, 4).map((w) => {
+            const wt = t.works[w.id as keyof typeof t.works];
+            return (
+              <Link
+                key={w.id}
+                href={localizedHref(locale, `/case-studies/${w.id}`)}
+                className="cv-row"
+                style={{
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  paddingBottom: 16,
+                  borderBottom: '1px dashed var(--border-hi)',
+                }}
+              >
+                <div className="mono" style={{ color: 'var(--lime)' }}>{w.year}</div>
+                <div>
+                  <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 500, letterSpacing: '-0.01em' }}>
+                    {wt.title}
+                  </h3>
+                  <div className="mono" style={{ marginTop: 4, color: 'var(--fg-dim)' }}>{wt.kind}</div>
+                  <div style={{ marginTop: 8, display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+                    {w.url && (
+                      <a
+                        href={w.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mono"
+                        style={{ color: 'var(--lime)', fontSize: 11 }}
+                      >
+                        {w.url.replace(/^https?:\/\//, '').replace(/\/$/, '')} ↗
+                      </a>
+                    )}
+                    <span className="mono" style={{ fontSize: 11, color: 'var(--fg-muted)' }}>
+                      {tcv.selectedWorkCase}
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+        <div style={{ marginTop: 20 }}>
+          <Link
+            href={localizedHref(locale, '/work')}
+            className="mono"
+            style={{ color: 'var(--lime)', fontSize: 12 }}
+          >
+            {tcv.selectedWorkAll}
+          </Link>
+        </div>
       </div>
       </Reveal>
 

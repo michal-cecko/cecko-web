@@ -282,6 +282,12 @@ const dict = {
     skillsExtra: 'Experience with',
     softTitle: 'Soft skills',
     languagesTitle: 'Languages',
+    availabilityTitle: 'Availability',
+    availabilityValue: 'Full-time · Part-time · Contract / project-based',
+    selectedWorkTitle: 'Selected work',
+    selectedWorkAll: 'All projects →',
+    selectedWorkCase: 'View case →',
+    portfolioLabel: 'Portfolio',
     soft: [
       ['Leadership & collaboration', 'Leading teams, fostering collaboration, and shipping projects.'],
       ['Project management', 'Planning, organisation, and reliable delivery.'],
@@ -300,7 +306,7 @@ const dict = {
         yr: '01/2023 — present',
         role: 'Laravel Developer',
         co: 'Madelo · Ostrava, CZ',
-        desc: 'Lead backend development and product owner on several shipped projects. Design, build, and test robust APIs; work closely with frontend teams and designers on UI/API integration. Direct, regular communication with clients.',
+        desc: 'Lead backend development and product owner on several shipped projects, leading a team of 5 developers. Design, build, and test robust Laravel APIs — including multiple long-running projects with multi-year development cycles. Work closely with frontend teams and designers on UI/API integration. Direct, regular communication with clients.',
       },
       {
         yr: '04/2022 — 04/2023',
@@ -312,7 +318,7 @@ const dict = {
         yr: '03/2019 — present',
         role: 'Freelance Developer',
         co: 'Self-Employed · Žilina, SK',
-        desc: 'Run the full project lifecycle — spec, design, frontend, backend, deployment. Deliver reliable, user-friendly websites and apps for a varied client base.',
+        desc: 'Run the full lifecycle of smaller projects — spec, design, frontend, backend, deployment, and ongoing ops on my own VPS. Deliver reliable, user-friendly websites and apps for a varied client base.',
       },
     ],
     education: [
