@@ -2,20 +2,12 @@ import Link from 'next/link';
 import Counter from '../Counter';
 import { defaultLocale, type Locale } from '../../i18n/config';
 import type { Dict } from '../../i18n/dictionaries';
+import { nextMonthLabel } from '../../lib/availability';
 
 function localizedHref(locale: Locale, path: string): string {
   if (locale === defaultLocale) return path;
   if (path === '/') return `/${locale}`;
   return `/${locale}${path}`;
-}
-
-const INTL_LOCALES: Record<Locale, string> = { en: 'en-US', sk: 'sk-SK', cs: 'cs-CZ' };
-
-function nextMonthLabel(locale: Locale): string {
-  const now = new Date();
-  const next = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-  const formatted = new Intl.DateTimeFormat(INTL_LOCALES[locale], { month: 'long', year: 'numeric' }).format(next);
-  return formatted.charAt(0).toUpperCase() + formatted.slice(1);
 }
 
 export default function Hero({ locale, t }: { locale: Locale; t: Dict }) {

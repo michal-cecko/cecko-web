@@ -6,6 +6,7 @@ import Link from 'next/link';
 import LangSwitcher from './LangSwitcher';
 import { defaultLocale, type Locale } from '../i18n/config';
 import type { Dict } from '../i18n/dictionaries';
+import { nextMonthLabel } from '../lib/availability';
 
 function localizedHref(locale: Locale, path: string): string {
   if (locale === defaultLocale) return path;
@@ -70,7 +71,7 @@ export default function Nav({
         </ul>
         <div className="nav-right">
           <span className="nav-status">
-            <span className="dot-live" /> {t.nav.available}
+            <span className="dot-live" /> {t.nav.available} {nextMonthLabel(locale)}
           </span>
           <LangSwitcher locale={locale} groupLabel={t.nav.langGroup} />
           <Link href={localizedHref(locale, '/contact')} className="nav-cta" onClick={close}>

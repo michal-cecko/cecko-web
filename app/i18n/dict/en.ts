@@ -7,7 +7,7 @@ const dict = {
     cv: 'CV',
     contact: 'Contact',
     cta: 'Get in touch',
-    available: 'Available — June 2026',
+    available: 'Available —',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
     langGroup: 'Language',

@@ -9,7 +9,7 @@ const dict: Dict = {
     cv: 'CV',
     contact: 'Kontakt',
     cta: 'Napíšte mi',
-    available: 'K dispozícii — Jún 2026',
+    available: 'K dispozícii —',
     openMenu: 'Otvoriť menu',
     closeMenu: 'Zavrieť menu',
     langGroup: 'Jazyk',
