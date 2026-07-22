@@ -303,7 +303,13 @@ const dict = {
     ],
     work: [
       {
-        yr: '01/2023 — present',
+        yr: '08/2026 — present',
+        role: 'Fullstack Developer',
+        co: 'Definic.ai',
+        desc: 'Fullstack development — building features end-to-end across frontend and backend.',
+      },
+      {
+        yr: '01/2023 — 04/2026',
         role: 'Laravel Developer',
         co: 'Madelo · Ostrava, CZ',
         desc: 'Lead backend development and product owner on several shipped projects, leading a team of 5 developers. Design, build, and test robust Laravel APIs — including multiple long-running projects with multi-year development cycles. Work closely with frontend teams and designers on UI/API integration. Direct, regular communication with clients.',

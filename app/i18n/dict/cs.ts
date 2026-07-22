@@ -305,7 +305,13 @@ const dict: Dict = {
     ],
     work: [
       {
-        yr: '01/2023 — dnes',
+        yr: '08/2026 — dnes',
+        role: 'Fullstack Developer',
+        co: 'Definic.ai',
+        desc: 'Fullstack vývoj — kompletní vývoj funkcí napříč frontendem i backendem.',
+      },
+      {
+        yr: '01/2023 — 04/2026',
         role: 'Laravel Developer',
         co: 'Madelo · Ostrava, CZ',
         desc: 'Vedu backend vývoj a jsem product owner několika úspěšných projektů, včetně vedení 5členného developerského týmu. Navrhuji, vyvíjím a testuji robustní Laravel API — včetně několika dlouhodobých projektů s několikaletým vývojem. Úzce spolupracuji s frontend týmy a designéry při integraci UI a API. Pravidelně komunikuji s klienty a řeším jejich požadavky.',
