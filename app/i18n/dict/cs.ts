@@ -306,9 +306,9 @@ const dict: Dict = {
     work: [
       {
         yr: '08/2026 — dnes',
-        role: 'Fullstack Developer',
+        role: 'Senior Laravel Fullstack Developer',
         co: 'Definic.ai',
-        desc: 'Fullstack vývoj — kompletní vývoj funkcí napříč frontendem i backendem.',
+        desc: 'Fullstack vývoj s backendem v Laravelu — kompletní vývoj funkcí napříč frontendem i backendem.',
       },
       {
         yr: '01/2023 — 04/2026',
